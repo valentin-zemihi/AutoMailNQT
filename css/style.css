@@ -1,1 +1,56 @@
+/*--CSS Global--*/
+* {
+    font-family: 'Segoe UI';
+}
+
+/*--CSS par balise--*/
 ul {margin: 0px;}
+
+button {
+    margin-top: 5px;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top : 0.5rem;
+    padding-bottom : 0.5rem;
+
+    background-color: #3367cd;
+    
+    border: none;
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+    
+    color: #fff;
+    font-weight: bold;
+}
+button:hover {
+    background-color: #7291ce;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/*--CSS par class--*/
+.listBut {
+    display: flex ;
+    margin-right: 5px;
+    flex-direction: column ;
+}
+
+.rowBut {
+    margin-right: 5px;
+}
+
+/*--CSS par ID--*/
+#zoneListButt {
+    display: flex;
+}
+
+#copyText {
+    border: 2px solid black ;
+    padding: 1em;
+}
