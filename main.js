@@ -56,7 +56,7 @@ function setKeyElemList() {
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearchP", "ton.text", ["Stage", "Alternance", "Emploi"], "YGSearch","list", "Recherche du jeune", null); //P pour posseif "ton stage"
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGWork","text", null, "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux")
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPres", "text", null, "YGPres", "text", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)") ;
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGIdea", "text", null, "YGIdea", "text", "Motivation de cette mise en relation", "Courageux, votre accompagnement lui permettrait de trouver un travail où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)") ;
+	tabKeyElem[tabKeyElem.length] = new KeyElem("YGIdea", "text", null, "YGIdea", "text", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)") ;
 
 	tabKeyElem[tabKeyElem.length] = new KeyElem("MFirstName","text", null, "MFirstName", "text", "Prénom du mentor", "Thomas");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("MLastName","text",null,"MLastName", "text", "Nom du mentor", "Pesquet");

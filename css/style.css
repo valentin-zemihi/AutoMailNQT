@@ -51,6 +51,5 @@ h1 {
 }
 
 #copyText {
-    border: 2px solid black ;
-    padding: 1em;
+    font-size: 12px;
 }
