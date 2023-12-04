@@ -4,6 +4,7 @@ var tabKeyElem = [] ; //Tableau d'objet KeyElem
 var tabTextType = [] ; //Tableau d'objet TextType
 
 var activeUser = 0 ;
+var activeText = 0 ;
 var tabPM = [] ;
 
 var apecGE = [
@@ -49,15 +50,14 @@ function writeButtonList() {
 	bodyElem.appendChild(ec) ;
 
 	//Crée et ajoute le bouton pour voir tous les éléments clés
-	addLinkButton("allKeyElem", "rowBut", "Tous les éléments clés", "page/allElemKey.html?user="+encodeURIComponent(activeUser)+"&test="+encodeURIComponent("1"), "zoneOption") ;
+	addLinkButton("allKeyElem", "rowBut", "Tous les éléments clés", "page/allElemKey.html?user="+encodeURIComponent(activeUser), "zoneOption") ;
 	//Crée et ajoute le bouton pour modifier les informations de l'utilisateur
 	addButton("changePM", "rowBut", "Paramètre utilisateur", "writePMOption()", "zoneOption") ;
 
 	/*Crée et ajoute la zone avec les informations sur l'utilisateur*/
 	ec = document.createElement("div") ;
 	ec.id = "zonePM" ;
-	console.log(tabKeyElem) ;
-	ec.appendChild(document.createTextNode("Utilisateur actif : "+tabKeyElem[0].contenu+" "+tabKeyElem[1].contenu.toUpperCase()+" "+tabKeyElem[2].contenu+" "+tabKeyElem[3].contenu)) ;
+	ec.appendChild(document.createTextNode("Utilisateur actif : "+tabKeyElem[0].content+" "+tabKeyElem[1].content.toUpperCase()+" "+tabKeyElem[2].content+" "+tabKeyElem[3].content)) ;
 	bodyElem.appendChild(ec) ;
 
 	/*Crée et ajoute la zone qui va contenir la liste des boutons*/
@@ -135,7 +135,7 @@ function writeButtonList() {
 				break;
 		}
 
-		addButton(tabTextType[i].type+""+i, null, tabTextType[i].name, "setForm("+i+")", ed) ;
+		addLinkButton(tabTextType[i].type+""+i, "butTexType", tabTextType[i].name, "page/textEditor.html?user="+encodeURIComponent(activeUser)+"&textID="+i, ed) ;
 	}
 }
 
@@ -276,237 +276,43 @@ function writePMOption() {
 
 function setPMOption(userSelect) {
 	if(userSelect==null) {
-		tabKeyElem[0].contenu = document.getElementById("PMFirstName").value ;
-		tabKeyElem[1].contenu = document.getElementById("PMLastName").value ;
-		tabKeyElem[2].contenu = document.getElementById("PMWork").value ;
-		tabKeyElem[3].contenu = document.getElementById("PMRegion").value ;
+		tabKeyElem[0].content = document.getElementById("PMFirstName").value ;
+		tabKeyElem[1].content = document.getElementById("PMLastName").value ;
+		tabKeyElem[2].content = document.getElementById("PMWork").value ;
+		tabKeyElem[3].content = document.getElementById("PMRegion").value ;
 		if (document.getElementById("PMGenderF").checked) {
-			tabKeyElem[4].contenu = true ;
-			tabKeyElem[5].contenu = true ;
+			tabKeyElem[4].content = true ;
+			tabKeyElem[5].content = true ;
 		}
 		else {
-			tabKeyElem[4].contenu = false ;
-			tabKeyElem[5].contenu = false ;
+			tabKeyElem[4].content = false ;
+			tabKeyElem[5].content = false ;
 		}
 	
-		tabKeyElem[6].contenu = document.getElementById("PMFirstName").value+" "+document.getElementById("PMLastName").value+", "+document.getElementById("PMWork").value+" NQT "+document.getElementById("PMRegionShort").value ;
+		tabKeyElem[6].content = document.getElementById("PMFirstName").value+" "+document.getElementById("PMLastName").value+", "+document.getElementById("PMWork").value+" NQT "+document.getElementById("PMRegionShort").value ;
 	} else {
 		activeUser = userSelect ;
-		tabKeyElem[0].contenu = tabPM[activeUser].firstName ;
-		tabKeyElem[1].contenu = tabPM[activeUser].lastName ;
-		tabKeyElem[2].contenu = tabPM[activeUser].work ;
-		tabKeyElem[3].contenu = tabPM[activeUser].region ; 
-		tabKeyElem[4].contenu = tabPM[activeUser].gender ;
-		tabKeyElem[5].contenu = tabPM[activeUser].gender ;
-		tabKeyElem[6].contenu = tabPM[activeUser].sign ;
+		tabKeyElem[0].content = tabPM[activeUser].firstName ;
+		tabKeyElem[1].content = tabPM[activeUser].lastName ;
+		tabKeyElem[2].content = tabPM[activeUser].work ;
+		tabKeyElem[3].content = tabPM[activeUser].region ; 
+		tabKeyElem[4].content = tabPM[activeUser].gender ;
+		tabKeyElem[5].content = tabPM[activeUser].gender ;
+		tabKeyElem[6].content = tabPM[activeUser].sign ;
 	}
 
 	writeButtonList() ;
 }
 
-
-
-function setForm(tabId) {
-	tabText = tabTextType[tabId].txt ;
-
-	var ec ; //Element créé
-	var mle = [] ; //Multiple Ligne Element
-	var bodyElem = document.getElementById("body") ;
-
-	//Stock chaque donnée nécessaire 1 fois :
-	//Cette étape évite les répétitions dans les informations demandées.
-	var tabElemAsk = [];
-	//Parcour le tableau texte pour pour récupérer chaque KeyElem
-	for (let i = 0; i < tabText.length; i++) {
-		//Pour chaque cellule du tabText vérifie s'il s'agit d'un KeyElm en parcourant la liste des KeyElems
-		for (let j = 0; j < tabKeyElem.length; j++) {
-			//Vérifie si le nom du KeyElem est le même que celui dans la cellule texte et que le KeyElem n'est pas une constante
-			if(tabText[i] == tabKeyElem[j].name && tabKeyElem[j].type!="const") {
-				//Vérfie si l'id KeyElem est déjà dans le tableau
-				if(!isInTabKeyElm(tabElemAsk, tabKeyElem[j])){tabElemAsk[tabElemAsk.length] = tabKeyElem[j];}
-			}
-		}
+function apecContent(dept) {
+	var temp = null ;
+    for (let i = 0; i < apecGE.length; i+=2) {
+        if(dept==apecGE[i]) {temp = apecGE[i+1] ;}
 	}
 
-	//Vide la page web
-	bodyElem.innerHTML = "" ;
-	
-	//Ajoute l'élément Form
-	ec = document.createElement("form") ;
-	ec.id = "formText" ;
-	ec.method = "get" ;
-	ec.action = "" ;
-	bodyElem.appendChild(ec) ;
+	if(temp == null) {alert("Les éléments de l'APEC"+dept+" n'ont pas été trouvé.") ;}
 
-	for (let i = 0; i < tabElemAsk.length; i++) {
-		mle = tabElemAsk[i].writeInputMode() ;
-		addMultipleElement(mle, "formText") ;
-		addBr("formText") ;
-	}
-
-	addButton("writeTxt", null, "Ecris le texte", "writeTxt()", "body") ;
-
-	addBr("body") ;
-
-	addButton("backButt", null, "Retour", "writeButtonList()", "body") ;
-
-	if(tabElemAsk.length==0) {
-		writeTxt() ;
-	}
-}
-
-function writeTxt() {
-	//Variable outil pour la boucle de vérification des KeyElem
-	var isElemKey ; //Retient si la cellule du tableau texte est un KeyElem
-	var idElmKey ;	//Retient le numéro de la cellule contenant le KeyElem
-
-	var toLowCase ; //Stock le texte à convertir en minuscule
-	
-	var bodyElem = document.getElementById("body") ;
-
-	//
-	var de = [] ; //Tableau des éléments de destination : stock en cascade les élements parents et enfants. Le dernier élément est l'actif : Celui dans lesquels les cellules du tableau texte sont ajoutés.
-	var deNB = 0 ; //Numéro de la cellule avec l'élément en cours dans le tableau des éléments destinations
-
-	//Paramètre le premier élément accueillant le texte
-	de[deNB] = document.createElement("div") ;
-	de[deNB].id = "copyText" ;
-
-	//Crée le texte, le style et les KeyElem
-	for (let i = 0; i < tabText.length; i++) {
-		isElemKey = false ;
-		for (let j = 0; j < tabKeyElem.length; j++) {
-			if(tabText[i]==tabKeyElem[j].name) {isElemKey = true ; idElmKey = j ;}
-		}
-
-		if(isElemKey) { 
-			switch (tabKeyElem[idElmKey].type) {
-				case "const" :
-					switch (tabKeyElem[idElmKey].category) {
-						case "text":
-							de[deNB].appendChild(document.createTextNode(tabKeyElem[idElmKey].contenu)) ;
-							break;
-						case "detail":
-							if (tabKeyElem[idElmKey].contenu) {de[deNB].appendChild(document.createTextNode("e"));}
-							break;
-						case "eurice" :
-							if (tabKeyElem[idElmKey].contenu) {de[deNB].appendChild(document.createTextNode("rice"));}
-							else {de[deNB].appendChild(document.createTextNode("eur"));}
-							break ;
-						case "startTag":
-							deNB += 1 ;
-							de[deNB] = document.createElement(tabKeyElem[idElmKey].contenu);
-							break ;
-						case "endTag":
-							de[deNB-1].appendChild(de[deNB]) ;
-							deNB -= 1 ;
-							break;
-						default:
-							alert(tabKeyElem[idElmKey].category+" n'est pas paramètré.") ;
-							break;
-					}
-					break;
-				case "gender" :
-					switch (tabKeyElem[idElmKey].category) {
-						case "detail":
-							if (document.getElementById(tabKeyElem[idElmKey].id+"F").checked) {de[deNB].appendChild(document.createTextNode("e"));}
-							break;
-						case "title":
-							if (document.getElementById(tabKeyElem[idElmKey].id+"F").checked) {de[deNB].appendChild(document.createTextNode("Mme"));}
-							else {de[deNB].appendChild(document.createTextNode("M"));}
-							break;
-						case "lui.elle":
-							if (document.getElementById(tabKeyElem[idElmKey].id+"F").checked) {de[deNB].appendChild(document.createTextNode("elle"));}
-							else {de[deNB].appendChild(document.createTextNode("lui"));}
-							break;
-						case "il.elle":
-							if (document.getElementById(tabKeyElem[idElmKey].id+"F").checked){de[deNB].appendChild(document.createTextNode("elle"));}
-							else {de[deNB].appendChild(document.createTextNode("il"));}
-							break;
-						case "ton.ta":
-							if (document.getElementById(tabKeyElem[idElmKey].id+"F").checked) {de[deNB].appendChild(document.createTextNode("ta"));}
-							else {de[deNB].appendChild(document.createTextNode("ton"));}
-							break ;
-						default:
-							alert(tabKeyElem[idElmKey].category+" n'est pas paramètré.") ;
-							break;
-					}
-					break;
-				case "text":
-					switch (tabKeyElem[idElmKey].category) {
-						case "text":
-							de[deNB].appendChild(document.createTextNode(document.getElementById(tabKeyElem[idElmKey].id).value)) ;
-							break;
-						case "dept":
-							console.log("A paramètré") ;
-							break;
-						case "apec":
-							let deptNumber = document.getElementById(tabKeyElem[idElmKey].id).value ;
-							de[deNB].appendChild(document.createTextNode(tabKeyElem[idElmKey].apecContenu(deptNumber))) ;
-							break;
-						default:
-							alert(tabKeyElem[idElmKey].category+" n'est pas paramètré dans le type text.") ;
-							break;
-					}
-					break;
-				case "list" :
-					switch (tabKeyElem[idElmKey].category) {
-						case "text":
-							de[deNB].appendChild(document.createTextNode(document.getElementById(tabKeyElem[idElmKey].id).value)) ;
-							break;
-						case "ton.text":
-							toLowCase = document.getElementById(tabKeyElem[idElmKey].id).value ;
-							de[deNB].appendChild(document.createTextNode("ton "+toLowCase.toLowerCase())) ;
-							break;
-						case "if" :
-							console.log(tabText[i+1]+" "+document.getElementById(tabKeyElem[idElmKey].id).value)
-							if(tabText[i+1]!=document.getElementById(tabKeyElem[idElmKey].id).value) {
-								console.log("Je n'ajoute pas le texte") ;
-								i += tabText[i+2] ;
-							}
-							i+=2 ;
-							break ;
-						default:
-							alert(tabKeyElem[idElmKey].category+" n'est pas paramètré dans le type list, pour l'écriture du texte.") ;
-							break;
-					}
-					break ;
-				case "next" :
-					if (!document.getElementById(tabKeyElem[idElmKey].id+"Y").checked) {
-						console.log("Je n'ajoute pas le texte") ;
-						i += tabText[i+1] ;
-					}
-					i++ ;
-					break ;
-				default:
-					alert(tabKeyElem[idElmKey].type+" n'est pas paramètré dans le type next, pour l'écriture du texte.") ;
-					break;
-			}
-		}
-		else if (tabText[i] == "br") {
-			de[deNB].appendChild(document.createElement("br")) ;
-		}
-		else {de[deNB].appendChild(document.createTextNode(tabText[i])) ;}
-	}
-
-	//Vide l'élément body après avoir récupérer les informatiions
-	bodyElem.innerHTML = "" ;
-
-	//Ajoute le texte
-	bodyElem.appendChild(de[deNB]) ;
-
-	/*Crée et ajoute les boutons*/
-	//Ajoute la zone avec les boutons pour copier ou revenier en arrière
-	de = document.createElement("div") ;
-	de.id = "zoneButtCopy" ;
-	//Ajoute la zone avec les boutons pour copier ou revenier en arrière
-	bodyElem.appendChild(de) ;
-
-	addButton("copyTxt", null, "Copier le texte", "copyFromIdToClip('copyText')", "zoneButtCopy") ;
-
-	addBr("zoneButtCopy") ;
-
-	addButton("backButt", null, "Retour", "writeButtonList()", "zoneButtCopy") ;
+    return temp ;
 }
 
 /*-----Outil d'ajout d'élément HTML-----*/

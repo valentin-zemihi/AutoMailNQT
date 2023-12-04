@@ -13,6 +13,7 @@ class TextType {
  */
 function setTextType() {
 	//new TextType(name, type, text)
+	/**Mail jeune**/
 	tabTextType[tabTextType.length] = new TextType("Dossier non éligible", "Mail", "Jeune", [
 		"Bonjour ","YGTitle"," ","YGLastName",",","br",
 		"br",
@@ -194,13 +195,13 @@ function setTextType() {
 	tabTextType[tabTextType.length] = new TextType("Sortie - Félicitation", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
-		"Félicitations pour ","YGSearchP"," !","br",
+		"Félicitations pour ton ","YGSearchLow"," !","br",
 		"br",
 		"nextCom",5,"J’espère que le mentorat NQT t’a aidé","YGGender"," dans ta recherche. Les jeunes diplômés sont nos meilleurs ambassadeurs pour promouvoir notre association. Si tu le souhaites, tu trouveras en pièce jointe un visuel de notre action à partager à ton entourage ou plus largement sur les réseaux sociaux.","br",
 		"br",	
 		'Je te propose de passer ton statut en "Sortie-',"YGSearch",'" ce qui aura pour effet de mettre fin à ton mentorat et de clôturer ton compte chez NQT.'," Toutefois n'hésite pas à rester en contact avec ","MAD2"," mentor","MGender",", ","MPP"," fait dorénavant partie de ton réseau. Et nous restons à ta disposition en cas d’évolution professionnelle.","br",
 		"br",
-		"Pour terminer complètement ton aventure NQT, peux-tu nous apporter quelques éléments complémentaires concernant ","YGSearchP",", en répondant aux questions ci-dessous :","br",
+		"Pour terminer complètement ton aventure NQT, peux-tu nous apporter quelques éléments complémentaires concernant ton ","YGSearchLow",", en répondant aux questions ci-dessous :","br",
 		"br",
 		"startUL",
 		"startLI", "Quel est le ","startStrong","nom de l’entreprise ou l’institution","endTag"," et son ","startStrong"," adresse exacte","endTag"," ?","endTag",
@@ -223,13 +224,13 @@ function setTextType() {
 		"startLI","NON","endTag",
 		"endTag",
 		"br",
-		"startLI","startStrong","Est-ce que le mentorat proposé par NQT t'a aidé à trouver ","YGSearchP"," ?","endTag"," (Supprimer les mentions inutiles)","endTag",
+		"startLI","startStrong","Est-ce que le mentorat proposé par NQT t'a aidé à trouver ton ","YGSearchLow"," ?","endTag"," (Supprimer les mentions inutiles)","endTag",
 		"startUL",
 		"startLI","OUI","endTag",
 		"startLI","NON","endTag",
 		"endTag",
 		"br",
-		"startLI","startStrong","Est-ce que les autres services proposés par NQT t'ont aidé à trouver ","YGSearchP"," ?","endTag"," (Supprimer les mentions inutiles)","endTag",
+		"startLI","startStrong","Est-ce que les autres services proposés par NQT t'ont aidé à trouver ton ","YGSearchLow"," ?","endTag"," (Supprimer les mentions inutiles)","endTag",
 		"startUL",
 		"startLI","OUI","endTag",
 		"startLI","NON","endTag",
@@ -245,6 +246,7 @@ function setTextType() {
 		"Et très belle journée,","br",
 		"Cordialement,"
 	]);
+	/**Mail mentor**/
 	tabTextType[tabTextType.length] = new TextType("Bienvenue dans l'aventure NQT", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
@@ -283,6 +285,7 @@ function setTextType() {
 		"YGTitle"," ","YGFirstName"," ","YGLastName"," : ","YGPres","br",
 		"nextCV",2,"Je vous propose de découvrir son CV joint à cet e-mail.","br",
 		"nextIdea",2,"YGIdea","br",
+		"br",
 		"Êtes-vous d'accord pour accompagner ","YGFirstName"," dans sa recherche ?","br",
 		"J'attends votre confirmation. J'enverrai ensuite votre adresse e-mail à votre filleul","YGGender"," qui prendra contact avec vous rapidement afin de faire plus ample connaissance et démarrer le mentorat.","br",
 		"br",
@@ -339,7 +342,7 @@ function setTextType() {
 	tabTextType[tabTextType.length] = new TextType("Fin de mentorat - Positif", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
-		"Je vous envoie un email pour vous notifier de la fin du mentorat de ","YGFirstName"," ","YGLastName",".En effet, ","YGGPP"," a décroché un ","YGSearch","nextJob",2," en tant que : ","YGWork",".","br",
+		"Je vous envoie un email pour vous notifier de la fin du mentorat de ","YGFirstName"," ","YGLastName",".En effet, ","YGGPP"," a décroché un ","YGSearchLow","nextJob",2," en tant que : ","YGWork",".","br",
 		"br",
 		"Bien entendu ","YGFirstName"," fait dorénavant partie de votre réseau, et nous vous invitons à garder contact.","br",
 		"br",
@@ -360,6 +363,7 @@ function setTextType() {
 		"br",
 		"Excellente journée à vous,"
 	]);
+	/**SMS jeune**/
 	tabTextType[tabTextType.length] = new TextType("SMS préscription", "SMS", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"Je vous écris dans la continuité de mon message vocal, de la part de ","EmploymentAdvisor", " de Pôle Emploi qui m'a transmis vos coordonnées. L'idée de cet appel est de vous présenter notre dispositif de mentorat professionnel, entièrement gratuit et dédié aux jeunes diplômés d'un Bac+3 minimum et âgés de moins de 31 ans. Pour vous inscrire, il vous suffit de créer un compte sur le site internet NQT.fr ou en téléchargeant notre application disponible sur smartphone.","br",
@@ -407,7 +411,7 @@ function setTextType() {
 		"PMSignSMS"
 	]);
 	tabTextType[tabTextType.length] = new TextType("Dossier validé", "SMS", "Jeune", [
-		"Bonjour ","YGFirstName","br",
+		"Bonjour ","YGFirstName",",","br",
 		"Je fais suite à la validation de ton dossier chez NQT. Félicitation !","br",
 		"Avant l’étape de la mise en mentorat, je t'invite à m’appeler ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique. Le but est de faire le point sur ton projet professionnel.","br",
 		"Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h","br",
@@ -441,6 +445,7 @@ function setTextType() {
 		"Très belle journée à toi.","br",
 		"PMSignSMS"
 	]);
+	/**Mail événement**/
 	tabTextType[tabTextType.length] = new TextType("Invitation ateler", "Mail", "Event",[
 		"Chers NQTéens 📣","br",
 		"br", 
