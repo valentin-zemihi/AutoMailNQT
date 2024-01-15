@@ -267,7 +267,7 @@ function setKeyElemList() {
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du mentor", null); //PP pour Pronom Personnel
+	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du jeune", null); //PP pour Pronom Personnel
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null);
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
