@@ -4,7 +4,7 @@
  * YGFirstName : Prénom du jeune ;
  * YGLastName : Nom de famille du jeune ;
  * YGGender : Genre du jeune pour detail "e" ;
- * YGGPP : avec YGGender "Il/Elle" ;
+ * YGPP : avec YGGender "Il/Elle" ; //PP pour Pronom Personnel
  * YGTitle : Titre genré du jeune "Monsieur/Madame" ;
  * YGDept : Département du jeune ;
  * YGSearch : Recherche du jeune sous forme de liste : Stage, Alternance, Emploi;
@@ -191,8 +191,8 @@ class KeyElem {
                 else {value = "lui"}
                 break ;
             case "ton.ta" :
-                if(document.getElementById(this.id+"F").checked) {value = "elle" ;}
-                else {value = "lui"}
+                if(document.getElementById(this.id+"F").checked) {value = "ta" ;}
+                else {value = "ton"}
                 break ;
             case "apec" :
                 value = apecContent(document.getElementById(this.id).value) ; //Récupère un nombre et le compare au tableau apecGe pour trouver le texte
@@ -267,6 +267,7 @@ function setKeyElemList() {
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null);
+	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du mentor", null); //PP pour Pronom Personnel
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null);
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
