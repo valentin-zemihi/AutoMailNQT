@@ -1,147 +1,20 @@
-/*Code pour les régions :
-- ARA : Auvergne-Rhône-Alpes
-- BFC : Bourgogne Franche-Comté
-- BRE : Bretagne
-- CVL : Centre-Val de Loire
-- COR : Corse
-- DROM : Départements et Régions d'Outre-Mer
-- GE : Grand Est
-- HDF : Hauts-de-France
-- IDF : Ile-de-France
-- NOR : Normandie
-- NA : Nouvelle-Aquitaine
-- OCC : Occitanie
-- PDL : Pays de la Loire
-- PACA : Provence Alpes Côtes d'Azur
-
-All = ["ARA", "BFC", "BRE", "CVL", "COR", "DROM", "GE", "HDF", "IDF", "NOR", "NA", "OCC", "PDL", "PACA"]
-*/
-
 class TextType {
-    constructor(name, target, region, type, category, obj, txt) {
+    constructor(name, type, target, txt) {
         this.name = name ;
-		this.target = target ;
-		this.region = region ;
         this.type = type ;
-		this.category = category ;
-		this.obj = obj ;
+        this.target = target ;
         this.txt = txt ;
     }
-
-	getFolder() {
-		if (this.target!=null) {
-			return this.type+"-"+this.target ;
-		}
-		return this.type ;
-	}
 }
-
-class EventTextType extends TextType {
-	constructor(name, region, type, category, obj, txt) {
-		super(name, null, region, type, category, obj, txt) ;
-	}
-
-	getFolder() {
-		return "Événement" ;
-	}
-}
-
-/*---------Fonction avec TextType---------*/
-
-var tabTextType = [] ; //Tableau d'objet TextType
-var activeText ;
-
-var allRegion = ["ARA", "BFC", "BRE", "CVL", "COR", "DROM", "GE", "HDF", "IDF", "NOR", "NA", "OCC", "PDL", "PACA"] ;
 
 /**
  * Initialise la liste des textes types utilisés dans les textes.
  * Pour la liste des textes types, voir le fichier textType.js
  */
 function setTextType() {
-	/**SMS jeune**/
-	tabTextType[tabTextType.length] = new TextType("SMS préscription", "Jeune", ["BFC", "GE"], "SMS", "Prescription", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je vous écris dans la continuité de mon message vocal, de la part de ","EmploymentAdvisor", " de France Travail qui m'a transmis vos coordonnées. L'idée de cet appel est de vous présenter notre dispositif de mentorat professionnel, entièrement gratuit et dédié aux jeunes diplômés d'un Bac+3 minimum et âgés de moins de 31 ans. Pour vous inscrire, il vous suffit de créer un compte sur le site internet nqt.fr ou en téléchargeant notre application mobile.","br",
-		"N'hésitez pas à me rappeler si vous souhaitez échanger sur votre projet et notre action.","br",
-		"Au plaisir d'échanger avec vous et de vous accompagner !","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Relance SMS préscription", "Jeune", ["BFC", "GE"], "SMS", "Prescription", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Suite à mon message vocal, je vous relance à propos de ma précédente proposition. Si vous avez besoin d'un accompagnement pour votre projet professionnel, NQT propose un service de mentorat par des professionnels en activité.","br",
-		"Vous pouvez vous y inscrire quand vous le souhaitez via nqt.fr ou notre application mobile. Je suis à votre entière disposition pour répondre à vos questions.","br",
-		"N'hésitez pas à me contacter,","br",
-		"Bien à vous,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Finalisation inscription", "Jeune", ["BFC", "GE"], "SMS", "Inscription", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je fais suite à votre inscription chez NQT !","br",
-		"A ce jour, votre dossier est toujours incomplet. Je vous invite à finaliser votre inscription en vous rendant sur votre espace personnel pour compléter vos informations : https://app.nqt.fr/signin.","br", 
-		"N'hésitez pas à me contacter directement si besoin.","br",
-		"Bien à vous,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Relance finalisation inscription", "Jeune", ["BFC", "GE"], "SMS", "Inscription", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je vous relance pour remplir la dernière étape d’inscription chez NQT sur https://app.nqt.fr/signin ou sur l’application NQT.","br",
-		"N’hésitez pas à me contacter si vous rencontrez le moindre problème. Je suis à votre entière disposition.","br",
-		"Cordialement,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Dernière relance finalisation inscription", "Jeune", ["BFC", "GE"], "SMS", "Inscription", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je vous relance suite à mon message vocal. Il ne vous reste plus qu'une étape pour être complètement inscrit","YGGender"," à notre dispositif et profiter du mentorat par NQT.","br",
-		"Je vous invite une dernière fois à compléter votre profil sur https://app.nqt.fr/signin.","br",
-		"N'hésitez pas à me contacter directement si vous rencontrez la moindre difficulté. Je suis disponible à ce numéro par SMS ou par appel, ou par mail à v.zemihi@nqt.fr.","br",
-		"Bien à vous,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Examen non éligible", "Jeune", ["BFC", "GE"], "SMS", "Non éligible", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je fais suite à votre inscription chez NQT ! Votre dossier serait non éligible selon notre logiciel.","br",
-		"J’aimerais voir avec vous les informations de votre dossier, pour vérifier manuellement l’éligibilité de votre profil.","br",
-		"N'hésitez pas à me contacter, dès que vous le pouvez. Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h.","br",
-		"Bien à vous,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Dossier validé", "Jeune", ["BFC", "GE"], "SMS", "Dossier validé", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Je fais suite à la validation de ton dossier chez NQT. Félicitation !","br",
-		"Avant l’étape de la mise en mentorat, je t'invite à m’appeler ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique. Le but est de faire le point sur ton projet professionnel.","br",
-		"Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h","br",
-		"Au plaisir de t'accompagner 😉","br",
-		"Très belle journée et à bientôt,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Dossier validé - Relance", "Jeune", ["BFC", "GE"], "SMS", "Dossier validé", null, [
-		"Bonjour ", "YGFirstName",",","br",
-		"Afin de faire le point sur ton projet professionnel, quand serais-tu disponible pour un échange téléphonique ? C'est une étape importante avant de te mettre en relation avec un mentor.","br",
-		"De mon côté, je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h.","br",
-		"N'hésite pas à m'appeler ou à m'indiquer tes disponibilités par SMS ou mail.","br",
-		"Bonne journée à toi et à bientôt.","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Dossier validé - Dernière relance", "Jeune", ["BFC", "GE"], "SMS", "Dossier validé", null, [
-		"Bonjour ","YGFirstName",",","br",
-		"Suite à ton inscription chez NQT, tu as dû recevoir un mail de validation de dossier, et plusieurs appels pour faire le point sur ton projet professionel. Cette étape est importante pour bien identifier ton profil et te mettre en relation avec un mentor","br",
-		"Es-tu toujours intéressé","YGGender"," par notre dispositif d’accompagnement ?","br",
-		"Si c’est le cas, je t'invite à me rappeler dès que possible, ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique.","br",
-		"En l'absence de réponse, je serais contraint","PMGender"," de clôturer ton dossier le ","closingDate",".","br",
-		"Dans l'attente de ton retour,","br",
-		"PMSignSMS"
-	]);
-	tabTextType[tabTextType.length] = new TextType("Dernière relance suivi mentorat", "Jeune", ["BFC", "GE"], "SMS", "Suivi mentorat", null,[
-		"Bonjour ","YGFirstName",",","br",
-		"Sauf erreur de ma part, je suis toujours dans l'attente de ton bilan de mentorat. Merci d'y répondre via le mail ayant pour objet “NQT - Dernière relance suivi mentorat”.","br",
-		"Ce bilan est obligatoire pour maintenir ton mentorat et le compte NQT actif.","br",
-		"Sans réponse de ta part d'ici le ","closingDate"," je serai contraint de clôturer ton dossier.","br",
-		"Merci de ta compréhension,","br",
-		"Très belle journée à toi.","br",
-		"PMSignSMS"
-	]);
+	//new TextType(name, type, text)
 	/**Mail jeune**/
-	tabTextType[tabTextType.length] = new TextType("Dossier non éligible", "Jeune", ["BFC", "GE"], "Mail", "Non éligible", "NQT - Dossier non éligible", [
+	tabTextType[tabTextType.length] = new TextType("Dossier non éligible", "Mail", "Jeune", [
 		"Bonjour ","YGTitle"," ","YGLastName",",","br",
 		"br",
 		"Je fais suite à votre inscription chez NQT.","br",
@@ -159,7 +32,7 @@ function setTextType() {
 		"br",
 		"Bien cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Finalisation inscription", "Jeune", ["BFC", "GE"], "Mail", "Inscrit", "NQT - Finalisation procédure d'inscription", [
+	tabTextType[tabTextType.length] = new TextType("Finalisation inscription", "Mail", "Jeune", [
 		"Bonjour ","YGTitle"," ","YGLastName",",","br",
 		"br",
 		"Nous avons bien reçu votre inscription chez NQT et nous vous remercions de l'intérêt porté par notre association.","br",
@@ -173,7 +46,7 @@ function setTextType() {
 		"br",
 		"Au plaisir de vous accompagner,","br"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Finalisation inscription - Dernière relance", "Jeune", ["BFC", "GE"], "Mail", "Inscrit", "NQT - Relance finalisation d'inscription", [
+	tabTextType[tabTextType.length] = new TextType("Finalisation inscription - Dernière relance", "Mail", "Jeune", [
 		"Bonjour ","YGTitle"," ","YGLastName",",","br",
 		"br",
 		"Vous vous êtes inscrit","YGGender"," le ","registrationDate"," sur notre plateforme, toutefois l'inscription n'est pas complète. Etes-vous toujours intéressé","YGGender"," par notre dispositif d'accompagnement ?","br",
@@ -186,7 +59,7 @@ function setTextType() {
 		"br",
 		"Bien cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Réactivation profil NQT", "Jeune", ["BFC", "GE"], "Mail", "Réactivation", "NQT - Réactivation du profil", [
+	tabTextType[tabTextType.length] = new TextType("Réactivation profil NQT", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
 		"Comme tu peux le constater, ton dossier NQT a bien été réactivé : bon retour dans l’aventure NQT !","br",
@@ -205,7 +78,7 @@ function setTextType() {
 		"br",
 		"Bien Cordialement,","br"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Dossier validé - BFC", "Jeune", ["BFC"], "Mail", "Dossier validé", "NQT - Dossier validé", [
+	tabTextType[tabTextType.length] = new TextType("Dossier validé - BFC", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
 		"Comme tu as pu le constater, ton dossier a bien été validé, félicitations !","br",
@@ -225,7 +98,7 @@ function setTextType() {
 		"br",
 		"Bien cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Dossier validé - GE", "Jeune", ["GE"], "Mail", "Dossier validé", "NQT - Dossier validé",[
+	tabTextType[tabTextType.length] = new TextType("Dossier validé - GE", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
 		"Comme tu as pu le constater, ton dossier a bien été validé, félicitations !","br",
@@ -243,7 +116,7 @@ function setTextType() {
 		"br",
 		"Bien cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Confirmation mentorat", "Jeune", ["BFC", "GE"], "Mail", "Confirmation mentorat", "NQT - Confirmation mentorat", [
+	tabTextType[tabTextType.length] = new TextType("Confirmation mentorat", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
 		"J'ai le plaisir de te confirmer ton mentorat avec :","br",
@@ -261,7 +134,7 @@ function setTextType() {
 		"br",
 		"Cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de", [
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Mail","Jeune", [
 		"Bonjour,","br",
 		"br",
 		"Comme tous les deux mois, je te propose de faire un point de suivi de ton accompagnement en répondant aux questions ci-dessous :","br",
@@ -280,7 +153,7 @@ function setTextType() {
 		"br", 
 		"Cordialement,","br"
 	]);
-	tabTextType[tabTextType.length] = new TextType ("Relance suivi mentorat", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Relance suivi mentorat de", [
+	tabTextType[tabTextType.length] = new TextType ("Relance suivi mentorat", "Mail", "Jeune", [
 		"Bonjour,","br",
 		"br",
 		"Je te relance concernant le suivi de mentorat chez NQT. Afin de savoir comment se passe ton accompagnement avec ton/ta mentor.e, je te propose de répondre aux questions ci-dessous :","br",
@@ -298,7 +171,7 @@ function setTextType() {
 		"Au plaisir de nos prochains échanges et restant à ta disposition.","br",
 		"Cordialement,","br"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Dernière relance suivi mentorat", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Dernière relance suivi mentorat de", [
+	tabTextType[tabTextType.length] = new TextType("Dernière relance suivi mentorat", "Mail", "Jeune", [
 		"Bonjour,","br",
 		"br",
 		"Voici la dernière relance concernant le suivi de mentorat chez NQT. L’idée est de savoir comment se passe ton accompagnement avec ton/ta mentor.e à travers le petit questionnaire ci-dessous.","br",
@@ -319,7 +192,7 @@ function setTextType() {
 		"Au plaisir de nos prochains échanges et restant à ta disposition.","br",
 		"Cordialement,","br"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Sortie - Félicitation", "Jeune", ["BFC", "GE"], "Mail", "Sortie", "NQT - Félicitation pour ton", [
+	tabTextType[tabTextType.length] = new TextType("Sortie - Félicitation", "Mail", "Jeune", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
 		"Félicitations pour ton ","YGSearchLow"," !","br",
@@ -374,7 +247,7 @@ function setTextType() {
 		"Cordialement,"
 	]);
 	/**Mail mentor**/
-	tabTextType[tabTextType.length] = new TextType("Bienvenue dans l'aventure NQT", "Mentor", ["BFC", "GE"], "Mail", "Bienvenue", "NQT - Bienvenue dans l'aventure NQT",[
+	tabTextType[tabTextType.length] = new TextType("Bienvenue dans l'aventure NQT", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je suis ","PMFirstName"," ","PMLastName",", ","PMWork"," dans la région ","PMRegion"," et également votre principal","PMGender"," interlocut","PMGeurice"," dans les actions de mentorat.","br",
@@ -405,7 +278,7 @@ function setTextType() {
 		"br",
 		"Bien cordialement,"
 	]) ;
-	tabTextType[tabTextType.length] = new TextType("Proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Proposition mentorat - ",[
+	tabTextType[tabTextType.length] = new TextType("Proposition mentorat", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"J'ai le plaisir de vous proposer l'accompagnement de :","br",
@@ -419,7 +292,7 @@ function setTextType() {
 		"Je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
 	]) ;
-	tabTextType[tabTextType.length] = new TextType("Relance proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Relance proposition mentorat -",[
+	tabTextType[tabTextType.length] = new TextType("Relance proposition mentorat", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je me permets de vous relancer concernant la proposition de mentorat avec ","YGTitle"," ","YGFirstName"," ","YGLastName",".","br",
@@ -432,7 +305,7 @@ function setTextType() {
 		"Je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
 	])
-	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de - ",[
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Mail", "Mentor",[
 		"Bonjour,","br",
 		"br",
 		"Vous avez démarré un mentorat depuis quelque temps et, comme tous les deux mois, je vous propose de faire un point de suivi de votre accompagnement :","br",
@@ -449,7 +322,7 @@ function setTextType() {
 		"Je reste à votre entière disposition,","br",
 		"Bien à vous,"
 	]) ;
-	tabTextType[tabTextType.length] = new TextType("Relance suivi mentorat", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de -",[
+	tabTextType[tabTextType.length] = new TextType("Relance suivi mentorat", "Mail", "Mentor",[
 		"Bonjour,","br",
 		"br",
 		"Je vous relance concernant le suivi de mentorat chez NQT. Afin de savoir comment se passe votre accompagnement avec votre/vos filleul.e.s, je vous propose de répondant aux questions ci-dessous :",
@@ -466,7 +339,7 @@ function setTextType() {
 		"Je reste à votre entière disposition,","br",
 		"Bien à vous,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Fin de mentorat - Positif", "Mentor", ["BFC", "GE"], "Mail", "Fin de mentorat", "NQT - Fin de mentorat -",[
+	tabTextType[tabTextType.length] = new TextType("Fin de mentorat - Positif", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je vous envoie un email pour vous notifier de la fin du mentorat de ","YGFirstName"," ","YGLastName",". En effet, ","YGPP"," a décroché un ","YGSearchLow","nextJob",2," en tant que : ","YGWork",".","br",
@@ -479,7 +352,7 @@ function setTextType() {
 		"br",
 		"Excellente journée à vous,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Fin de mentorat - Pas de retour", "Mentor", ["BFC", "GE"], "Mail", "Fin de mentorat", "NQT - Fin de mentorat -",[
+	tabTextType[tabTextType.length] = new TextType("Fin de mentorat - Pas de retour", "Mail", "Mentor",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je vous envoie un email pour vous notifier de la fin du mentorat de ","YGFirstName"," ","YGLastName",".","br",
@@ -490,8 +363,90 @@ function setTextType() {
 		"br",
 		"Excellente journée à vous,"
 	]);
+	/**SMS jeune**/
+	tabTextType[tabTextType.length] = new TextType("SMS préscription", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je vous écris dans la continuité de mon message vocal, de la part de ","EmploymentAdvisor", " de Pôle Emploi qui m'a transmis vos coordonnées. L'idée de cet appel est de vous présenter notre dispositif de mentorat professionnel, entièrement gratuit et dédié aux jeunes diplômés d'un Bac+3 minimum et âgés de moins de 31 ans. Pour vous inscrire, il vous suffit de créer un compte sur le site internet NQT.fr ou en téléchargeant notre application disponible sur smartphone.","br",
+		"N'hésitez pas à me rappeler si vous souhaitez échanger sur votre projet et notre action.","br",
+		"Au plaisir d'échanger avec vous et de vous accompagner !","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Relance SMS préscription", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Suite à mon message vocal, je vous relance à propos de ma précédente proposition. Si vous avez besoin d'un accompagnement pour votre projet professionnel, NQT propose un service de mentorat par des professionnels en activité.","br",
+		"Vous pouvez vous y inscrire quand vous le souhaitez via nqt.fr ou notre application mobile. Je suis à votre entière disposition pour répondre à vos questions.","br",
+		"N'hésitez pas à me contacter,","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Finalisation inscription", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je fais suite à votre inscription chez NQT !","br",
+		"A ce jour, votre dossier est toujours incomplet. Je vous invite à finaliser votre inscription en vous rendant sur votre espace personnel pour compléter vos informations : https://app.nqt.fr/signin.","br", 
+		"N'hésitez pas à me contacter directement si besoin.","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Relance finalisation inscription", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je vous relance pour remplir la dernière étape d’inscription chez NQT sur https://app.nqt.fr/signin ou sur l’application NQT.","br",
+		"N’hésitez pas à me contacter si vous rencontrez le moindre problème. Je suis à votre entière disposition.","br",
+		"Cordialement,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Dernière relance finalisation inscription", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je vous relance suite à mon message vocal. Il ne vous reste plus qu'une étape pour être complètement inscrit","YGGender"," à notre dispositif et profiter du mentorat par NQT.","br",
+		"Je vous invite une dernière fois à compléter votre profil sur https://app.nqt.fr/signin.","br",
+		"N'hésitez pas à me contacter directement si vous rencontrez la moindre difficulté. Je suis disponible à ce numéro par SMS ou par appel, ou par mail à v.zemihi@nqt.fr.","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Examen non éligible", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je fais suite à votre inscription chez NQT ! Votre dossier serait non éligible selon notre logiciel.","br",
+		"J’aimerais voir avec vous les informations de votre dossier, pour vérifier manuellement l’éligibilité de votre profil.","br",
+		"N'hésitez pas à me contacter, dès que vous le pouvez. Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h.","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Dossier validé", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Je fais suite à la validation de ton dossier chez NQT. Félicitation !","br",
+		"Avant l’étape de la mise en mentorat, je t'invite à m’appeler ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique. Le but est de faire le point sur ton projet professionnel.","br",
+		"Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h","br",
+		"Au plaisir de t'accompagner 😉","br",
+		"Très belle journée et à bientôt,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Dossier validé - Relance", "SMS", "Jeune", [
+		"Bonjour ", "YGFirstName",",","br",
+		"Afin de faire le point sur ton projet professionnel, quand serais-tu disponible pour un échange téléphonique ? C'est une étape importante avant de te mettre en relation avec un mentor.","br",
+		"De mon côté, je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h.","br",
+		"N'hésite pas à m'appeler ou à m'indiquer tes disponibilités par SMS ou mail.","br",
+		"Bonne journée à toi et à bientôt.","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Dossier validé - Dernière relance", "SMS", "Jeune", [
+		"Bonjour ","YGFirstName",",","br",
+		"Suite à ton inscription chez NQT, tu as dû recevoir un mail de validation de dossier, et plusieurs appels pour faire le point sur ton projet professionel. Cette étape est importante pour bien identifier ton profil et te mettre en relation avec un mentor","br",
+		"Es-tu toujours intéressé","YGGender"," par notre dispositif d’accompagnement ?","br",
+		"Si c’est le cas, je t'invite à me rappeler dès que possible, ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique.","br",
+		"En l'absence de réponse, je serais contraint","PMGender"," de clôturer ton dossier le ","closingDate",".","br",
+		"Dans l'attente de ton retour,","br",
+		"PMSignSMS"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Dernière relance suivi mentorat", "SMS", "Jeune",[
+		"Bonjour ","YGFirstName",",","br",
+		"Sauf erreur de ma part, je suis toujours dans l'attente de ton bilan de mentorat. Merci d'y répondre via le mail ayant pour objet “NQT - Dernière relance suivi mentorat”.","br",
+		"Ce bilan est obligatoire pour maintenir ton mentorat et le compte NQT actif.","br",
+		"Sans réponse de ta part d'ici le ","closingDate"," je serai contraint de clôturer ton dossier.","br",
+		"Merci de ta compréhension,","br",
+		"Très belle journée à toi.","br",
+		"PMSignSMS"
+	]);
 	/**Mail événement**/
-	tabTextType[tabTextType.length] = new EventTextType("Invitation ateler", ["BFC", "GE"],"Mail", "Atelier", "NQT - Invitation atelier :",[
+	tabTextType[tabTextType.length] = new TextType("Invitation ateler", "Mail", "Event",[
 		"Chers NQTéens 📣","br",
 		"br", 
 		"Pour compléter votre mentorat, nous avons mis en place un atelier à distance organisé par l’équipe NQT Est qui saura, je l’espère, répondre à vos attentes et à vos questions !","br",
@@ -518,7 +473,7 @@ function setTextType() {
 		"br",
 		"Au plaisir de vous retrouver en live !"
 	]);
-	tabTextType[tabTextType.length] = new EventTextType("Modalité de connexion et programme", ["BFC", "GE"],"Mail", "Atelier", "NQT - Modalité de connexion atelier :", [
+	tabTextType[tabTextType.length] = new TextType("Modalité de connexion et programme", "Mail", "Event", [
 		"Bonjour à toutes et tous,","br",
 		"br",
 		"Je suis ravi de vous accueillir ce ","EventDate"," à ","EventTime"," pour l’atelier : ","EventName","br",

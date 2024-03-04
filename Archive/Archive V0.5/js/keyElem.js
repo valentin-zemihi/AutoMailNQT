@@ -1,5 +1,3 @@
-/*Gender : true = femme, false = homme*/
-
 /**Liste des éléments clés pour mail auto
  * Pour les Genders : true = femme et false = homme
  * 
@@ -106,17 +104,8 @@ class KeyElem {
                 ec.id = this.id ;
                 ec.type = this.type ;
                 ec.placeholder = "Ex. "+this.exemple ;
-                mec.push(ec) ;
+                mec[mec.length] = ec ;
                 break;
-            case "longText" :
-                ec = document.createElement("br") ;
-                mec.push(ec) ;
-                ec = document.createElement("textarea") ;
-                ec.name = this.id ;
-                ec.id = this.id ;
-                ec.placeholder = "Ex. "+this.exemple ;
-                mec.push(ec) ;
-                break ;
             case "gender":
                 ec = document.createElement("input") ;
 	            ec.name = this.id ;
@@ -158,7 +147,7 @@ class KeyElem {
                 ec = document.createElement("input") ;
 	            ec.name = this.id ;
                 ec.id = this.id+"Y" ;
-                ec.type = "checkbox" ;
+                ec.type = "radio" ;
                 mec[mec.length] = ec ;
 
                 ec = document.createElement("label") ;
@@ -261,21 +250,19 @@ class TagElem extends KeyElem {
     getValue() {return this.tag ;}
 }
 
-var tabKeyElem = [] ; //Tableau d'objet KeyElem
-
 /**
  * Initialise la liste des éléments clés utilisés dans les textes.
  * Pour la liste des éléments clés, voir le fichier keyElem.js
  */
 function setKeyElemList() {
 	//new KeyElem(name, category, content, id, type, label, exemple)
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMFirstName", "text", activeUser.firstName);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMLastName", "text", activeUser.lastName);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMWork", "text", activeUser.work);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMRegion", "text", activeUser.region);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGender", "detail", activeUser.gender);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGeurice", "eurice", activeUser.gender);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMSignSMS", "text", activeUser.sign);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMFirstName", "text", tabPM[activeUser].firstName);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMLastName", "text", tabPM[activeUser].lastName);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMWork", "text", tabPM[activeUser].work);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMRegion", "text", tabPM[activeUser].region);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGender", "detail", tabPM[activeUser].gender);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGeurice", "eurice", tabPM[activeUser].gender);
+	tabKeyElem[tabKeyElem.length] = new ConstElem("PMSignSMS", "text", tabPM[activeUser].sign);
 
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer");
@@ -286,8 +273,8 @@ function setKeyElemList() {
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]); //P pour Possessif "ton stage"
 	tabKeyElem[tabKeyElem.length] = new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)");
+	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPres", "text", "YGPres", "text", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)");
+	tabKeyElem[tabKeyElem.length] = new KeyElem("YGIdea", "text", "YGIdea", "text", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)");
 
 	tabKeyElem[tabKeyElem.length] = new KeyElem("MFirstName","text", "MFirstName", "text", "Prénom du mentor", "Thomas");
 	tabKeyElem[tabKeyElem.length] = new KeyElem("MLastName","text", "MLastName", "text", "Nom du mentor", "Pesquet");
@@ -331,30 +318,4 @@ function setKeyElemList() {
 	tabKeyElem[tabKeyElem.length] = new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null) ;
 
 	tabKeyElem[tabKeyElem.length] = new KeyElem("ifYGSearch","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
-}
-
-/*---Fonction particulière pour l'APEC Grand-Est---*/
-
-var apecGE = [
-	"08","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
-	"10","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
-	"51","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
-	"52","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
-	"54","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
-	"55","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
-	"57","Pour l’APEC Moselle : Véronique PETITJEAN veronique.petitjean@apec.fr",
-	"67","Pour l’APEC Bas-Rhin : Grégory JOECKLE gregory.joeckle@apec.fr",
-	"68","Pour l’APEC Haut-Rhin: Franck WOOG franck.woog@apec.fr",
-	"88","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
-] ;
-
-function apecContent(dept) {
-	var temp = null ;
-    for (let i = 0; i < apecGE.length; i+=2) {
-        if(dept==apecGE[i]) {temp = apecGE[i+1] ;}
-	}
-
-	if(temp == null) {alert("Les éléments de l'APEC"+dept+" n'ont pas été trouvé.") ;}
-
-    return temp ;
 }

@@ -1,5 +1,143 @@
 /*Gender : true = femme, false = homme*/
+
+var tabKeyElem = [] ; //Tableau d'objet KeyElem
+var tabTextType = [] ; //Tableau d'objet TextType
+
+var activeUser = 0 ;
 var activeText = 0 ;
+var tabPM = [] ;
+
+var apecGE = [
+	"08","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
+	"10","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
+	"51","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
+	"52","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
+	"54","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
+	"55","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
+	"57","Pour l’APEC Moselle : Véronique PETITJEAN veronique.petitjean@apec.fr",
+	"67","Pour l’APEC Bas-Rhin : Grégory JOECKLE gregory.joeckle@apec.fr",
+	"68","Pour l’APEC Haut-Rhin: Franck WOOG franck.woog@apec.fr",
+	"88","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
+] ;
+
+var tabText ;
+
+function setTabPM() {
+	tabPM.push(new users("Valentin", "ZEMIHI", false, "Chargé de mission", "Bourgogne Franche-Comté", "BFC")) ;
+	tabPM.push(new users("Kevin", "AUBIN", false, "Chargé de mission", "Grand-Est", "GE")) ;
+	tabPM.push(new users("Cannelle", "LEONARD", true, "Chargée de mission", "Grand-Est", "GE")) ;
+	tabPM.push(new users("Sophie", "CORROY", false, "Chargée de mission", "Grand-Est", "GE")) ;
+}
+
+/**Paramètre la liste des boutons SMS et Mail*/
+function writeButtonList() {
+	var ec ; //Elément crée
+	var princDiv ; //Div Principal
+	var ed ; //Elément de destination
+
+	var textNode ;
+	var bodyElem = document.getElementById("body") ; 
+
+	//Vide la variable lié au texte
+	tabText = null ;
+
+	//Vide la page web
+	bodyElem.innerHTML = "" ;
+
+	/*Crée et ajoute la zone option*/
+	ec = document.createElement("div") ;
+	ec.id = "zoneOption" ;
+	bodyElem.appendChild(ec) ;
+
+	//Crée et ajoute le bouton pour voir tous les éléments clés
+	addLinkButton("allKeyElem", "rowBut", "Tous les éléments clés", "page/allElemKey.html?user="+encodeURIComponent(activeUser), "zoneOption") ;
+	//Crée et ajoute le bouton pour modifier les informations de l'utilisateur
+	addButton("changePM", "rowBut", "Paramètre utilisateur", "writePMOption()", "zoneOption") ;
+
+	/*Crée et ajoute la zone avec les informations sur l'utilisateur*/
+	ec = document.createElement("div") ;
+	ec.id = "zonePM" ;
+	ec.appendChild(document.createTextNode("Utilisateur actif : "+tabKeyElem[0].content+" "+tabKeyElem[1].content.toUpperCase()+" "+tabKeyElem[2].content+" "+tabKeyElem[3].content)) ;
+	bodyElem.appendChild(ec) ;
+
+	/*Crée et ajoute la zone qui va contenir la liste des boutons*/
+	ec = document.createElement("div") ;
+	ec.id = "zoneListButt" ;
+	bodyElem.appendChild(ec) ;
+	princDiv = document.getElementById("zoneListButt") ;
+
+	//Ajoute le titre de la catégorie SMS - Jeune
+	ec = document.createElement("div") ;
+	ec.id = "zoneButtSMSYG" ;
+	ec.className = "listBut" ;
+	princDiv.appendChild(ec) ;
+
+	ec = document.createElement("h1") ;
+	textNode = document.createTextNode("SMS type - Jeune") ;
+	ec.appendChild(textNode) ;
+	document.getElementById("zoneButtSMSYG").appendChild(ec) ;
+
+	//Ajoute le titre de la catégorie Mail - Jeune
+	ec = document.createElement("div") ;
+	ec.id = "zoneButtMailYG" ;
+	ec.className = "listBut" ;
+	princDiv.appendChild(ec) ;
+
+	ec = document.createElement("h1") ;
+	textNode = document.createTextNode("Mail type - Jeune") ;
+	ec.appendChild(textNode) ;
+	document.getElementById("zoneButtMailYG").appendChild(ec) ;
+
+	//Ajoute le titre de la catégorie Mail - Mentor
+	ec = document.createElement("div") ;
+	ec.id = "zoneButtMailM" ;
+	ec.className = "listBut" ;
+	princDiv.appendChild(ec) ;
+
+	ec = document.createElement("h1") ;
+	textNode = document.createTextNode("Mail type - Mentor") ;
+	ec.appendChild(textNode) ;
+	document.getElementById("zoneButtMailM").appendChild(ec) ;
+
+	//Ajoute le titre de la catégorie Mail - Evénement
+	ec = document.createElement("div") ;
+	ec.id = "zoneButtEvent" ;
+	ec.className = "listBut" ;
+	princDiv.appendChild(ec) ;
+
+	ec = document.createElement("h1") ;
+	textNode = document.createTextNode("Evénement") ;
+	ec.appendChild(textNode) ;
+	document.getElementById("zoneButtEvent").appendChild(ec) ;
+
+	for (let i = 0; i < tabTextType.length; i++) {
+		switch (tabTextType[i].type) {
+			case "SMS":
+				ed = "zoneButtSMS" ;
+				break;
+			case "Mail":
+				ed = "zoneButtMail" ;
+				break;
+			default:
+				break;
+		}
+		switch (tabTextType[i].target) {
+			case "Jeune" :
+				ed += "YG" ;
+				break;
+			case "Mentor" :
+				ed += "M" ;
+				break ;
+			case "Event" :
+				ed = "zoneButtEvent" ;
+				break;
+			default :
+				break;
+		}
+
+		addLinkButton(tabTextType[i].type+""+i, "butTexType", tabTextType[i].name, "page/textEditor.html?user="+encodeURIComponent(activeUser)+"&textID="+i, ed) ;
+	}
+}
 
 function writePMOption() {
 	var ec ; //Element créé
@@ -12,7 +150,7 @@ function writePMOption() {
 	ec = document.createElement("div") ;
 	ec.id = "zoneConfUser" ;
 	bodyElem.appendChild(ec) ;
-	for (let i = 0; i < listUser.length; i++) {addButton("user"+i, [], listUser[i].lastName, "setPMOption("+i+")","zoneConfUser") ;}
+	for (let i = 0; i < tabPM.length; i++) {addButton("user"+i, "null", tabPM[i].lastName, "setPMOption("+i+")","zoneConfUser") ;}
 
 	addBr("body") ;
 
@@ -131,9 +269,9 @@ function writePMOption() {
 	ec.placeholder = "Ex. BFC" ;
 	ed.appendChild(ec) ;
 
-	addButton("writeTxt", [], "Change les paramètres", "setPMOption("+null+")", "body") ;
+	addButton("writeTxt", null, "Change les paramètres", "setPMOption("+null+")", "body") ;
 	addBr("body") ;
-	addButton("backButt", [], "Retour", "writeButtonList()", "body") ;
+	addButton("backButt", null, "Retour", "writeButtonList()", "body") ;
 }
 
 function setPMOption(userSelect) {
@@ -154,32 +292,31 @@ function setPMOption(userSelect) {
 		tabKeyElem[6].content = document.getElementById("PMFirstName").value+" "+document.getElementById("PMLastName").value+", "+document.getElementById("PMWork").value+" NQT "+document.getElementById("PMRegionShort").value ;
 	} else {
 		activeUser = userSelect ;
-		tabKeyElem[0].content = listUser[activeUser].firstName ;
-		tabKeyElem[1].content = listUser[activeUser].lastName ;
-		tabKeyElem[2].content = listUser[activeUser].work ;
-		tabKeyElem[3].content = listUser[activeUser].region ; 
-		tabKeyElem[4].content = listUser[activeUser].gender ;
-		tabKeyElem[5].content = listUser[activeUser].gender ;
-		tabKeyElem[6].content = listUser[activeUser].sign ;
+		tabKeyElem[0].content = tabPM[activeUser].firstName ;
+		tabKeyElem[1].content = tabPM[activeUser].lastName ;
+		tabKeyElem[2].content = tabPM[activeUser].work ;
+		tabKeyElem[3].content = tabPM[activeUser].region ; 
+		tabKeyElem[4].content = tabPM[activeUser].gender ;
+		tabKeyElem[5].content = tabPM[activeUser].gender ;
+		tabKeyElem[6].content = tabPM[activeUser].sign ;
 	}
 
 	writeButtonList() ;
 }
 
-function cleanLocalStorage() {
-	localStorage.clear() ;
+function apecContent(dept) {
+	var temp = null ;
+    for (let i = 0; i < apecGE.length; i+=2) {
+        if(dept==apecGE[i]) {temp = apecGE[i+1] ;}
+	}
+
+	if(temp == null) {alert("Les éléments de l'APEC"+dept+" n'ont pas été trouvé.") ;}
+
+    return temp ;
 }
 
-/*-----Fonction de navigation-----*/
-function goToEditor(idTTT) {
-    window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;
-}
+/*-----Outil d'ajout d'élément HTML-----*/
 
-function goToWelcome() {
-    window.location = "../../index.html" ;
-}
-
-/*-----Fontion outil d'ajout d'élément HTML-----*/
 /**
  * Fonction pour ajouter de multiple élément HTML
  * @param {*} mle : tableau avec chacun des éléments à ajouter 
@@ -207,10 +344,7 @@ function addButton(id, style, txt, onClickFunc, idMother) {
 
 	ec = document.createElement("button") ;
 	ec.id = id ;
-	console.log(id) ;
-	for (let i = 0; i < style.length; i++) {
-		ec.classList.add(style[i]) ;	
-	}
+	ec.className = style ;
 	ec.appendChild(document.createTextNode(txt)) ;
 	ec.setAttribute("onclick", onClickFunc) ;
 
@@ -257,25 +391,6 @@ function copyFromIdToClip(divId) {
   
 	// Désélectionnez le texte après la copie
 	window.getSelection().removeAllRanges();
-}
-
-/**isInTab(e, t)
- * Fonction : cherche l'élément e dans le tableau t
- * @param {*} e : élément
- * @param {*} t : tableau
- * return : true/false selon la présence de l'élément
- */
-function isInTab(e, t) {
-	var isIn = false ;
-	var ite = 0 ;
-	while (!isIn && ite < t.length) {
-		if (t[ite] == e) {
-			isIn = true ;
-		}
-		ite++ ;
-	}
-
-	return isIn ;
 }
 
 /**

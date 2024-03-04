@@ -1,12 +1,16 @@
 /*--CSS par balise--*/
 body {
+    margin: 0px ;
+
     font-size: 15px ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button {
     margin-top: 5px;
-    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
 
     padding-left: 1rem;
     padding-right: 1rem;
@@ -21,21 +25,49 @@ button {
     cursor: pointer;
     
     color: #fff;
+    font-size: 1rem;
     font-weight: bold;
 }
 button:hover {background-color: #7291ce;}
 
 h1 {
-    font-size: 24px;
+    margin: 0px;
+
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
 }
+
+h2 {
+    margin: 0;
+    margin-top: 0.25rem;
+    
+    padding-left: 1rem;
+
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+p {margin: 0;}
 
 span {background-color: yellow;}
 
 ul {margin: 0px;}
 
 /*--CSS par class--*/
+.hide {
+    display: none !important;
+}
+
+.btn-white {
+    background-color: white;
+
+    color: #3367cd;
+}
+.btn-white:hover {
+    background-color: #ffffffCA;
+}
+
 .listBut {
     display: flex ;
     margin-right: 5px;
@@ -47,18 +79,20 @@ ul {margin: 0px;}
 }
 
 /*--CSS par ID--*/
-#zoneListButt {
-    display: flex;
+#header {
+    /*Taile Header 8 = 6-height + 1-padding-bottom + 1-padding-top (Utile pour sidemenu de editor)*/
+    background-color: #3367cd;
+
+    height: 5vh;
+
+    padding-left: 1rem;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+    color: white ;
 }
 
-#copyText {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 12px;
-}
-
-#zoneForm {
-    margin-bottom: 2rem ;
-    padding: 5px;
-
-    border: black solid 1px;
+#main {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

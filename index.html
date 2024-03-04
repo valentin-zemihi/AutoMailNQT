@@ -1,23 +1,114 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Mail Type NQT</title>
+	<meta charset="UTF-8">
+	<title>Accueil - NQT Message Type</title>
 
-    <!--CSS-->
-        <!--CSS principal-->
+	<!--CSS-->
+		<!--CSS principal-->
 	<link rel="stylesheet" href="css/style.css">
+		<!--CSS page-->
+	<link rel="stylesheet" href="style_index.css">
 
-    <!--JS-->
-        <!--JS Class-->
-    <script src="js/keyElem.js"></script>
-    <script src="js/textType.js"></script>
-    <script src="js/users.js"></script>
-        <!--JS Pricnipal-->
-    <script src="js/main.js"></script>
-        <!--JS Page-->
-    <script src="main_index.js"></script>
+	<!--JS-->
+		<!--JS Class-->
+	<script src="js/keyElem.js"></script>
+	<script src="js/textType.js"></script>
+	<script src="js/users.js"></script>
+		<!--JS Pricnipal-->
+	<script src="js/main.js"></script>
+		<!--JS Page-->
+	<script src="main_index.js"></script>
 </head>
-<body id="body">
+<body>
+	<button id="cleanBtn" class="btn-white" onclick="cleanLocalStorage()">Vider Localstorage</button>
+	<button id="showUpdateBtn" class="btn-white" onclick="showUpdateInfo()">Voir update</button>
+	<div id="zoneUpdateInfo">
+		<div id="zoneEleUpdate">
+			<div id="zoneUpdateTitle"><h1 class="titleUpdate">Information dernière mise à jour</h1></div>
+			<div id="zoneUpdateTexte">
+				<div>
+					<h2>Mise à jour Beta V0.6</h2>
+					<p>Pour cette version 0.6, l'expérience utilisateur a été complètement améliorée avec l'ajout de nouvelles fonctionnalités : page d'accueil avec les dernières informations, amélioration des éléments utilisateur, organisation des textes types, amélioration de la page éditeur.</p>
+					<br>
+					<p>La liste des principales nouvelles fonctionnalités :</p>
+					<ul>
+						<strong>Page d'accueil</strong>
+						<li>Encart mise à jour : informe les modifications apportées au site internet ;</li>
+						<li>Ajout d'une page d'accueil : permet de sélectioner ou ajouter un profil utilisateur avant de passer à la liste de message type.</li>
+						<br>
+						<strong>Page bibliothèque</strong>
+						<li>Ajout en-tête utilisateur : zone au dessus de la page où est affiché l'utilisateur actif, un bouton "Retour pour retourner à la page précédente et un bouton pour changer d'utilisateur ;</li>
+						<li>Classement des textes : les textes types ont été classés dans différents dossiers et sous-dossiers. Chaque dossier est associé à un public et un média, ou à un événement. Les sous-dossiers sont associés à une raison ;</li>
+						<li>Filtre par région : les textes affichés sont filtrés selon la région de l'utilisateur.</li>
+						<br>
+						<strong>Page éditeur</strong>
+						<li>Ajout d'un menu sur le côté : permet de changer de texte depuis l'éditeur ;</li>
+						<li>Ajout d'objet de mail : pour les mails, l'objet est écrit au dessus du texte et un bouton permet de le copier.</li>
+					</ul>
+					<br>
+					<p>Correction des messages types :</p>
+					<ul>
+						<li>SMS de presciption : "Pole emploi" -> "France Travail".</li>
+					</ul>
+					<br>
+					<p>Mise à jour mineur :</p>
+					<ul>
+						<li>Dans la page d'accueil :
+							<ul>
+								<li>Bouton "Voir update" : permet d'afficher l'encart avec les dernières mise à jour ;</li>
+								<li>Bouton "Vider Localstorage" : permet de vider le Localstorage*.</li>
+							</ul>
+						</li>
+					</ul>
+					<br>
+					<p>*Les nouvelles fonctionnalités utilisent la sauvegarde locale permise par Localstorage pour conserver des informations lors de l'utilisation du site.</p>
+				</div>
+			</div>
+			<button id="okUpdateInfo" onclick="hideUpdateInfo()">Compris !</button>
+		</div>
+	</div>
+	<div id="main" class="welcomeBody">
+		<div id="zoneWelcome">
+			<div id="zoneTitle"><H1 class="welcomeTitle">Editeur de message NQT</H1></div>
+			<div id="zoneSelectUser">
+				<div id="zoneGuide">
+					<p>Bienvenue !</p>
+					<p>Pour utiliser l'éditeur de message type, veuillez sélectioner ou ajouter votre profil.</p>
+				</div>
+				<div id="zonePreSetUser">
+					<p><u>Sélectionez un utilisateur :</u></p>
+				</div>
+				<div id="zoneNewUser">
+					<p><u>Ajoutez un utilisateur :</u></p>
+					<label for="firstNameUser" class="welcomeLabel">Prénom :</label>
+					<input id="firstNameUser" name="firstNameUser" type="text" value="Valentin">
+					<br>
+					<label for="lastNameUser" class="welcomeLabel">Nom :</label>
+					<input id="lastNameUser" name="lastNameUser" type="text" value="ZEMIHI">
+					<br>
+					<label for="genderUser">Genre :</label>
+					<select id="genderUser" name="genderUser">
+						<option value="F">Femme</option>
+						<option value="M">Homme</option>
+					</select>
+					<br>
+					<label for="workUser" class="welcomeLabel">Poste :</label>
+					<select id="workUser" name="workUser">
+						<option value="Chargé de mission">Chargé de mission</option>
+						<option value="Coordinateur sourcing">Coordinateur sourcing</option>
+					</select>
+					<br>
+					<label for="regionUser" class="welcomeLabel">Région :</label>
+					<select id="regionUser" name="regionUser">
+						<option value="BFC">Bourgogne Franche-Comté</option>
+						<option value="GE">Grand-Est</option>
+					</select>
+					<br>
+					<button class="btn-white" onclick="goToLibrary('newUser')">Enregistrer un nouvel utilisateur</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
