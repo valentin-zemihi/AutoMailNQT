@@ -35,8 +35,10 @@ function setlistUser() {
 	listUser.push(new Users("Kevin", "AUBIN", false, "Chargé de mission", "GE")) ;
 	listUser.push(new Users("Bilhal", "BENAÏANG", false, "Chargé de mission", "BFC")) ;
 	listUser.push(new Users("Sophie", "CORROY", true, "Chargée de mission", "GE")) ;
-	listUser.push(new Users("Laure", "DESNOUVEAUX", true, "Chargée de mission", "GE")) ;
+	listUser.push(new Users("Laure", "DESNOUVAUX", true, "Chargée de mission", "GE")) ;
     listUser.push(new Users("Cannelle", "LEONARD", true, "Chargée de mission", "GE")) ;
+    listUser.push(new Users("Olivier", "PERREAUT", false, "Délégué régional", "GE")) ;
+    listUser.push(new Users("Wahiba", "RAMIREZ-VIDAL", true, "Chargée de développement", "BFC")) ; 
 	listUser.push(new Users("Xavier", "TRUTI", false, "Chargé de mission", "GE")) ;
     listUser.push(new Users("Valentin", "ZEMIHI", false, "Chargé de mission", "BFC")) ;
 }

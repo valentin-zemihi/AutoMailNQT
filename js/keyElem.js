@@ -189,6 +189,10 @@ class KeyElem {
                 if(document.getElementById(this.id+"F").checked) {value = "e" ;}
                 else {value = "" ;}
                 break ;
+            case "details" :
+                if (document.getElementById(this.id+"Y").checked) {value = "s" ;}
+                else {value = "" ;}
+                break ;
             case "title" :
                 if(document.getElementById(this.id+"F").checked) {value = "Mme" ;}
                 else {value = "M"}
@@ -204,6 +208,10 @@ class KeyElem {
             case "ton.ta" :
                 if(document.getElementById(this.id+"F").checked) {value = "ta" ;}
                 else {value = "ton"}
+                break ;
+            case "votre.vos" :
+                if (document.getElementById(this.id+"Y").checked) {value = "vos" ;}
+                else {value = "votre" ;}
                 break ;
             case "apec" :
                 value = apecContent(document.getElementById(this.id).value) ; //Récupère un nombre et le compare au tableau apecGe pour trouver le texte
@@ -269,68 +277,71 @@ var tabKeyElem = [] ; //Tableau d'objet KeyElem
  */
 function setKeyElemList() {
 	//new KeyElem(name, category, content, id, type, label, exemple)
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMFirstName", "text", activeUser.firstName);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMLastName", "text", activeUser.lastName);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMWork", "text", activeUser.work);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMRegion", "text", activeUser.region);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGender", "detail", activeUser.gender);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMGeurice", "eurice", activeUser.gender);
-	tabKeyElem[tabKeyElem.length] = new ConstElem("PMSignSMS", "text", activeUser.sign);
+	tabKeyElem.push(new ConstElem("PMFirstName", "text", activeUser.firstName));
+	tabKeyElem.push(new ConstElem("PMLastName", "text", activeUser.lastName));
+	tabKeyElem.push(new ConstElem("PMWork", "text", activeUser.work));
+	tabKeyElem.push(new ConstElem("PMRegion", "text", activeUser.region));
+	tabKeyElem.push(new ConstElem("PMGender", "detail", activeUser.gender));
+	tabKeyElem.push(new ConstElem("PMGeurice", "eurice", activeUser.gender));
+	tabKeyElem.push(new ConstElem("PMSignSMS", "text", activeUser.sign));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du jeune", null); //PP pour Pronom Personnel
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]); //P pour Possessif "ton stage"
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)");
+	tabKeyElem.push(new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom"));
+	tabKeyElem.push(new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer"));
+	tabKeyElem.push(new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null));
+	tabKeyElem.push(new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du jeune", null)); //PP pour Pronom Personnel
+	tabKeyElem.push(new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null));
+	tabKeyElem.push(new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50"));
+	tabKeyElem.push(new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
+	tabKeyElem.push(new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //P pour Possessif "ton stage"
+	tabKeyElem.push(new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux"));
+	tabKeyElem.push(new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)"));
+	tabKeyElem.push(new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)"));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MFirstName","text", "MFirstName", "text", "Prénom du mentor", "Thomas");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MLastName","text", "MLastName", "text", "Nom du mentor", "Pesquet");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MGender", "detail", "MGender", "gender", "Genre du mentor", null);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MTitle", "title", "MGender", "gender", "Genre du mentor", null);
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MMail", "text", "MMail", "text", "Mail du mentor", "thomas.pesquet@space.com");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MPP", "il.elle", "MGender", "gender", "Genre du mentor", null); //PP pour Pronom Personnel
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MPPT", "lui.elle", "MGender", "gender", "Genre du mentor", null); //PPT pour Pronom Personnel Tonique
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre de mentor", null); //AD2 pour Adjectif Possesif de la deuxième personne
-	tabKeyElem[tabKeyElem.length] = new KeyElem("MWork", "text", "MWork", "text", "Travail du mentor", "Spationaute");
+	tabKeyElem.push(new KeyElem("MFirstName","text", "MFirstName", "text", "Prénom du mentor", "Thomas"));
+	tabKeyElem.push(new KeyElem("MLastName","text", "MLastName", "text", "Nom du mentor", "Pesquet"));
+	tabKeyElem.push(new KeyElem("MGender", "detail", "MGender", "gender", "Genre du mentor", null));
+	tabKeyElem.push(new KeyElem("MTitle", "title", "MGender", "gender", "Genre du mentor", null));
+	tabKeyElem.push(new KeyElem("MMail", "text", "MMail", "text", "Mail du mentor", "thomas.pesquet@space.com"));
+	tabKeyElem.push(new KeyElem("MPP", "il.elle", "MGender", "gender", "Genre du mentor", null)); //PP pour Pronom Personnel
+	tabKeyElem.push(new KeyElem("MPPT", "lui.elle", "MGender", "gender", "Genre du mentor", null)); //PPT pour Pronom Personnel Tonique
+	tabKeyElem.push(new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre de mentor", null)); //AD2 pour Adjectif Possesif de la deuxième personne
+	tabKeyElem.push(new KeyElem("MWork", "text", "MWork", "text", "Travail du mentor", "Spationaute"));
+    tabKeyElem.push(new KeyElem("MMultYG", "votre.vos", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
+    tabKeyElem.push(new KeyElem("MMultD", "details", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventName", "text", "EventName", "text", "Nom de l'événement","Séance de Prana-bindu");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventDate", "text", "EventDate", "text", "Date de l'événement", "13/03/2024");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventTime","text","EventTime", "text", "Horaire de l'événement", "19h10");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventProg1", "text", "EventProg1", "text", "Acte 1 de l'événement", "Présentation");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventProg2", "text", "EventProg2", "text", "Acte 2 de l'événement", "Entrainement physique");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventProg3", "text", "EventProg3", "text", "Acte 3 de l'événement", "Entrainement mental");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventLink", "text", "EventLink", "text", "Lien de l'événement", "www.prana-bindu.dune");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EventLinkVisio", "text", "EventLinkVisio", "text", "Lien de la visio de l'événement", "teams.prana-bindu.dune");
+	tabKeyElem.push(new KeyElem("EventName", "text", "EventName", "text", "Nom de l'événement","Séance de Prana-bindu"));
+	tabKeyElem.push(new KeyElem("EventDate", "text", "EventDate", "text", "Date de l'événement", "13/03/2024"));
+	tabKeyElem.push(new KeyElem("EventTime","text","EventTime", "text", "Horaire de l'événement", "19h10"));
+	tabKeyElem.push(new KeyElem("EventProg1", "text", "EventProg1", "text", "Acte 1 de l'événement", "Présentation"));
+	tabKeyElem.push(new KeyElem("EventProg2", "text", "EventProg2", "text", "Acte 2 de l'événement", "Entrainement physique"));
+	tabKeyElem.push(new KeyElem("EventProg3", "text", "EventProg3", "text", "Acte 3 de l'événement", "Entrainement mental"));
+	tabKeyElem.push(new KeyElem("EventLink", "text", "EventLink", "text", "Lien de l'événement", "www.prana-bindu.dune"));
+	tabKeyElem.push(new KeyElem("EventLinkVisio", "text", "EventLinkVisio", "text", "Lien de la visio de l'événement", "teams.prana-bindu.dune"));
 
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("linkForm", "text", "linkForm", "text", "Lien de la formation", "www.salledutemps.com");
+	tabKeyElem.push(new KeyElem("linkForm", "text", "linkForm", "text", "Lien de la formation", "www.salledutemps.com"));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("closingDate", "text", "closingDate","text","Date de clôture du dossier", "17 novembre");
-	tabKeyElem[tabKeyElem.length] = new KeyElem("registrationDate", "text", "registrationDate","text","Date d'inscription du dossier", "17 novembdre");
+	tabKeyElem.push(new KeyElem("closingDate", "text", "closingDate","text","Date de clôture du dossier", "17 novembre"));
+	tabKeyElem.push(new KeyElem("registrationDate", "text", "registrationDate","text","Date d'inscription du dossier", "17 novembdre"));
 
     //A modifier
-	tabKeyElem[tabKeyElem.length] = new KeyElem("ApecGE", "apec", "YGDept", "text", "Département du jeune", "50");
+	tabKeyElem.push(new KeyElem("ApecGE", "apec", "YGDept", "text", "Département du jeune", "50"));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("EmploymentAdvisor", "text", "employmentAdvisor", "text", "Prénom et nom du conseiller pôle emploi", "Gandalf LEGRIS");
+	tabKeyElem.push(new KeyElem("EmploymentAdvisor", "text", "EmploymentAdvisor", "text", "Prénom et nom du prescripteur", "Gandalf LEGRIS"));
+    tabKeyElem.push(new KeyElem("EmploymentAgency", "text", "EmploymentAgency", "text", "Agence du prescripteur", "Communauté de l'Anneau"));
 
-	tabKeyElem[tabKeyElem.length] = new TagElem("startUL", "startTag", "ul") ;
-	tabKeyElem[tabKeyElem.length] = new TagElem("startLI", "startTag", "li") ;
-	tabKeyElem[tabKeyElem.length] = new TagElem("startStrong", "startTag", "strong") ;
-	tabKeyElem[tabKeyElem.length] = new TagElem("endTag", "endTag", "end") ;
+	tabKeyElem.push(new TagElem("startUL", "startTag", "ul"));
+	tabKeyElem.push(new TagElem("startLI", "startTag", "li"));
+	tabKeyElem.push(new TagElem("startStrong", "startTag", "strong"));
+	tabKeyElem.push(new TagElem("endTag", "endTag", "end"));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("nextCom", "next", "nextCom", "next", "Message communication ?", null) ;
-	tabKeyElem[tabKeyElem.length] = new KeyElem("nextForm", "next", "nextFrom", "next", "Lien vers la formation ?", null) ;
-	tabKeyElem[tabKeyElem.length] = new KeyElem("nextCV", "next", "nextCV", "next", "CV disponnible ?", null) ;
-	tabKeyElem[tabKeyElem.length] = new KeyElem("nextIdea", "next", "nextIdea", "next", "Idée derrière cette proposition ?", null) ;
-	tabKeyElem[tabKeyElem.length] = new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null) ;
+	tabKeyElem.push(new KeyElem("nextCom", "next", "nextCom", "next", "Message communication ?", null));
+	tabKeyElem.push(new KeyElem("nextForm", "next", "nextFrom", "next", "Lien vers la formation ?", null));
+	tabKeyElem.push(new KeyElem("nextCV", "next", "nextCV", "next", "CV disponnible ?", null));
+	tabKeyElem.push(new KeyElem("nextIdea", "next", "nextIdea", "next", "Idée derrière cette proposition ?", null));
+	tabKeyElem.push(new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null));
 
-	tabKeyElem[tabKeyElem.length] = new KeyElem("ifYGSearch","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]);
+	tabKeyElem.push(new KeyElem("ifYGSearch","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
 }
 
 /*---Fonction particulière pour l'APEC Grand-Est---*/

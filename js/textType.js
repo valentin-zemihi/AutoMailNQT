@@ -61,16 +61,15 @@ function setTextType() {
 	/**SMS jeune**/
 	tabTextType[tabTextType.length] = new TextType("SMS préscription", "Jeune", ["BFC", "GE"], "SMS", "Prescription", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Je vous écris dans la continuité de mon message vocal, de la part de ","EmploymentAdvisor", " de France Travail qui m'a transmis vos coordonnées. L'idée de cet appel est de vous présenter notre dispositif de mentorat professionnel, entièrement gratuit et dédié aux jeunes diplômés d'un Bac+3 minimum et âgés de moins de 31 ans. Pour vous inscrire, il vous suffit de créer un compte sur le site internet nqt.fr ou en téléchargeant notre application mobile.","br",
-		"N'hésitez pas à me rappeler si vous souhaitez échanger sur votre projet et notre action.","br",
+		"Suite à mon message vocal, je vous écris de la part de ","EmploymentAdvisor"," de ","EmploymentAgency"," qui m'a transmis vos coordonnées. Je souhaite vous présenter notre dispositif d'accompagnement à l'insertion professionnel par mentorat, entièrement gratuit et dédié aux jeunes (moins de 31 ans) diplômés (minimum BAC+3 validé). Si cela vous intéresse, n'hésitez pas à me contacter par appel ou SMS pour une présentation. Et pour plus d'informations, vous pouvez vous rendre sur notre site internet nqt.fr.","br",
 		"Au plaisir d'échanger avec vous et de vous accompagner !","br",
 		"PMSignSMS"
 	]);
 	tabTextType[tabTextType.length] = new TextType("Relance SMS préscription", "Jeune", ["BFC", "GE"], "SMS", "Prescription", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Suite à mon message vocal, je vous relance à propos de ma précédente proposition. Si vous avez besoin d'un accompagnement pour votre projet professionnel, NQT propose un service de mentorat par des professionnels en activité.","br",
-		"Vous pouvez vous y inscrire quand vous le souhaitez via nqt.fr ou notre application mobile. Je suis à votre entière disposition pour répondre à vos questions.","br",
-		"N'hésitez pas à me contacter,","br",
+		"Suite à mon message vocal, je vous relance concernant ma précédente proposition. Si vous avez besoin d'un accompagnement pour votre projet professionnel, NQT est une solution avec notre dispositif de mentorat par des professionnels en activité.","br",
+		"Vous pouvez aussi vous inscrire quand vous le souhaitez via nqt.fr ou notre application mobile.","br",
+		"Je suis à votre entière disposition, n'hésitez pas à me contacter.","br",
 		"Bien à vous,","br",
 		"PMSignSMS"
 	]);
@@ -261,7 +260,7 @@ function setTextType() {
 		"br",
 		"Cordialement,"
 	]);
-	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de", [
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat de masse", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de", [
 		"Bonjour,","br",
 		"br",
 		"Comme tous les deux mois, je te propose de faire un point de suivi de ton accompagnement en répondant aux questions ci-dessous :","br",
@@ -273,8 +272,27 @@ function setTextType() {
 		"startLI","As-tu d’autres commentaires que tu souhaites porter à ma connaissance ?","endTag",
 		"endTag",
 		"br",
-		"Merci d’y répondre rapidement en me faisant un retour par mail.","br",
+		"startStrong","Merci d’y répondre rapidement en me faisant un retour par mail.","endTag","br",
 		"Par la suite, je consignerai l’ensemble de tes réponses sur ton dossier afin d’assurer le suivi de ton accompagnement chez NQT.","br",
+		"br",
+		"Au plaisir de nos prochains échanges et restant à ta disposition.","br",
+		"br", 
+		"Cordialement,","br"
+	]);
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat individualisé", "Jeune", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de", [
+		"Bonjour ","YGFirstName",",","br",
+		"br",
+		"Comme tous les mois, je te propose de faire un point sur ton mentorat :","br",
+		"br",
+		"startUL",
+		"startLI","Es-tu régulièrement en lien avec ","MAD2"," mentor","MGender"," ?","endTag",
+		"startLI","Quels sujets as-tu travaillés avec ","MAD2"," mentor","MGender"," ?","endTag",
+		"startLI","Quelle est ta situation actuelle (CDI, CDD, alternance, stage, toujours en recherche…) ?","endTag",
+		"startLI","As-tu d’autres commentaires que tu souhaites porter à ma connaissance ?","endTag",
+		"endTag",
+		"br",
+		"startStrong","Merci d’y répondre rapidement en me faisant un retour par mail.","endTag","br",
+		"Je consignerai l’ensemble de tes réponses sur ton dossier afin d’assurer le suivi de ton accompagnement chez NQT.","br",
 		"br",
 		"Au plaisir de nos prochains échanges et restant à ta disposition.","br",
 		"br", 
@@ -432,12 +450,12 @@ function setTextType() {
 		"Je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
 	])
-	tabTextType[tabTextType.length] = new TextType("Suivi mentorat", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de - ",[
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat de masse", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de",[
 		"Bonjour,","br",
 		"br",
-		"Vous avez démarré un mentorat depuis quelque temps et, comme tous les deux mois, je vous propose de faire un point de suivi de votre accompagnement :","br",
+		"Comme tous les deux mois, je vous propose de faire un point de suivi de votre accompagnement :","br",
 		"startUL",
-		"startLI","Êtes-vous en lien régulièrement (au moins 1 fois par mois) avec votre/vos filleul.e.s ?","endTag",
+		"startLI","Êtes-vous en lien régulièrement avec votre/vos filleul.e.s ?","endTag",
 		"startLI","Quels sujets avez-vous travaillés avec votre/vos filleul.e.s ?","endTag",
 		"startLI","Quelle est la situation actuelle de votre/vos filleul.e.s  (CDI, CDD, alternance, stage, toujours en recherche…) ?","endTag",
 		"startLI","Avez-vous d’autres commentaires que vous souhaitez porter à ma connaissance ?","endTag",
@@ -445,6 +463,23 @@ function setTextType() {
 		"startStrong","Merci d’y répondre dès que possible en me faisant un retour par mail.","endTag","br",
 		"br",
 		"Par la suite, je consignerai l’ensemble de vos réponses sur votre dossier afin d’assurer le suivi de votre/vos accompagnements chez NQT.","br",
+		"br",
+		"Je reste à votre entière disposition,","br",
+		"Bien à vous,"
+	]) ;
+	tabTextType[tabTextType.length] = new TextType("Suivi mentorat individualisé", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de",[
+		"Bonjour ","MTitle"," ","MLastName",",","br",
+		"br",
+		"Comme tous les deux mois, je vous propose de faire un point de suivi de votre accompagnement :","br",
+		"startUL",
+		"startLI","Êtes-vous en lien régulièrement avec ","MMultYG"," filleul","YGGender","MMultD"," ?","endTag",
+		"startLI","Quels sujets avez-vous travaillés avec ","MMultYG"," filleul","YGGender","MMultD"," ?","endTag",
+		"startLI","Quelle est la situation actuelle de ","MMultYG"," filleul","YGGender","MMultD","  (CDI, CDD, alternance, stage, toujours en recherche…) ?","endTag",
+		"startLI","Avez-vous d’autres commentaires que vous souhaitez porter à ma connaissance ?","endTag",
+		"endTag","br",
+		"startStrong","Merci d’y répondre dès que possible en me faisant un retour par mail.","endTag","br",
+		"br",
+		"Je consignerai l’ensemble de vos réponses sur votre dossier afin d’assurer le suivi de ","MMultYG"," accompagnement","MMultD"," chez NQT.","br",
 		"br",
 		"Je reste à votre entière disposition,","br",
 		"Bien à vous,"

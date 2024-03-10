@@ -2,15 +2,15 @@
 body {
     margin: 0px ;
 
-    font-size: 15px ;
+    font-size: 12px ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 2.5px;
-    margin-right: 2.5px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
 
     padding-left: 1rem;
     padding-right: 1rem;
