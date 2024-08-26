@@ -1,4 +1,4 @@
-var activeVersion = "majBetaV0.6.1" ;
+var activeVersion = "majBetaV0.7" ;
 
 window.onload = function () {
 	var updateRead = localStorage.getItem("updateRead") ;

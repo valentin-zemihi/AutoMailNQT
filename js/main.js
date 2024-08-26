@@ -175,9 +175,8 @@ function goToEditor(idTTT) {
     window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;
 }
 
-function goToWelcome() {
-    window.location = "../../index.html" ;
-}
+function goToWelcome() {window.location = "../../index.html" ;}
+function goToPath(from) {window.location = from+"page/path/path.html";}
 
 /*-----Fontion outil d'ajout d'élément HTML-----*/
 /**
@@ -207,7 +206,6 @@ function addButton(id, style, txt, onClickFunc, idMother) {
 
 	ec = document.createElement("button") ;
 	ec.id = id ;
-	console.log(id) ;
 	for (let i = 0; i < style.length; i++) {
 		ec.classList.add(style[i]) ;	
 	}

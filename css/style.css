@@ -4,13 +4,12 @@ body {
 
     font-size: 12px ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    height: 100vh;
 }
 
 button {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
+    margin : 0.25rem;
 
     padding-left: 1rem;
     padding-right: 1rem;
@@ -59,6 +58,8 @@ ul {margin: 0px;}
     display: none !important;
 }
 
+.btn-header {margin: 0px;}
+
 .btn-white {
     background-color: white;
 
@@ -66,6 +67,14 @@ ul {margin: 0px;}
 }
 .btn-white:hover {
     background-color: #ffffffCA;
+}
+
+.btn-orange {
+    margin-left: auto;
+    background-color: #fc9d19;
+}
+.btn-orange:hover {
+    background-color: #fc9d19CA;
 }
 
 .listBut {
@@ -80,19 +89,33 @@ ul {margin: 0px;}
 
 /*--CSS par ID--*/
 #header {
-    /*Taile Header 8 = 6-height + 1-padding-bottom + 1-padding-top (Utile pour sidemenu de editor)*/
     background-color: #3367cd;
 
-    height: 5vh;
-
-    padding-left: 1rem;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    padding: 1vh 1vw 1vh 1vw;
 
     color: white ;
+}
+
+#zoneActiveUser {display: flex;}
+
+#infoActiveUser {
+    display: flex;
+    align-items: center;
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    padding-left: 1rem;
+
+    border-left: white solid 0.25rem;
 }
 
 #main {
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+#pathBtn {
+    position: absolute;
+    top : 30px;
 }

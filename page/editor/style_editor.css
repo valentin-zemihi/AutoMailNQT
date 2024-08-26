@@ -30,22 +30,6 @@ textarea {
 }
 
 /*--CSS par ID--*/
-    /*---CSS Header---*/
-#zoneActiveUser {
-    display: flex;
-}
-
-#infoActiveUser {
-    display: flex;
-    align-items: center;
-    
-    margin-left: 1rem;
-    margin-right: 1rem;
-
-    padding-left: 1rem;
-
-    border-left: white solid 0.25rem;
-}
 
     /*---Main---*/
 #main {
@@ -54,9 +38,10 @@ textarea {
 }
 
 #zoneSideMenu {
+    flex: 1;
     min-width: 7.5%;
     max-width: 7.5%;
-    min-height: calc(100vh - 7vh) ; /*100 - header size cf style.css 8vh*/
+    height: calc(100vh - 7vh);
     padding-left: 0.5rem;
     background-color: #3367cd;
 }

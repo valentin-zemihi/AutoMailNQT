@@ -209,6 +209,10 @@ class KeyElem {
                 if(document.getElementById(this.id+"F").checked) {value = "ta" ;}
                 else {value = "ton"}
                 break ;
+            case "le.la" :
+                if(document.getElementById(this.id+"F").checked) {value = "la" ;}
+                else {value = "le"}
+                break ;
             case "votre.vos" :
                 if (document.getElementById(this.id+"Y").checked) {value = "vos" ;}
                 else {value = "votre" ;}
@@ -284,6 +288,7 @@ function setKeyElemList() {
 	tabKeyElem.push(new ConstElem("PMGender", "detail", activeUser.gender));
 	tabKeyElem.push(new ConstElem("PMGeurice", "eurice", activeUser.gender));
 	tabKeyElem.push(new ConstElem("PMSignSMS", "text", activeUser.sign));
+    tabKeyElem.push(new ConstElem("PMMail", "text", activeUser.mail));
 
 	tabKeyElem.push(new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom"));
 	tabKeyElem.push(new KeyElem("YGLastName","text", "YGLastName", "text", "Non du jeune", "Sawyer"));
@@ -304,7 +309,8 @@ function setKeyElemList() {
 	tabKeyElem.push(new KeyElem("MMail", "text", "MMail", "text", "Mail du mentor", "thomas.pesquet@space.com"));
 	tabKeyElem.push(new KeyElem("MPP", "il.elle", "MGender", "gender", "Genre du mentor", null)); //PP pour Pronom Personnel
 	tabKeyElem.push(new KeyElem("MPPT", "lui.elle", "MGender", "gender", "Genre du mentor", null)); //PPT pour Pronom Personnel Tonique
-	tabKeyElem.push(new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre de mentor", null)); //AD2 pour Adjectif Possesif de la deuxième personne
+	tabKeyElem.push(new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre du mentor", null)); //AD2 pour Adjectif Possesif de la deuxième personne
+    tabKeyElem.push(new KeyElem("MPCOD", "le.la", "MGender", "gender", "Genre du mentor", null)); //PCOD pour Pronom Compléments d'objet direct
 	tabKeyElem.push(new KeyElem("MWork", "text", "MWork", "text", "Travail du mentor", "Spationaute"));
     tabKeyElem.push(new KeyElem("MMultYG", "votre.vos", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
     tabKeyElem.push(new KeyElem("MMultD", "details", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
