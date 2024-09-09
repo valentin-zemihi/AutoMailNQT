@@ -38,6 +38,7 @@ function setlistUser() {
 	listUser.push(new Users("Sophie", "CORROY", true, "Chargée de mission", "GE", "s.corroy@nqt.fr")) ;
 	listUser.push(new Users("Laure", "DESNOUVAUX", true, "Chargée de mission", "GE", "l.desnouvaux@nqt.fr")) ;
     listUser.push(new Users("Cannelle", "LEONARD", true, "Chargée de mission", "GE", "c.leonard@nqt.fr")) ;
+    listUser.push(new Users("Danielle-Ange", "LUETETA", true, "Chargée de mission", "BFC", "d.lueteta@nqt.fr")) ;
     listUser.push(new Users("Olivier", "PERREAUT", false, "Délégué régional", "GE", "o.perreaut@nqt.fr")) ;
     listUser.push(new Users("Wahiba", "RAMIREZ-VIDAL", true, "Chargée de développement", "BFC","w.ramirez-vidal@nqt.fr")) ; 
 	listUser.push(new Users("Xavier", "TRUTI", false, "Chargé de mission", "GE", "x.truti@nqt.fr")) ;

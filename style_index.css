@@ -1,4 +1,9 @@
 /*CSS Update Info*/
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
 #zoneUpdateInfo {
     width: 100vw;
     height: 100vh;
@@ -34,6 +39,10 @@
 
 .titleUpdate {
     color: black;
+}
+
+.wip {
+    font-style: italic;
 }
 
 /*CSS Welcome*/

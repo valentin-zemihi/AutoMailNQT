@@ -1,18 +1,18 @@
 /*---Constante de couleur---*/
 const FONTCOLOR = "black" ;
+const FONTSIZE = 14 ;
 const PRIMARYCOLOR = "white" ;
 const LINE = 30 ;
 const FAILLINE = 5 ;
 const NOLINEWIDTH = 20 ;
-const FONTSIZE = 14 ;
 const MARGETEXT = 5 ;
 const MARGEBLOCK = 10 ;
 const MARGESECT = 20 ;
 const RWAITINGARC = 10 ;
 
 //Détail des sections
-const SECTColor = ["40, 50, 118", "16, 144, 48"] ;
-const SECTHeight = [MARGESECT*2+239, 150] ;
+const SECTColor = ["40, 50, 118", "16, 144, 48", "0, 176, 219"] ;
+const SECTHeight = [309, 230, 150] ;
 
 /*---Variable de canvas---*/
 var canvas ;
@@ -49,13 +49,17 @@ window.onload = function () {
 }
 
 function drawYGPath() {
+    var temp ;
     var tempX ; var tempY ;
     var tempX2 ; var tempY2 ;
     var tempH ; var tempW ;
-    var tempSize ;
-    var x = canvas.width/3 ;
+    var tempSize ; var tempSize2 ;
+    var x = canvas.width/2 ;
     yMax = 0 ;
     isFail = false ;
+
+    ctxt.fillStyle = "white" ;
+    ctxt.fillRect(0, 0, canvas.width, canvas.height) ;
 
     /***Dessine la section : Prescription***/
     drawSection("Prescription", SECTHeight[0], SECTColor[0]) ; //Dessine le titre de la section et le fond
@@ -63,18 +67,21 @@ function drawYGPath() {
     yMax += drawTxt("Réception des contacts d'un jeune", x, yMax, "center","top", "italic ").height ; //Dessine l'action extérieur : Transfert de dossier
     yMax += drawLine(x, yMax, 1, LINE).height ;
         /*Boucle d'action A : Présentation du mentorat NQT*/
+    drawActionBlock("A", "Présentation du mentorat NQT", ["Appel - Script", "Message vocal - Script"], ["Réponse : N'est pas intéressé", "Réponse : Souhaite s'inscrire"], [0, 1], "1 semaine", x, yMax, "center", "top") ;
+
+    yMax += 500 ;
     tempSize = drawBlock(["Présentation du mentorat NQT", "Appel du jeune"], x, yMax, "center", "top") ; //Dessine l'action du CM : Appel du jeune pour prescription
     yMax += tempSize.height ;
             /*Résulat A1 : N'est pas intéressé.e*/
     tempX = x-tempSize.width/2 ;
     tempY = yMax-tempSize.height/2 ;
-    tempX -= drawLine(tempX, tempY, -LINE, 1).width ;
+    tempX -= drawLine(tempX, tempY, -LINE/2, 1).width ;
     drawTxt("Réponse : N'est pas intéressé", tempX, tempY, "right", "middle","bold ") ; //Dessine le 1er résultat de l'action : "N'est pas intéressé"
             /*Résultat A2 : Pas de réponse*/
     tempX = x+tempSize.width/2 ;
-    tempX += drawLine(tempX, tempY, LINE, 1).width ;
-    tempX += drawTxt("Pas de réponse", tempX, tempY, "left", "middle", null).width ; //Dessine le 2ème résultat de l'action : "Pas de réponse"
-    tempX += drawLine(tempX, tempY, LINE, 1).width ;
+    tempX += drawLine(tempX, tempY, LINE/2, 1).width ;
+    tempX += drawTxt("Pas de réponse", tempX, tempY, "left", "middle", "italic ").width ; //Dessine le 2ème résultat de l'action : "Pas de réponse"
+    tempX += drawLine(tempX, tempY, LINE/2, 1).width ;
                 /*Boucle d'action A2A : Envoyer un SMS pour l'action A*/
     tempX += drawBlock(["Envoyer un SMS", "1 relance"], tempX, tempY, "left", "middle").width ; //Dessine l'action du CM : Envoyer un SMS
                         /*Premier texte type et sa boucle*/
@@ -87,83 +94,108 @@ function drawYGPath() {
     tempX2 = tempX + tempSize.width ;
     tempY2 = tempY + tempSize.height/2 ;
     drawEndLine("Attendre 1 semaine", tempX2, tempY2) ;
-
-    tempX += MARGEBLOCK+ctxt.measureText(tabTextType[0].type+" "+tabTextType[0].name).width/2 ;
-    tempY -= 2*MARGEBLOCK+FONTSIZE ;
-    
-    //Dessine le 2ème résultat de l'action : "Doit s'inscrire"
-    yMax += drawLine(x, yMax, 1, LINE) ;
-    yMax += drawTxt("Réponse : Souhaite s'inscrire", x, yMax, "center", "top", null) ;
-    //Dessine l'action du CM : Vérification inscription
-    yMax += drawLine(x, yMax, 1, LINE) ;
-    yMax += drawBlock(["Vérification inscription"], x, yMax, "center", "top") ;
-    //Dessine le résultat de l'action : Non inscrit
-    tempX = x+(ctxt.measureText("Vérification inscription").width+MARGEBLOCK*2)/2+MARGETEXT ;
-    tempY = yMax-MARGEBLOCK-FONTSIZE/2 ;
-    drawTxt("Non",tempX, tempY, "left", "middle", null) ;
-    tempX += ctxt.measureText("Non").width+MARGETEXT ;
-    drawLine(tempX, tempY, LINE, 1) ;
-    tempX += LINE ;
-    drawBlock(["Envoyer un SMS"], tempX, tempY, "left", "middle") ;
-    tempX += ctxt.measureText("Envoyer un SMS").width+MARGEBLOCK*2 ;
-    drawTextTypeBlock(2, tempX, tempY, "left", "middle") ;
-    tempX += MARGEBLOCK*2+ctxt.measureText(tabTextType[2].type+" "+tabTextType[2].name).width ;
+            /*Résultat A3 : Doit s'inscrire*/
+    yMax += drawLine(x, yMax, 1, LINE).height ;
+    yMax += drawTxt("Réponse : Souhaite s'inscrire", x, yMax, "center", "top", null).height ;
+        /*Boucle d'action B : Vérification de l'inscription*/
+    yMax += drawLine(x, yMax, 1, LINE).height ;
+    tempSize = drawBlock(["Vérification inscription"], x, yMax, "center", "top") ;
+    yMax += tempSize.height ;
+            /*Résultat B1 : Non inscrit*/
+    tempX = x+tempSize.width/2 ;
+    tempY = yMax-tempSize.height/2 ;
+    tempX += drawTxt("Non",tempX, tempY, "left", "middle", null).width ;
+    tempX += drawLine(tempX, tempY, LINE/2, 1).width ;
+    tempX += drawBlock(["Envoyer un SMS"], tempX, tempY, "left", "middle").width ;
+    tempX += drawTextTypeBlock(2, tempX, tempY, "left", "middle").width ;
     drawEndLine("Attendre 1 semaine", tempX, tempY) ;
-    tempX += ctxt.measureText("Attendre 1 semaine").width+MARGETEXT*3+LINE/2  ;
-    tempY -= FONTSIZE/2;
-    drawDotLineTo(tempX, tempY, tempX, tempY-15)
-    drawDotLineTo(tempX, tempY-15, x, yMax-MARGEBLOCK*2-FONTSIZE-5) ;
-    //Dessine le résultat de l'action : inscrit
-    yMax += drawLine(x, yMax, 1, LINE) ;
-    yMax += drawTxt("Oui", x, yMax, "center", "top", null) ;
-    yMax += drawLine(x, yMax, 1, LINE/2) ;
+            /*Résultat B2 : Inscrit*/
+    yMax += drawLine(x, yMax, 1, LINE).height ;
+    yMax += drawTxt("Est inscrit", x, yMax, "center", "top", null).height ;
+    yMax += drawLine(x, yMax, 1, LINE/2).height ;
 
-    /*Dessine la section : Inscription*/
+    /***Dessine la section : Inscription***/
     drawSection("Inscription", SECTHeight[1], SECTColor[1]) ;
-    yMax += drawLine(x, yMax, 1, LINE*2.5) ;
-    //Dessine l'action : Vérification passage en suivi
-    yMax += drawBlock(["Vérification passage en suivi"], x, yMax, "center", "top") ;
-    //Dessine le résultat de l'action : Non
-    tempX = x+(MARGEBLOCK*2+ctxt.measureText("Vérification passage en suivi").width)/2+MARGETEXT ;
-    tempY = yMax-MARGEBLOCK-FONTSIZE/2 ;
-    drawTxt("Non",tempX, tempY, "left", "middle", null) ;
-    tempX += ctxt.measureText("Non").width+MARGETEXT ;
-    drawLine(tempX, tempY, LINE, 1) ;
-    tempX += LINE ;
-    //Dessine l'action : Appel du jeune pour inscription
-    drawBlock(["Appel du jeune pour inscription"], tempX, tempY, "left", "middle") ;
-    tempX += MARGEBLOCK*2+ctxt.measureText("Appel du jeune pour inscription").width ;
-    drawLine(tempX, tempY, LINE, 1) ;
-    tempX += LINE+MARGETEXT ;
-    drawTxt("Pas de réponse", tempX, tempY, "left", "middle") ;
-    tempX += ctxt.measureText("Pas de réponse").width+MARGETEXT ;
-    drawLine(tempX, tempY, LINE, 1) ;
-    tempX += LINE ;
-    drawBlock(["Envoyer un SMS", "2 relances"], tempX, tempY, "left", "middle") ;
-    tempX += ctxt.measureText("Envoyer un SMS").width+MARGEBLOCK*2 ;
-    tempY -= (MARGEBLOCK*2+FONTSIZE)*1.5 ;
-    tempX2 = tempX+MARGEBLOCK+ctxt.measureText(tabTextType[3].type+" "+tabTextType[3].name).width/2 ;
-    drawWaitingLine("Attendre 1 semaine", tempX2, tempY, x, 1) ;
-    tempY += drawTextTypeBlock(3, tempX, tempY, "left", "top") ;
-    tempX2 = tempX+MARGEBLOCK+ctxt.measureText(tabTextType[4].type+" "+tabTextType[4].name).width*0.90 ;
-    tempH = MARGEBLOCK*2+FONTSIZE+LINE/4 ;
-    tempY2 = tempY-tempH ;
-    drawLine(tempX2, tempY2, 1, tempH) ;
-    tempW = 200 ;
-    tempX2 -= tempW ;
-    drawLine(tempX2, tempY2, tempW, 1) ;
-    tempY += drawTextTypeBlock(4, tempX, tempY, "left", "top") ; 
-    drawTextTypeBlock(5, tempX, tempY, "left", "top") ;
+        /*Boucle d'acion C : Vérification de passage en suivi*/
+    yMax += drawLine(x, yMax, 1, LINE*2).height ;
+    tempSize = drawBlock(["Vérification passage en suivi"], x, yMax, "center", "top") ;
+    yMax += tempSize.height ;
+            /*Résultat C1 : Non*/
+    tempX = x+tempSize.width/2 ;
+    tempY = yMax-tempSize.height/2 ;
+    tempX += drawTxt("Non",tempX, tempY, "left", "middle", null).width ;
+                /*Boucle d'action C1A : Appel du jeune pour poursuivre son inscription*/
+    tempX += drawLine(tempX, tempY, LINE/2, 1).width ;
+    tempSize = drawBlock(["Appel du jeune pour poursuivre son inscription"], tempX, tempY, "left", "middle") ;
+    tempH = tempSize.height ;
+                    /*Résultat C1A1 : Doit reprendre l'inscription*/
+    tempX2 = tempX+tempSize.width/2 ;
+    tempY2 = tempY-tempSize.height/2 ;
+    temp = drawLine(tempX2, tempY2, 1, -LINE/2).height ;
+    tempH += temp ;
+    tempY2 -= temp ;
+    temp = drawTxt("Réponse : Doit reprendre l'inscription", tempX2, tempY2, "center", "bottom", null).height ;
+    tempH += temp ;
+    tempY2 -= temp ;
+    tempH += drawWaitingLine("Attendre 1 semaine", tempX2, tempY2, x, -1).height ;
+                    /*Résultat C1A2 : Pas de réponse*/
+    tempY += tempSize.height/2 ;
+    tempX += tempSize.width/2 ;
+    temp = drawLine(tempX, tempY, 1, LINE).height ;
+    tempH += temp ;
+    tempY += temp ;
+    tempSize = drawTxt("Pas de réponse", tempX, tempY, "center", "top", "italic ") ;
+    tempW = tempSize.width/2 ;
+    tempH += tempSize.height/2 ;
+    tempX += tempSize.width/2 ;
+    tempY += tempSize.height/2 ;
+    temp = drawLine(tempX, tempY, LINE/2, 1).width ;
+    tempW += temp ;
+    tempX += temp ;
+    tempSize = drawBlock(["Envoyer un SMS", "2 relances"], tempX, tempY, "left", "middle") ;
+    tempW += tempSize.width ;
+    tempH -= tempSize.height/2 ;
+    tempX += tempSize.width ;
+    tempY -= tempSize.height/2 ;
+    tempSize = drawTextTypeBlock(3, tempX, tempY, "left", "top") ;
+    tempW += tempSize.width/2 ;
+    tempX2 = tempX+tempSize.width/2 ;
+    tempY2 = tempY ;
+    tempY2 -= drawLine(tempX2, tempY2, 1, -tempH).height ;
+    drawLine(tempX2, tempY2, -tempW, 1) ;
+    tempW = tempSize.width*0.5 ;
+    tempH += tempSize.height ;
+    tempY += tempSize.height ;
+    tempSize = drawTextTypeBlock(4, tempX, tempY, "left", "top") ;
+    tempW = (tempX+tempSize.width*0.9)-tempX2 ;
+    tempX2 = tempX+tempSize.width*0.9 ;
+    tempY2 = tempY ;
+    tempY2 -= drawLine(tempX2, tempY2, 1, -tempH).height ;
+    drawLine(tempX2, tempY2, -tempW, 1) ;
+    tempY += tempSize.height ;
+    tempSize = drawTextTypeBlock(5, tempX, tempY, "left", "top") ;
+    tempX += tempSize.width ;
+    tempY += tempSize.height/2 ;
+    drawEndLine("Attendre 1 semaine", tempX, tempY) ;
+            /*Résultat C2 : Oui*/
+    yMax += drawLine(x, yMax, 1, LINE).height ;
+    yMax += drawTxt("Oui", x, yMax, "center", "top", null).height ;
+    yMax += drawLine(x, yMax, 1, LINE+37+LINE/2).height ;
     
+    /***Dessine la section suivi***/
+    drawSection("Suivi sans mentorat", SECTHeight[2], SECTColor[2]) ;
+    yMax += drawLine(x, yMax, 1, LINE).height ;
 
-    console.log(yMax-MARGESECT*2-239) ;
+
+    console.log(yMax) ;
+    console.log(yMax-SECTHeight[0]-SECTHeight[1]) ;
 }
 
 function drawLine(x, y, w, h) {
     ctxt.fillStyle = "black" ;
     ctxt.fillRect(x, y, w, h) ;
 
-    return new Size(Math.abs(w), h) ;
+    return new Size(Math.abs(w), Math.abs(h)) ;
 }
 
 function drawWaitingLine(txt, x1, y1, x2, dir) {
@@ -190,6 +222,8 @@ function drawWaitingLine(txt, x1, y1, x2, dir) {
     ctxt.lineTo(x2-dir*(1+5), tempY+5) ;
     ctxt.closePath() ;
     ctxt.fill() ;
+
+    return new Size(tempWidth+txtWidth, LINE/4) ;
 }
 
 function drawSection(txt, sectHeight, color) {
@@ -254,18 +288,27 @@ function drawBlock(txt, x, y, align, baseline) {
 }
 
 function drawTxt(txt, x, y, align, baseline, deco) {
-    var tempX = x ;
+    var tempX ;
+    var tempY ;
     switch (align) {
         case "left" : tempX = x+MARGETEXT ; break ;
         case "right" : tempX = x-MARGETEXT ; break ;
+        case "center" : tempX = x ; break ;
         default : console.log(align+" n'est pas paramètré pour drawTxt()") ; break ;
+    }
+
+    switch (baseline) {
+        case "top" : tempY = y+MARGETEXT ; break ;
+        case "middle" : tempY = y ; break ;
+        case "bottom" : tempY = y-MARGETEXT ; break ;
+        default: console.log(baseline+" n'est pas paramètré pour drawTxt()") ; break;
     }
 
     ctxt.fillStyle = FONTCOLOR ;
     ctxt.textAlign = align ;
     ctxt.textBaseline = baseline ;
     ctxt.font = deco+FONTSIZE+"px sans-serif" ;
-    ctxt.fillText(txt, tempX, y) ;
+    ctxt.fillText(txt, tempX, tempY) ;
 
     return new Size(ctxt.measureText(txt).width+MARGETEXT*2, FONTSIZE+2*MARGETEXT) ;
 }
@@ -328,11 +371,138 @@ function drawDotLineTo(x1, y1, x2, y2) {
 
 }
 
+function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, waitingTime, x, y, align, baseline) {
+    var tempX ; var tempY ;
+    var tempW ; var tempH ;
+    var tempW2 ;
+    var temp ;
+
+    /*Initialise les dimensions du rectangle de fond*/
+        /*Initialise le largeur en fonction du texte le plus grand puis y ajoute les marges*/
+    tempW = ctxt.measureText(name).width ;  
+    for (let i = 0; i < tabAction.length; i++) {
+        temp = ctxt.measureText(tabAction[i]).width ;
+        if (tempW < temp) {tempW = temp ;}
+    }
+    tempW += MARGEBLOCK*2 ;
+        /*Initialise la hauteur en calculant le nombre de texte (taille du tableau + 1 pour le nom) et les marges*/
+    tempH = MARGEBLOCK*2+(FONTSIZE+MARGETEXT)*(tabAction.length+1) ;
+
+    /*Positionne le rectangle de fond en fonction de l'align et du baseline*/
+    switch (align) {
+        case "center" : tempX = x-tempW/2 ; break;
+        case "left" : tempX = x ; break ;
+        default : console.log(align+" n'est pas défini") ; break;
+    }
+    switch (baseline) {
+        case "top" : tempY = y ; break;
+        case "middle" : tempY = y - tempH/2 ; break ;
+        default : console.log(baseline+" n'est pas défini") ; break;
+    }
+
+    /*Initialise les paramètre du rectangle*/
+    ctxt.fillStyle = PRIMARYCOLOR ;
+    
+    /*Dessine le rectangle*/
+    ctxt.fillRect(tempX, tempY, tempW, tempH) ;
+
+    /*Initialise l'id de l'action*/
+    ctxt.fillStyle = FONTCOLOR ;
+    ctxt.font = (FONTSIZE*0.75)+"px sans-serif" ;
+    ctxt.textAlign = "left" ;
+    ctxt.textBaseline = "top" ;
+
+    /*Dessine l'id de l'action dans le coin supérieur gauche*/
+    ctxt.fillText(id, tempX+1, tempY+1) ;
+
+    /*Initialise le texte de l'action*/
+    ctxt.font = FONTSIZE+"px sans-serif" ;
+    ctxt.textAlign = align ;
+    /*Positionne le texte de l'action*/
+    tempY += MARGEBLOCK ;
+    /*Dessine le nom de l'action*/
+    ctxt.fillText(name, x, tempY) ;
+
+    /*Initilise les scripts de l'action*/
+    ctxt.font = "italic "+FONTSIZE+"px sans-serif" ;
+    /*Positionne les scripts de l'action*/
+    /*Pour chaque texte dans l'action : positione et écrit le texte */
+    for (let i = 0; i < tabAction.length; i++) {
+        tempY += FONTSIZE+MARGETEXT ;
+        ctxt.fillText(tabAction[i], x, tempY) ;
+    }
+    
+    /*Initialise la police du texte des résultats*/
+    ctxt.font = FONTSIZE+"px sans-serif" ;
+
+    /*Premier résultat*/
+        /*Positione le cadre*/
+    tempW2 = MARGEBLOCK*2+ctxt.measureText(tabAnswer[0]).width ;
+    tempX = x-tempW/2-tempW2 ; tempY = y+tempH ;
+    tempH = MARGEBLOCK*2+FONTSIZE ;
+        /*Initialise la couleur de fond du cadre*/
+    ctxt.fillStyle = PRIMARYCOLOR ;
+        /*Dessine le cadre*/
+    ctxt.fillRect(tempX, tempY, tempW2, tempH) ;
+        /*Positione le texte*/
+    tempX += tempW/2 ;
+    tempY += MARGEBLOCK ;
+        /*Initialise la couleur du texte*/
+    ctxt.fillStyle = FONTCOLOR ;
+        /*Dessine le texte*/
+    ctxt.fillText(tabAnswer[0], tempX, tempY) ;
+
+    /*Deuxième résultat*/
+        /*Positione le cadre*/
+    tempW2 = MARGEBLOCK*2+ctxt.measureText(tabAnswer[1]).width ;
+    tempX = x-tempW2/2 ;
+        /*Initialise la couleur de fond du cadre*/
+    ctxt.fillStyle = PRIMARYCOLOR ;
+        /*Dessine le cadre*/
+    ctxt.fillRect(tempX, tempY, tempW2, tempH) ;
+        /*Positione le texte*/
+    tempX += tempW/2 ;
+    tempY += MARGEBLOCK ;
+        /*Initialise la couleur du texte*/
+    ctxt.fillStyle = FONTCOLOR ;
+        /*Dessine le texte*/
+    ctxt.fillText(tabAnswer[1], tempX, tempY) ;
+
+    /*Résultat Pas de réponse*/
+        /*Initialise le fond de la couleur*/
+    ctxt.fillStyle = PRIMARYCOLOR ;
+        /*Positione le texte*/
+    tempX = x+tempW/2 ;
+    tempW = MARGEBLOCK*2+ctxt.measureText("Pas de réponse").width ;
+    tempH = MARGEBLOCK*2+FONTSIZE ;
+    
+    tempY -= MARGEBLOCK*2
+    ctxt.fillRect(tempX, tempY, tempW, tempH) ;
+    tempX += tempW/2 ;
+    tempY += MARGEBLOCK ;
+    ctxt.fillStyle = FONTCOLOR ;
+    ctxt.fillText("Pas de réponse", tempX, tempY) ;
+
+    ctxt.textAlign = "left" ;
+
+    tempX -= ctxt.measureText("Pas de réponse").width/4
+    tempY += FONTSIZE+MARGETEXT ;
+    ctxt.font = "italic "+FONTSIZE+"px sans-serif" ;
+    ctxt.fillText("Envoie de SMS", tempX, tempY) ;
+    ctxt.font = FONTSIZE+"px sans-serif" ;
+    for (let i = 0; i < tabNoAnswerTextType.length; i++) {
+        tempY += FONTSIZE+MARGETEXT ;
+        ctxt.fillText("Tentative "+(i+1)+" : "+tabTextType[tabNoAnswerTextType[i]].type+" "+tabTextType[tabNoAnswerTextType[i]].name, tempX, tempY) ;
+    }
+
+    return new Size(0, 0) ;
+}
+
 /*---Outils---*/
 //Redimensionne le canvas à la taille de la fenêtre
 function sizeOnScreen() {
 	canvas.width = window.innerWidth-17 ;  
-	canvas.height = window.innerHeight ;
+	canvas.height = 1569 ;
 }
 
 //Recadre automatiquement le canvas en fonction de la fenêtre
