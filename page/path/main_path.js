@@ -402,19 +402,15 @@ function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, wa
 
     /*Initialise les paramètre du rectangle*/
     ctxt.fillStyle = PRIMARYCOLOR ;
-    
     /*Dessine le rectangle*/
     ctxt.fillRect(tempX, tempY, tempW, tempH) ;
-
     /*Initialise l'id de l'action*/
     ctxt.fillStyle = FONTCOLOR ;
     ctxt.font = (FONTSIZE*0.75)+"px sans-serif" ;
     ctxt.textAlign = "left" ;
     ctxt.textBaseline = "top" ;
-
     /*Dessine l'id de l'action dans le coin supérieur gauche*/
     ctxt.fillText(id, tempX+1, tempY+1) ;
-
     /*Initialise le texte de l'action*/
     ctxt.font = FONTSIZE+"px sans-serif" ;
     ctxt.textAlign = align ;
@@ -422,7 +418,6 @@ function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, wa
     tempY += MARGEBLOCK ;
     /*Dessine le nom de l'action*/
     ctxt.fillText(name, x, tempY) ;
-
     /*Initilise les scripts de l'action*/
     ctxt.font = "italic "+FONTSIZE+"px sans-serif" ;
     /*Positionne les scripts de l'action*/
@@ -440,6 +435,9 @@ function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, wa
     tempW2 = MARGEBLOCK*2+ctxt.measureText(tabAnswer[0]).width ;
     tempX = x-tempW/2-tempW2 ; tempY = y+tempH ;
     tempH = MARGEBLOCK*2+FONTSIZE ;
+        /*Dessine les lignes vers la box*/
+    drawLine(tempX+tempW2-LINE/2, tempY-LINE/2, LINE/2, 1) ;
+    drawLine(tempX+tempW2-LINE/2, tempY-LINE/2, 1, LINE/2) ;
         /*Initialise la couleur de fond du cadre*/
     ctxt.fillStyle = PRIMARYCOLOR ;
         /*Dessine le cadre*/
@@ -456,6 +454,8 @@ function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, wa
         /*Positione le cadre*/
     tempW2 = MARGEBLOCK*2+ctxt.measureText(tabAnswer[1]).width ;
     tempX = x-tempW2/2 ;
+        /*Dessine les lignes vers la box*/
+    drawLine(x, tempY, 1, -MARGEBLOCK) ;
         /*Initialise la couleur de fond du cadre*/
     ctxt.fillStyle = PRIMARYCOLOR ;
         /*Dessine le cadre*/
@@ -469,23 +469,30 @@ function drawActionBlock(id, name, tabAction, tabAnswer, tabNoAnswerTextType, wa
     ctxt.fillText(tabAnswer[1], tempX, tempY) ;
 
     /*Résultat Pas de réponse*/
-        /*Initialise le fond de la couleur*/
-    ctxt.fillStyle = PRIMARYCOLOR ;
-        /*Positione le texte*/
+        /*Initialise la position du fond*/
     tempX = x+tempW/2 ;
+    tempY -= MARGEBLOCK*2
+        /*Dessine les lignes vers la box*/
+    drawLine(tempX, tempY-LINE/2, LINE/2, 1) ;
+    drawLine(tempX+LINE/2, tempY-LINE/2, 1, LINE/2) ;
+        /*Initialise la taille du fond*/
     tempW = MARGEBLOCK*2+ctxt.measureText("Pas de réponse").width ;
     tempH = MARGEBLOCK*2+FONTSIZE ;
-    
-    tempY -= MARGEBLOCK*2
+    /*Initialise le fond de la couleur*/
+    ctxt.fillStyle = PRIMARYCOLOR ;
+        /*Dessine le fond*/
     ctxt.fillRect(tempX, tempY, tempW, tempH) ;
+        /*Positione le texte*/
     tempX += tempW/2 ;
     tempY += MARGEBLOCK ;
+        /*Initialise la couleur du texte*/
     ctxt.fillStyle = FONTCOLOR ;
+        /*Dessine le texte*/
     ctxt.fillText("Pas de réponse", tempX, tempY) ;
-
+    /*Dessine les SMS types lié aux résultats précédents*/
     ctxt.textAlign = "left" ;
 
-    tempX -= ctxt.measureText("Pas de réponse").width/4
+    tempX -= tempW/4 ;
     tempY += FONTSIZE+MARGETEXT ;
     ctxt.font = "italic "+FONTSIZE+"px sans-serif" ;
     ctxt.fillText("Envoie de SMS", tempX, tempY) ;

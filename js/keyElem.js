@@ -185,6 +185,12 @@ class KeyElem {
                 value = document.getElementById(this.id).value ;
                 value = value.toLowerCase() ;
                 break ;
+            case "de.des" :
+                value = document.getElementById(this.id).value ;
+                value = value.toLowerCase() ;
+                if (value == "emploi" || value == "alternance") {value = "d'"+value ;}
+                else {value = "de "+value ;}
+                break ;
             case "detail" :
                 if(document.getElementById(this.id+"F").checked) {value = "e" ;}
                 else {value = "" ;}
@@ -297,7 +303,8 @@ function setKeyElemList() {
 	tabKeyElem.push(new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null));
 	tabKeyElem.push(new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50"));
 	tabKeyElem.push(new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
-	tabKeyElem.push(new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //P pour Possessif "ton stage"
+	tabKeyElem.push(new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //Low pour en minuscule
+	tabKeyElem.push(new KeyElem("YGSearchAP", "de.des", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //AP pour Article Partitif
 	tabKeyElem.push(new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux"));
 	tabKeyElem.push(new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)"));
 	tabKeyElem.push(new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)"));
@@ -324,16 +331,18 @@ function setKeyElemList() {
 	tabKeyElem.push(new KeyElem("EventLink", "text", "EventLink", "text", "Lien de l'événement", "www.prana-bindu.dune"));
 	tabKeyElem.push(new KeyElem("EventLinkVisio", "text", "EventLinkVisio", "text", "Lien de la visio de l'événement", "teams.prana-bindu.dune"));
 
-
 	tabKeyElem.push(new KeyElem("linkForm", "text", "linkForm", "text", "Lien de la formation", "www.salledutemps.com"));
 
 	tabKeyElem.push(new KeyElem("closingDate", "text", "closingDate","text","Date de clôture du dossier", "17 novembre"));
 	tabKeyElem.push(new KeyElem("registrationDate", "text", "registrationDate","text","Date d'inscription du dossier", "17 novembdre"));
+    tabKeyElem.push(new KeyElem("startMentoringDate", "text", "startMentoringDate", "text", "Date de début du mentorat", "17 novembre"));
 
-    //A modifier
-	tabKeyElem.push(new KeyElem("ApecGE", "apec", "YGDept", "text", "Département du jeune", "50"));
+	tabKeyElem.push(new KeyElem("ApecGE", "apec", "YGDept", "text", "Département du jeune", "50")); //A modifier
 
 	tabKeyElem.push(new KeyElem("EmploymentAdvisor", "text", "EmploymentAdvisor", "text", "Prénom et nom du prescripteur", "Gandalf LEGRIS"));
+    tabKeyElem.push(new KeyElem("ADFirstName","text", "ADFirstName", "text", "Prénom du directeur d'agence", "Albus"));
+	tabKeyElem.push(new KeyElem("ADLastName","text", "ADLastName", "text", "Nom du directeur d'agence", "Dumbledore"));
+	tabKeyElem.push(new KeyElem("ADTitle", "title", "ADGender", "gender", "Genre du directeur d'agence", null));
     tabKeyElem.push(new KeyElem("EmploymentAgency", "text", "EmploymentAgency", "text", "Agence du prescripteur", "Communauté de l'Anneau"));
 
 	tabKeyElem.push(new TagElem("startUL", "startTag", "ul"));
@@ -348,6 +357,9 @@ function setKeyElemList() {
 	tabKeyElem.push(new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null));
 
 	tabKeyElem.push(new KeyElem("ifYGSearch","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
+
+    //---Fonctionalité "or" en cours de programmation
+    //tabKeyElem.push(new KeyElem("orYGReview", "or", "YGReview", "next", "Dossier du jeune examiné", null))
 }
 
 /*---Fonction particulière pour l'APEC Grand-Est---*/
@@ -357,12 +369,12 @@ var apecGE = [
 	"10","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
 	"51","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
 	"52","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
-	"54","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
-	"55","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
+	"54","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",
+	"55","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",
 	"57","Pour l’APEC Moselle : Véronique PETITJEAN veronique.petitjean@apec.fr",
-	"67","Pour l’APEC Bas-Rhin : Grégory JOECKLE gregory.joeckle@apec.fr",
+	"67","Pour l’APEC Bas-Rhin : Sylvie KONING sylvie.koning@apec.fr",
 	"68","Pour l’APEC Haut-Rhin: Franck WOOG franck.woog@apec.fr",
-	"88","Pour l’APEC Lorraine : Michèle BLASZCZAK michele.blaszczak@apec.fr",
+	"88","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",
 ] ;
 
 function apecContent(dept) {

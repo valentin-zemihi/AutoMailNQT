@@ -46,6 +46,16 @@ class EventTextType extends TextType {
 	}
 }
 
+class SourcingTextType extends TextType {
+	constructor(name, region, type, category, obj, txt) {
+		super(name, null, region, type, category, obj, txt) ;
+	}
+
+	getFolder() {
+		return "Sourcing" ;
+	}
+}
+
 /*---------Fonction avec TextType---------*/
 
 var tabTextType = [] ; //Tableau d'objet TextType
@@ -80,7 +90,15 @@ function setTextType() {
 		"Sachez que je suis à votre entière disposition pour répondre à vos questions.","br",
 		"Cordialement,","br",
 		"PMSignSMS"
-	])) ;
+	]));
+	tabTextType.push(new TextType("Finalisation inscription - Post événement", "Jeune", ["BFC", "GE"], "SMS", "Inscription", null, [
+		"Bonjour ","YGFirstName",",","br",
+		"Merci pour votre inscription à NQT suite au salon ","EventName",".","br",
+		"Il vous reste une étape d'inscription pour profiter du mentorat par NQT, je vous invite à poursuivre en validant votre adresse mail ou en vous connectant sur nqt.fr ou l'application mobile.","br",
+		"Au plaisir de vous accompagner dans votre recherche !","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]));
 	tabTextType.push(new TextType("Finalisation inscription", "Jeune", ["BFC", "GE"], "SMS", "Inscription", null, [
 		"Bonjour ","YGFirstName",",","br",
 		"Je fais suite à votre inscription chez NQT !","br",
@@ -100,15 +118,22 @@ function setTextType() {
 		"Bonjour ","YGFirstName",",","br",
 		"Je vous relance suite à mon message vocal. Il ne vous reste plus qu'une étape pour être complètement inscrit","YGGender"," à notre dispositif et profiter du mentorat par NQT.","br",
 		"Je vous invite une dernière fois à compléter votre profil sur https://app.nqt.fr/signin.","br",
-		"N'hésitez pas à me contacter directement si vous rencontrez la moindre difficulté. Je suis disponible à ce numéro par SMS ou par appel, ou par mail à v.zemihi@nqt.fr.","br",
+		"N'hésitez pas à me contacter directement si vous rencontrez la moindre difficulté. Je suis disponible à ce numéro par SMS ou par appel, ou par mail à ","PMMail",".","br",
 		"Bien à vous,","br",
 		"PMSignSMS"
 	]));
-	tabTextType.push(new TextType("Examen non éligible", "Jeune", ["BFC", "GE"], "SMS", "Non éligible", null, [
+	tabTextType.push(new TextType("Examen dossier - Non éligible", "Jeune", ["BFC", "GE"], "SMS", "Examen dossier", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Je fais suite à votre inscription chez NQT ! Votre dossier serait non éligible selon notre logiciel.","br",
-		"J’aimerais voir avec vous les informations de votre dossier, pour vérifier manuellement l’éligibilité de votre profil.","br",
+		"Suite à votre inscription chez NQT, votre dossier serait non éligible selon notre application.","br",
+		"Peuton convenir d'un rendez-vous pour vérifier manuellement l’éligibilité de votre profil ?","br",
 		"N'hésitez pas à me contacter, dès que vous le pouvez. Je suis joignable du lundi au jeudi de 9h à 18h et le vendredi de 9h à 12h.","br",
+		"Bien à vous,","br",
+		"PMSignSMS"
+	]));
+	tabTextType.push(new TextType("Examen dossier - Bug", "Jeune", ["BFC", "GE"], "SMS", "Examen dossier", null, [
+		"Bonjour ","YGFirstName",",","br",
+		"Suite à votre inscription chez NQT, il semble que votre dossier a eu un bug de notre côté. Vous devez avoir accès normalement à l'application NQT mais cela est bloqué du côté de NQT. Je souhaite donc faire le point avec vous et activer correctement votre compte pour profiter du dispositif.","br",
+		"N'hésitez pas à me transmettre vos disponibilités.","br",
 		"Bien à vous,","br",
 		"PMSignSMS"
 	]));
@@ -131,7 +156,7 @@ function setTextType() {
 	]));
 	tabTextType.push(new TextType("Dossier validé - Dernière relance", "Jeune", ["BFC", "GE"], "SMS", "Dossier validé", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Suite à ton inscription chez NQT, tu as dû recevoir un mail de validation de dossier, et plusieurs appels pour faire le point sur ton projet professionel. Cette étape est importante pour bien identifier ton profil et te mettre en relation avec un mentor","br",
+		"Suite à ton inscription chez NQT, tu as dû recevoir un mail de validation de dossier, et plusieurs appels pour faire le point sur ton projet professionnel. Cette étape est importante pour bien identifier ton profil et te mettre en relation avec un mentor","br",
 		"Es-tu toujours intéressé","YGGender"," par notre dispositif d’accompagnement ?","br",
 		"Si c’est le cas, je t'invite à me rappeler dès que possible, ou à m'indiquer tes disponibilités pour que nous puissions fixer un rendez-vous téléphonique.","br",
 		"En l'absence de réponse, je serais contraint","PMGender"," de clôturer ton dossier le ","closingDate",".","br",
@@ -144,24 +169,40 @@ function setTextType() {
 		"Bonne journée à toi,","br",
 		"PMSignSMS"
 	]));
+	tabTextType.push(new TextType("Reprise de contact", "Jeune", ["BFC", "GE"], "SMS", "Actualité", null, [
+		"Bonjour ","YGFirstName",",","br",
+		"Suite à mon message vocal, j'aimerais prendre contact avec toi afin de faire le point sur ton inscription à NQT. J'ai remarqué que tu n'avais pas été contacté par NQT depuis un moment. L'idée de ce point est de te poser plusieurs questions :  Est-ce que tu as  pu avancer ton projet professionnel ? Est-ce que tu as pu échanger avec ton mentor attribué automatiquement ? Est-ce que tu as toujours besoin de nous ?","br",
+		"Je reste à ta disposition ici ou par mail à ","PMMail",".","br",
+		"Bien à toi,","br",
+		"PMSignSMS"
+	]));
 	tabTextType.push(new TextType("Suivi attente mentorat", "Jeune", ["BFC", "GE"], "SMS", "Suivi attente mentorat", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Suite à ton inscription à NQT, je te contacte pour prendre de tes nouvelles : comment se passe ta recherche ","YGSearch"," ? As-tu trouvé des postes qui t'intéressent ? As-tu pu passer des entretiens ?","br",
-		"Bonne journée à toi,",
+		"Suite à ton inscription à NQT, je te contacte pour prendre de tes nouvelles : comment se passe ta recherche ","YGSearchAP"," ? As-tu trouvé des postes qui t'intéressent ? As-tu pu passer des entretiens ?","br",
+		"Bonne journée à toi,","br",
 		"PMSignSMS"
 	]));
 	tabTextType.push(new TextType("Suivi attente mentorat - Mentor potentiel", "Jeune", ["BFC", "GE"], "SMS", "Suivi attente mentorat", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Suite à ton inscription à NQT, je te contacte pour prendre de tes nouvelles : comment se passe ta recherche ","YGSearch"," ? As-tu trouvé des postes qui t'intéressent ? As-tu pu passer des entretiens ?","br",
+		"Suite à ton inscription à NQT, je te contacte pour prendre de tes nouvelles : comment se passe ta recherche ","YGSearchAP"," ? As-tu trouvé des postes qui t'intéressent ? As-tu pu passer des entretiens ?","br",
 		"Actuellement, j'ai proposé à un mentor de t'accompagner dans ta recherche, j'espère pouvoir te transmettre une réponse positive rapidement.","br",
 		"Bonne journée à toi,","br",
 		"PMSignSMS"
 	]));
 	tabTextType.push(new TextType("Suivi attente mentorat - Mentor autonome", "Jeune", ["BFC", "GE"], "SMS", "Suivi attente mentorat", null, [
 		"Bonjour ","YGFirstName",",","br",
-		"Je fais le point concernant ton inscription à NQT. Comment se passe ta recherche ","YGSearch"," ?","br",
+		"Je fais le point concernant ton inscription à NQT. Comment se passe ta recherche ","YGSearchAP"," ?","br",
 		"Je vois aussi que tu es en mentorat autonome avec un","MGender"," mentor","MGender",", est-ce que tu as pu entrer en contact avec ","MPPT"," ?","br",
 		"Je t'invite à me répondre rapidement via SMS, ou à m'appeler si besoin.","br",
+		"Bien à toi,","br",
+		"PMSignSMS"
+	]));
+	tabTextType.push(new TextType("Relance - Suivi attente mentorat", "Jeune", ["BFC", "GE"], "SMS", "Suivi attente mentorat", null, [
+		"Bonjour ","YGFirstName",",","br",
+		"Suite à mon précédent message, je te contacte à nouveau pour faire le point concernant ta recherche ","YGSearchAP",".","br",
+		"Aurais tu as du temps disponible pour échanger sur ta recherche ?","br",
+		"De mon côté, je suis disponible du lundi au jeudi entre 9h et 18h et le vendredi entre 9h et 12h.","br",
+		"Dans l'attente de ton retour, je suis à ta disposition.","br",
 		"Bien à toi,","br",
 		"PMSignSMS"
 	]));
@@ -176,6 +217,15 @@ function setTextType() {
 		"Bonjour ","YGFirstName",",","br",
 		"Suite à mon précédent message t’informant ta mise en relation avec un mentor, as-tu eu le temps de le contacter pour te présenter ?","br",
 		"Bien à toi,","br",
+		"PMSignSMS"
+	]));
+	tabTextType.push(new TextType("Vérification premier contact - J+15", "Jeune", ["GE"], "SMS", "Confirmation mentorat", null, [
+		"Bonjour ","YGFirstName",",","br",
+		"J’espère que tu vas bien.","br",
+		"Je reviens vers toi dans la continuité de ta mise en mentorat du ","startMentoringDate"," afin de m’assurer que tu as bien pris contact avec ","MAD2"," mentor","MGender"," pour te présenter et solliciter un premier échange.","br",
+		"Merci de me mettre en copie (","PMMail",") de ton mail le plus rapidement possible.","br",
+		"Dans l’attente de ton retour.","br",
+		"Je te souhaite une bonne journée,","br",
 		"PMSignSMS"
 	]));
 	tabTextType.push(new TextType("Vérification premier contact - Dernière relance", "Jeune", ["BFC", "GE"], "SMS", "Confirmation mentorat", null, [
@@ -270,15 +320,15 @@ function setTextType() {
 	tabTextType.push(new TextType("Dossier validé - BFC", "Jeune", ["BFC"], "Mail", "Dossier validé", "NQT - Dossier validé", [
 		"Bonjour ","YGFirstName",",","br",
 		"br",
-		"Comme tu as pu le constater, ton dossier a bien été validé, félicitations !","br",
+		"Comme tu as pu le constater, ton inscription à NQT a bien été validé. ","startStrong","Bienvenue","endTag"," !","br",
 		"br",
-		"Si tu n'es actuellement pas suivi","YGGender"," par l’APEC, sache que le double accompagnement APEC/NQT est aujourd’hui un partenariat qui fonctionne particulièrement bien pour te permettre de trouver un emploi le plus rapidement possible.","br",
-		"Je te propose contacter directement l’accueil de l’APEC BFC au 03 80 54 17 60 ou par mail à accueil.bfc@apec.fr afin d'en savoir plus et d'obtenir un rendez-vous.","br",
+		"Si tu n'es actuellement pas suivi","YGGender"," par l’APEC, sache que le double accompagnement APEC/NQT est un partenariat qui fonctionne particulièrement bien pour te permettre de trouver un emploi le plus rapidement possible.","br",
+		"Je te propose de contacter directement l’accueil de l’APEC BFC au 03 80 54 17 60 ou par mail à accueil.bfc@apec.fr afin d'en savoir plus et d'obtenir un rendez-vous.","br",
 		"br",
-		"Avec NQT, tu as accès à un large choix d'outils numériques pour te perfectionner en langues, mieux connaître ta personnalité et ton orientation professionnelle.","br",
-		"Toutes les informations dans les deux guides ci-joint.","br",
+		"Avec NQT, ","startStrong"," tu as accès à un large choix d'outils numériques","endTag"," pour te perfectionner en langues, mieux connaître ta personnalité et ton orientation professionnelle.","br",
+		"startStrong","Toutes les informations dans les deux guides ci-joint.","endTag","br",
 		"br",
-		"Profite également de notre groupe LinkedIn NQT - Est : https://www.linkedin.com/groups/8481900/","br",
+		"startStrong","Profite également de notre groupe LinkedIn NQT - Est","endTag"," : https://www.linkedin.com/groups/8481900/","br",
 		"Tu y trouveras des offres d'emploi, d'alternance et de stage de nos partenaires, ainsi que tous nos événements !","br",
 		"br",
 		"N'hésite pas à revenir vers moi pour toutes autres questions.","br",
@@ -289,15 +339,33 @@ function setTextType() {
 	tabTextType.push(new TextType("Dossier validé - GE", "Jeune", ["GE"], "Mail", "Dossier validé", "NQT - Dossier validé",[
 		"Bonjour ","YGFirstName",",","br",
 		"br",
-		"Comme tu as pu le constater, ton dossier a bien été validé, félicitations !","br",
+		"Comme tu as pu le constater ton dossier a bien été validé, bienvenue chez NQT !","br",
 		"br",
-		"Si tu n'es actuellement pas suivi","YGGender"," par l’APEC, sache que le double accompagnement APEC/NQT est aujourd’hui un partenariat qui fonctionne particulièrement bien pour te permettre de trouver un emploi le plus rapidement possible.","br",
-		"N’hésite pas à t'inscrire sur leur site (https://www.apec.fr/) et à prendre contact avec eux en précisant que tu viens de notre part, et à m'ajouter en copie de ton email : ","br",
+		"Voici quelques informations complémentaires 🔎","br",
+		"Si tu n'es actuellement pas suivi","YGGender"," par l’APEC, sache que le double accompagnement APEC/NQT est aujourd’hui un partenariat qui fonctionne particulièrement bien pour te permettre de trouver un emploi le plus rapidement possible. N’hésite pas à t'inscrire sur leur site (https://www.apec.fr/) et à prendre contact avec eux en précisant que tu viens de notre part : ","br",
 		"ApecGE","br",
 		"br",
-		"Par ailleurs, si tu souhaites te perfectionner en langues et/ou mieux connaître ta personnalité et ton orientation professionnelle, tu trouveras ci-joint les liens et explications sur les outils numériques mis à ta disposition tout au long de l'accompagnement.","br",
+		"Par ailleurs, si tu souhaites te perfectionner en langues et/ou mieux connaître ta personnalité et ton orientation professionnelle, tu trouveras ci-joint les liens et explications sur ","startStrong","les outils numériques mis à ta disposition tout au long de l'accompagnement🎯","endTag","br",
 		"br",
-		"Profite également de notre groupe LinkedIn NQT - Est : https://www.linkedin.com/groups/8481900/","br",
+		"Rejoins notre groupe LinkedIn NQT - Est : https://www.linkedin.com/groups/8481900/ ! Tu y trouveras des ","startStrong","offres d'emploi, d'alternance et de stage de nos partenaires, ainsi que tous nos événements 💥","endTag","br",
+		"br",
+		"📞 Je vais t’appeler prochainement pour échanger sur ton projet professionnel avant de te confirmer toute mise en mentorat. N’hésite pas à m’indiquer si tu as des préférences dans le créneau horaire.","br",
+		"startUL","startLI","Au préalable, si tu as rencontré des difficultés pour ajouter tes documents sur la plateforme, merci de m’envoyer par mail : ton ","startStrong","CV","endTag",", un ","startStrong","justificatif d’identité","endTag"," et ton ","startStrong","dernier diplôme","endTag"," 💼","endTag","endTag","br",
+		"Bien cordialement,"
+	]));
+	tabTextType.push(new TextType("Dossier validé - Après examen éligibilité", "Jeune", ["BFC", "GE"], "Mail", "Dossier validé", "NQT - Dossier validé", [
+		"Bonjour ","YGFirstName",",","br",
+		"br",
+		"Comme promis au téléphone, ton inscription à NQT a bien été validé. ","startStrong","Bienvenue","endTag"," !","br",
+		"Je t'invite à te connecter à ton compte pour mettre ton profil à jour.","br",
+		"br",
+		"Si tu n'es actuellement pas suivi","YGGender"," par l’APEC, sache que le double accompagnement APEC/NQT est un partenariat qui fonctionne particulièrement bien pour te permettre de trouver un emploi le plus rapidement possible.","br",
+		"Je te propose de contacter directement l’accueil de l’APEC BFC au 03 80 54 17 60 ou par mail à accueil.bfc@apec.fr afin d'en savoir plus et d'obtenir un rendez-vous.","br",
+		"br",
+		"Avec NQT, ","startStrong"," tu as accès à un large choix d'outils numériques","endTag"," pour te perfectionner en langues, mieux connaître ta personnalité et ton orientation professionnelle.","br",
+		"startStrong","Toutes les informations dans les deux guides ci-joint.","endTag","br",
+		"br",
+		"startStrong","Profite également de notre groupe LinkedIn NQT - Est","endTag"," : https://www.linkedin.com/groups/8481900/","br",
 		"Tu y trouveras des offres d'emploi, d'alternance et de stage de nos partenaires, ainsi que tous nos événements !","br",
 		"br",
 		"N'hésite pas à revenir vers moi pour toutes autres questions.","br",
@@ -334,7 +402,7 @@ function setTextType() {
 		"br",
 		"N’hésite pas à revenir vers moi d’ici une quinzaine de jours si jamais tu n’as pas de retour de sa part.","br",
 		"br",
-		"Je reste à ton écoute et te souhaite une très bonne fin de journée.","br",
+		"Bonne accompagnement à toi, et je reste à ta disposition.","br",
 		"br",
 		"Cordialement,"
 	]));
@@ -475,11 +543,11 @@ function setTextType() {
 		"br",
 		"Je suis ","PMFirstName"," ","PMLastName",", ","PMWork"," dans la région ","PMRegion"," et également votre principal","PMGender"," interlocut","PMGeurice"," dans les actions de mentorat.","br",
 		"br",
-		"Vous pouvez dès maintenant compléter votre profil de mentor sur la plateforme en ajoutant votre expérience et vos thèmes d'accompagnement.","br",
+		"Suite à votre inscription, vous pouvez dès maintenant compléter votre profil de mentor sur la plateforme en ajoutant votre expérience et vos thèmes d'accompagnement.","br",
 		"br",
 		"nextForm",4,"Olivier PERRAUT, délégué régional de NQT Est, vous propose une formation de 1h30 pour vous familiariser avec les actions du mentorat et pour vous apporter les premiers conseils. Voici le lien doodle pour vous y inscrire : ","linkForm","br",
 		"br",
-		"Une fois la formation passée, voici la procédure de mise en mentorat :","br",
+		"Une fois votre profil complété, j'activerai votre compte pour accompagner un jeune diplômé. Pour information, voici la procédure de mise en mentorat :","br",
 		"startUL",
 		"startLI","Je vous propose le profil d’un jeune en vous présentant brièvement ses besoins et son CV ;","endTag",
 		"startLI","Vous avez le choix d’accepter, ou non, d’accompagner le jeune qui vous a été présenté ; ","endTag",
@@ -488,7 +556,7 @@ function setTextType() {
 		"endTag","br",
 		"Vous trouverez sur notre plateforme, nqt.fr ou application NQT, divers fonctionnalités, dont des formations et un réseau social de mentor.","br",
 		"br",
-		"Sachez que vous n'êtes pas seul ! Je vous propose d’accéder à notre groupe LinkedIn NQT Est (https://www.linkedin.com/groups/8481900/) pour retrouver toutes les informations sur l'année.","br",
+		"Sachez que vous n'êtes pas seul","MGender"," ! Je vous propose d’accéder à notre groupe LinkedIn NQT Est (https://www.linkedin.com/groups/8481900/) pour retrouver toutes les informations sur l'année.","br",
 		"br", 
 		"Enfin, vous trouverez en pièces-jointes à ce mail deux documents :","br",
 		"startUL",
@@ -500,33 +568,79 @@ function setTextType() {
 		"Je vous souhaite une belle journée et bienvenue dans l’aventure NQT !","br",
 		"br",
 		"Bien cordialement,"
-	])) ;
+	]));
+	tabTextType.push(new TextType("Point d'engagement - En pause", "Mentor", ["BFC", "GE"], "Mail", "Point d'engagement", "NQT - Point d'engagement", [
+		"Bonjour ","MTitle"," ","MLastName",",","br",
+		"br",
+		"En faisant le point sur les mentors NQT, nous avons remarqué que cela faisait un moment que nous ne vous avions pas échangé. Je vous contacte donc aujourd'hui pour suivre votre engagement au sein de l'association et connaître votre actualité.","br",
+		"br",
+		"Ainsi, j’aimerais savoir si vous êtes toujours disponible pour accompagner des jeunes diplômés dans leur projet professionnel ?","br",
+		"Dans le cas positif, je vous invite à mettre à jour les éléments concernant votre compte.","br",
+		"Actuellement, votre profil est en pause, mais dès que vous êtes disponible, je peux le passer actif et chercher un jeune que vous pourrez accompagner.","br",
+		"br",
+		"Dans l’attente de votre retour, re reste à votre entière disposition pour toute sollicitation.","br",
+		"br",
+		"Bien à vous,","br"
+	]));
+	tabTextType.push(new TextType("Première proposition mentorat", "Mentor", ["BFC"], "Mail","Proposition mentorat", "NQT - Propositon mentorat - ", [
+		"Bonjour ","MTitle"," ","MLastName",",","br",
+		"br",
+		"Pour votre première proposition, j'ai le plaisir de vous proposer l'accompagnement de :",
+		"YGTitle"," ","YGFirstName"," ","YGLastName"," : ","YGPres","br",
+		"Vous pouvez découvrir son CV joint à cet e-mail.","br",
+		"br",
+		"br",
+		"nextIdea",2,"YGIdea","br",
+		"br",
+		"Pour information, il vous est possible de refuser un mentorat, c'est vous qui avez le dernier mot.","br",
+		"En cas d'accord, je transmettrai votre adresse mail à ","YGFirstName"," qui prendra contact avec vous pour se présenter et solliciter un premier entretien.","br",
+		"br",
+		"Vu qu'il s'agit d'une première proposition, j'aimerais échanger avec vous quelques minutes pour me présenter, vous connaître un peu plus et répondre à vos questions.","br",
+		"Quelles seraient vos disponibilités dans les prochains jours ?","br",
+		"br",
+		"Dans l'attente de votre réponse, je reste bien-sûr à votre entière disposition.","br",
+		"Bien cordialement,"
+	]));
 	tabTextType.push(new TextType("Proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Proposition mentorat - ",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
-		"J'ai le plaisir de vous proposer l'accompagnement de :","br",
+		"Pour votre mentorat NQT, je souhaite vous proposer l'accompagnement de :","br",
 		"YGTitle"," ","YGFirstName"," ","YGLastName"," : ","YGPres","br",
-		"nextCV",2,"Je vous propose de découvrir son CV joint à cet e-mail.","br",
+		"nextCV",2,"Vous pouvez découvrir son CV joint à cet e-mail.","br",
+		"br",
 		"nextIdea",2,"YGIdea","br",
 		"br",
-		"Êtes-vous d'accord pour accompagner ","YGFirstName"," dans sa recherche ?","br",
-		"J'attends votre confirmation. J'enverrai ensuite votre adresse e-mail à votre filleul","YGGender"," qui prendra contact avec vous rapidement afin de faire plus ample connaissance et démarrer le mentorat.","br",
+		"Si vous êtes d'accord pour accompagner ","YGFirstName",", je lui transfère votre adresse mail. Il prendra ensuite contact avec vous pour se présenter et planifier un premier entretien.","br",
 		"br",
 		"Je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
-	])) ;
-	tabTextType.push(new TextType("Proposition mentorat - Relance", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Relance proposition mentorat -",[
+	]));
+	tabTextType.push(new TextType("Relance proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Relance proposition mentorat -",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je me permets de vous relancer concernant la proposition de mentorat avec ","YGFirstName"," ","YGLastName",".","br",
-		"nextCV",2,"Je vous propose de découvrir à nouveau son CV joint à cet e-mail.","br",
-		"nextIdea",2,"YGIdea","br",
-		"Êtes-vous d'accord pour l'accompagner dans sa recherche ?","br",
-		"J'attends votre confirmation. En cas de retour positif, j'enverrai ensuite votre adresse e-mail à ","YGFirstName"," qui prendra contact avec vous rapidement afin de faire plus ample connaissance et démarrer le mentorat.","br",
+		"nextCV",2,"Vous pouvez découvrir à nouveau son CV joint à cet e-mail.","br",
 		"br",
-		"Je reste bien-sûr à votre entière disposition.","br",
-		"Bien cordialement,"
-	]))
+		"nextIdea",2,"YGIdea","br",
+		"br",
+		"Si vous êtes d'accord pour accompagner ","YGFirstName",", je lui transfère votre adresse mail. Il prendra ensuite contact avec vous pour se présenter et planifier un premier entretien.","br",
+		"br",
+		"Dans l'attente de votre retour, je reste à votre entière disposition.","br",
+		"Bien à vous,"
+	]));
+	tabTextType.push(new TextType("Annulation proposition mentorat", "Mentor", ["BFC"], "Mail", "Proposition mentorat", "NQT - Annulation proposition mentorat + Passage en pause", [
+		"Bonjour ","MTitle"," ","MLastName",",","br",
+		"br",
+		"En l'absence de réponse, je retire ma proposition d'accompagner ","YGFirstName"," ","YGLastName",".","br",
+		"br",
+		"Dans le cas où cette absence de réponse est due à une indisponibilité, je vous propose de passer votre compte en pause le temps d'un mois.","br",
+		"N'hésitez pas à me contacter avant pour m'indiquer vos disponibilités, nous aurons sans doute un jeune diplômé pouvant profiter de votre accompagnement.","br",
+		"br",
+		"Toutes mes excuses pour le dérangement si ce fut le cas.","br",
+		"Je reste à votre disposition pour toute sollicitation.","br",
+		"br",
+		"Bien à vous,"
+	]));
 	tabTextType.push(new TextType("Suivi mentorat de masse", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de",[
 		"Bonjour,","br",
 		"br",
@@ -543,7 +657,7 @@ function setTextType() {
 		"br",
 		"Je reste à votre entière disposition,","br",
 		"Bien à vous,"
-	])) ;
+	]));
 	tabTextType.push(new TextType("Suivi mentorat individualisé", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
@@ -560,7 +674,7 @@ function setTextType() {
 		"br",
 		"Je reste à votre entière disposition,","br",
 		"Bien à vous,"
-	])) ;
+	]));
 	tabTextType.push(new TextType("Relance suivi mentorat", "Mentor", ["BFC", "GE"], "Mail", "Suivi mentorat", "NQT - Suivi mentorat de -",[
 		"Bonjour,","br",
 		"br",
@@ -603,7 +717,7 @@ function setTextType() {
 		"Excellente journée à vous,"
 	]));
 	/**Mail événement**/
-	tabTextType.push(new EventTextType("Invitation ateler", ["BFC", "GE"],"Mail", "Atelier", "NQT - Invitation atelier :",[
+	tabTextType.push(new EventTextType("Invitation atelier", ["BFC", "GE"],"Mail", "Atelier", "NQT - Invitation atelier :",[
 		"Chers NQTéens 📣","br",
 		"br", 
 		"Pour compléter votre mentorat, nous avons mis en place un atelier à distance organisé par l’équipe NQT Est qui saura, je l’espère, répondre à vos attentes et à vos questions !","br",
@@ -657,5 +771,21 @@ function setTextType() {
 		"En cas de désistement, merci de m’en informer au plus vite !","br",
 		"br",
 		"Bien Cordialement,"
+	]));
+	/**Mail sourcing**/
+	tabTextType.push(new SourcingTextType("Premier contact France Travail", ["BFC", "GE"], "Mail", "Sourcing", "NQT - Présentation l'association NQT, pour l'insertion professionnel des jeunes diplômés", [
+		"Bonjour ","ADTitle"," ","ADLastName",",","br",
+		"br",
+		"Je suis ","PMFirstName"," ","PMLastName",","," ","PMWork"," pour l’association NQT. En quelques mots, j’accueille et accompagne les jeunes diplômés et les mentors dans notre association.","br",
+		"br",
+		"Je vous contacte dans le but de présenter l'association et nos services d’insertion à vous et vos collaborateurs. Ou, si vous nous connaissez déjà, faire un point sur notre relation avec votre agence.","br",
+		"br",
+		"La mission de NQT est d’accompagner les jeunes (moins de 31 ans) diplômés (au minimum bac+3 validé) dans leur projet professionnel : recherche de stage, d’alternance, d’emploi ou même création d’entreprise. Le cœur de notre accompagnement est le mentorat avec des professionnels en activité, collaborateurs des entreprises adhérentes à l’association.","br",
+		"br",
+		"Pour les actions, je peux vous proposer d’abord de rencontrer les collaborateurs de votre agence et présenter en détail nos services. Nous pourrions mettre en place un système de prescription et accompagner les jeunes que vos agents trouvent pertinent. Enfin, en fonction du nombre de jeunes concernés, nous pouvons mettre en place une information collective dans votre agence ou en visio.","br",
+		"br",
+		"Si notre association vous intéresse, ou pour tout complément d’information, je suis à votre entière disposition et à celle de vos équipes.","br",
+		"br",
+		"Bien à vous,"
 	]));
 }

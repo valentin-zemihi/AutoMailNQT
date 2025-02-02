@@ -41,7 +41,7 @@ textarea {
     flex: 1;
     min-width: 7.5%;
     max-width: 7.5%;
-    height: calc(100vh - 7vh);
+    min-height: calc(100vh - 7vh);
     padding-left: 0.5rem;
     background-color: #3367cd;
 }
