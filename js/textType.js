@@ -582,16 +582,29 @@ function setTextType() {
 		"br",
 		"Bien à vous,","br"
 	]));
-	tabTextType.push(new TextType("Première proposition mentorat", "Mentor", ["BFC"], "Mail","Proposition mentorat", "NQT - Propositon mentorat - ", [
+	tabTextType.push(new TextType("Affectation mentorat - Avec information", "Mentor", ["BFC"], "Mail", "Mise en mentorat", "NQT - Confirmation mentorat", [
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
-		"Pour votre première proposition, j'ai le plaisir de vous proposer l'accompagnement de :",
+		"Dans le cadre de notre nouvelle organisation, nous simplifions le processus de mise en relation pour permettre des échanges plus fluides. Désormais, nous transmettons directement vos coordonnées aux jeunes dont votre accompagnement peut lui être bénéfique.","br",
+		"br", 
+		"Je vous confirme l’accompagnement de ","startStrong","YGTitle"," ","YGFirstName"," ","YGLastName","endTag"," dans le cadre du mentorat NQT.","br",
+		"startStrong","Vous trouverez son CV en pièce jointe.","endTag","br",
+		"br",
+		"YGPP"," a reçu votre mail et doit prendre contact avec vous pour se présenter et solliciter un premier rendez-vous pour poser le diagnostic de sa recherche ","YGSearchAP",".","br",
+		"br", 
+		"Je reste à votre entière disposition. N’hésitez pas à me contacter en cas de difficulté ou si vous ne vous sentez pas en capacité d'accompagner ce jeune, nous interviendrons rapidement pour vous apporter une solution.","br",
+		"br",
+		"Bien à vous"
+	]));
+	tabTextType.push(new TextType("Première proposition mentorat", "Mentor", ["BFC"], "Mail", "Mise en mentorat", "NQT - Propositon mentorat - ", [
+		"Bonjour ","MTitle"," ","MLastName",",","br",
+		"br",
+		"Pour votre première proposition, j'ai le plaisir de vous proposer l'accompagnement de :","br",
 		"YGTitle"," ","YGFirstName"," ","YGLastName"," : ","YGPres","br",
 		"Vous pouvez découvrir son CV joint à cet e-mail.","br",
 		"br",
-		"br",
-		"nextIdea",2,"YGIdea","br",
-		"br",
+		"nextIdea",3,"YGIdea","br","br",
+
 		"Pour information, il vous est possible de refuser un mentorat, c'est vous qui avez le dernier mot.","br",
 		"En cas d'accord, je transmettrai votre adresse mail à ","YGFirstName"," qui prendra contact avec vous pour se présenter et solliciter un premier entretien.","br",
 		"br",
@@ -601,34 +614,34 @@ function setTextType() {
 		"Dans l'attente de votre réponse, je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
 	]));
-	tabTextType.push(new TextType("Proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Proposition mentorat - ",[
+	tabTextType.push(new TextType("Proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Mise en mentorat", "NQT - Proposition mentorat - ",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
-		"Pour votre mentorat NQT, je souhaite vous proposer l'accompagnement de :","br",
+		"Je souhaite vous proposer l'accompagnement de :","br",
 		"YGTitle"," ","YGFirstName"," ","YGLastName"," : ","YGPres","br",
 		"nextCV",2,"Vous pouvez découvrir son CV joint à cet e-mail.","br",
 		"br",
-		"nextIdea",2,"YGIdea","br",
-		"br",
+		"nextIdea",3,"YGIdea","br","br",
+		
 		"Si vous êtes d'accord pour accompagner ","YGFirstName",", je lui transfère votre adresse mail. Il prendra ensuite contact avec vous pour se présenter et planifier un premier entretien.","br",
 		"br",
 		"Je reste bien-sûr à votre entière disposition.","br",
 		"Bien cordialement,"
 	]));
-	tabTextType.push(new TextType("Relance proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Proposition mentorat", "NQT - Relance proposition mentorat -",[
+	tabTextType.push(new TextType("Relance proposition mentorat", "Mentor", ["BFC", "GE"], "Mail", "Mise en mentorat", "NQT - Relance proposition mentorat -",[
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"Je me permets de vous relancer concernant la proposition de mentorat avec ","YGFirstName"," ","YGLastName",".","br",
 		"nextCV",2,"Vous pouvez découvrir à nouveau son CV joint à cet e-mail.","br",
 		"br",
-		"nextIdea",2,"YGIdea","br",
-		"br",
+		"nextIdea",3,"YGIdea","br","br",
+		
 		"Si vous êtes d'accord pour accompagner ","YGFirstName",", je lui transfère votre adresse mail. Il prendra ensuite contact avec vous pour se présenter et planifier un premier entretien.","br",
 		"br",
 		"Dans l'attente de votre retour, je reste à votre entière disposition.","br",
 		"Bien à vous,"
 	]));
-	tabTextType.push(new TextType("Annulation proposition mentorat", "Mentor", ["BFC"], "Mail", "Proposition mentorat", "NQT - Annulation proposition mentorat + Passage en pause", [
+	tabTextType.push(new TextType("Annulation proposition mentorat", "Mentor", ["BFC"], "Mail", "Mise en mentorat", "NQT - Annulation proposition mentorat + Passage en pause", [
 		"Bonjour ","MTitle"," ","MLastName",",","br",
 		"br",
 		"En l'absence de réponse, je retire ma proposition d'accompagner ","YGFirstName"," ","YGLastName",".","br",

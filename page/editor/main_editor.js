@@ -198,9 +198,7 @@ function writeTxt() {
 					deNB -= 1 ;
 					break ;
 				case "next" :
-					if (!document.getElementById(tabKeyElem[idElmKey].id+"Y").checked) {
-						i += tabText[i+1] ;
-					}
+					if (!document.getElementById(tabKeyElem[idElmKey].id+"Y").checked) {i += tabText[i+1] ;}
 					i++ ;
 					break ;
 				case "if" :

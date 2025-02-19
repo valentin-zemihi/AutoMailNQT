@@ -1,6 +1,11 @@
 /*---CSS par balise---*/
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 textarea {
-    min-width: 100vh;
+    min-width: 75vw;
     min-height: 1vh;
 }
 
@@ -33,27 +38,27 @@ textarea {
 
     /*---Main---*/
 #main {
+    flex-grow: 1;
+
     margin: 0px;
     display: flex;
 }
 
 #zoneSideMenu {
-    flex: 1;
-    min-width: 7.5%;
-    max-width: 7.5%;
-    min-height: calc(100vh - 7vh);
-    padding-left: 0.5rem;
+    width: 10vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
     background-color: #3367cd;
 }
 
 #zoneEditor {
-    margin: 1rem;
+    padding: 1rem;
     width: 100%;
 }
 
 #zoneForm {
     margin-bottom: 2rem ;
-    padding: 5px;
+    padding: 0.5rem;
 
     border: black solid 1px;
 }
