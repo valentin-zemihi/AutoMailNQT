@@ -1,60 +1,27 @@
+/*---A trier---*/
 /*---CSS par balise---*/
 body {
     display: flex;
     flex-direction: column;
 }
 
+#main {
+    display: flex;
+    flex-grow: 1;
+}
+
+
 textarea {
     min-width: 75vw;
     min-height: 1vh;
 }
 
-/*---CSS par class---*/
-.folderSideMenu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.folderTitle {
-    text-align: left ;
-
-    font-size: 0.75rem;
-    color: white;
-}
-
-.categoryTitle {
-    font-size: 0.75rem;
-
-    color: white;
-}
-
-.btnSideMenu {
-    padding: 0.25rem;
-
-    font-size: 0.75rem;
-}
-
 /*--CSS par ID--*/
 
     /*---Main---*/
-#main {
-    flex-grow: 1;
+#zoneTitleEditor {font-weight: bold;}
 
-    margin: 0px;
-    display: flex;
-}
-
-#zoneSideMenu {
-    width: 10vw;
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
-    background-color: #3367cd;
-}
-
-#zoneEditor {
-    padding: 1rem;
-    width: 100%;
-}
+#zoneUpdate {font-size: 0.75rem;}
 
 #zoneForm {
     margin-bottom: 2rem ;

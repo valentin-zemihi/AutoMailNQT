@@ -1,102 +1,63 @@
-/*--CSS par balise--*/
-body {
-    margin: 0px ;
+:root {
+    --main_blue : #3367CD ;
+    --light_blue : #DBEAFE ;
+    --flash_blue : #2563EB ;
+    --alert_red : #DC2626 ;
+    --main_grey : #F2F2F2 ;
+    --dark_grey : #F9FAFB ;
 
-    font-size: 12px ;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-    height: 100vh;
+    --amethyst : #884da7 ;
+    --amethystLight : #a27ab7 ;
 }
 
-button {
-    margin : 0.25rem;
+/*---Reset---*/
+body, h1, h2, h3, h4, p, ul, div {margin: unset;}
 
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top : 0.5rem;
-    padding-bottom : 0.5rem;
-
-    background-color: #3367cd;
-    
-    border: none;
-    border-radius: 0.25rem;
-
-    cursor: pointer;
-    
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
+html {
+    font-size: 16px;
+    font-family:system-ui,/* prise en charge CSS Fonts Level 4 */-apple-system,/* macOS / iOS Safari */BlinkMacSystemFont,/* macOS Chrome */"Segoe UI",/* Windows */Roboto,/* Android / Chrome OS */Oxygen-Sans,/* KDE */Ubuntu,/* Ubuntu */Cantarell,/* GNOME */"Helvetica Neue",/* vieilles versions macOS */Helvetica, Arial,/* fallbacks */sans-serif;/* generic fallback */
 }
-button:hover {background-color: #7291ce;}
+
+body {height: 100vh;}
 
 h1 {
-    margin: 0px;
-
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
 }
 
 h2 {
-    margin: 0;
-    margin-top: 0.25rem;
-    
+    margin-top: 0.5rem;
     padding-left: 1rem;
-
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: normal;
 }
 
-p {margin: 0;}
-
-span {background-color: yellow;}
-
-ul {margin: 0px;}
-
-/*--CSS par class--*/
-.hide {
-    display: none !important;
+h3 {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
 }
 
-.btn-header {
-    margin: 0px;
-    padding: 0.5rem 0.5rem;
-    font-size: 1rem;
-}
+.hidden {display: none !important ;}
 
-.btn-white {
-    background-color: white;
-
-    color: #3367cd;
-}
-.btn-white:hover {
-    background-color: #ffffffCA;
-}
-
-.btn-orange {
-    margin-left: auto;
-    background-color: #fc9d19;
-}
-.btn-orange:hover {
-    background-color: #fc9d19CA;
-}
+/**---En révision---**/
 
 .listBut {
     display: flex ;
     margin-right: 5px;
-    flex-direction: column ;
 }
 
-.butTexType {
-    width: 100%;
-}
+.highlight {background-color: yellow;}
+.highlightError {background-color: red;}
+.highlightNext {background-color:  turquoise;}
 
-/*--CSS par ID--*/
-#header {
-    background-color: #3367cd;
+.hide {display: none !important;}
 
+    /*CSS Entête*/
+header {
+    display: flex;
+    background-color: var(--main_blue);
     padding: 1vh 1vw;
-
     color: white ;
 }
 
@@ -114,12 +75,106 @@ ul {margin: 0px;}
     border-left: white solid 0.25rem;
 }
 
-#main {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    /*CSS SideMenu*/
+#zoneSideMenu {
+    flex-shrink: 0 ;
+    width: 10vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    background-color: #3367cd;
+
+    color: white;
 }
 
-#pathBtn {
-    position: absolute;
-    top : 30px;
+.infoSideMenu {font-size: 0.5rem;}
+
+.folderSideMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sideMenuListBtn {flex-direction: column;}
+
+.sideMenuTitle {font-size: 0.7rem;}
+
+.btnSideMenu {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+}
+
+    /*CSS Zone Editor*/
+#zoneEditor {padding: 1rem;}
+
+    /*CSS Bouton*/
+button {
+    margin : 0.25rem;
+
+    padding: 0.5rem 1rem;
+
+    background-color: #3367cd;
+    
+    border: none;
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+    
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+button:hover {background-color: #7291ce;}
+
+.btn-white {
+    background-color: white;
+    color: #3367cd;
+}
+.btn-white:hover {background-color: #ffffffCA;}
+
+.btn-orange {background-color: #fc9d19;}
+.btn-orange:hover {background-color: #fc9d19CA;}
+
+.btn-inactive {background-color: var(--amethyst);} 
+.btn-inactive:hover {background-color: var(--amethystLight);}
+
+.btn-left {margin-left: auto;}
+
+.btn-Ltl {
+    display: flex ;
+
+    width: 1vw;
+    height: 1rem;
+
+    justify-content: center;
+    align-items:  center;
+    text-align: center;
+
+    margin: 0.25vh 0.25vw;
+    padding: unset;
+
+    font-size: 1rem;
+}
+
+    /*CSS majPerso*/
+.majPerso {background-color: #1fa055;}
+.majPerso:hover{background-color: #237646;}
+span.majPerso{
+    font-weight: bold;
+    color: white;
+}
+
+    /*CSS WIP*/
+.WIP {background-color: #e0115f}
+.WIP:hover {background-color: #a31e50;}
+span.WIP{
+    font-weight: bold;
+    color: white;
+}
+
+
+.higlInactive  {background-color: var(--amethyst)}
+.higlInactive :hover {background-color: var(--amethystLight);}
+span.higlInactive {
+    font-weight: bold;
+    color: white;
 }

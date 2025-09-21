@@ -1,5 +1,7 @@
 /*Gender : true = femme, false = homme*/
+var activeVersion = 1.0 ;
 var activeText = 0 ;
+var testVersion = true ;
 
 function writePMOption() {
 	var ec ; //Element créé
@@ -166,17 +168,37 @@ function setPMOption(userSelect) {
 	writeButtonList() ;
 }
 
-function cleanLocalStorage() {
-	localStorage.clear() ;
+function activeZoneUpload() {
+	var ed = $("#zoneUpload") ;
+	var ec = createHTMLInput("fichier", null, "fichier", "file", null, null) ;
+	ed.empty() ;
+	ed.append(ec) ;
+	ec = createHTMLElement("button", null, "btn-header btn-white", "readFile()", "Lire fichier") ;
+	ed.append(ec) ;
+}
+
+function actionTxtFile(txtFile) {updateTextTypeFromFile(txtFile)}
+
+function cleanLocalStorage() {localStorage.clear() ;}
+
+function resetTextType() {
+	setDefaultTextType() ;
+	localStorage.setItem("tabTextType", null) ;
 }
 
 /*-----Fonction de navigation-----*/
-function goToEditor(idTTT) {
-    window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;
-}
-
 function goToWelcome() {window.location = "../../index.html" ;}
+function goToLibrary(from, user) {
+	if (user != null) {
+		if (user == "newUser") {activeUser = createNewUser() ;}
+		else {activeUser = listUser[user] ;}
+		localStorage.setItem("activeUser", JSON.stringify(activeUser)) ;
+	}
+	window.location = from+"page/library/library.html" ;
+}
+function goToEditor(idTTT) {window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;}
 function goToPath(from) {window.location = from+"page/path/path.html";}
+function goToEditorTextType(from, sourcePage) {window.location = from+"page/editorTextType/editorTextType.html?sourcePage="+encodeURIComponent(sourcePage);}
 
 /*-----Fontion outil d'ajout d'élément HTML-----*/
 /**
@@ -234,10 +256,8 @@ function addLinkButton(id, style, txt, link, idMother) {
 	return ec ;
 }
 
-
 /*-----Fonction outil-----*/
-/*Fonction qui copie un texte riche en paramètre
-*/
+/*Fonction qui copie un texte riche en paramètre*/
 function copyFromIdToClip(divId) {
 	// Sélectionnez l'élément div par son ID
 	const divToCopy = document.getElementById(divId);
@@ -257,34 +277,25 @@ function copyFromIdToClip(divId) {
 	window.getSelection().removeAllRanges();
 }
 
-/**isInTab(e, t)
- * Fonction : cherche l'élément e dans le tableau t
- * @param {*} e : élément
- * @param {*} t : tableau
- * return : true/false selon la présence de l'élément
- */
-function isInTab(e, t) {
-	var isIn = false ;
-	var ite = 0 ;
-	while (!isIn && ite < t.length) {
-		if (t[ite] == e) {
-			isIn = true ;
-		}
-		ite++ ;
-	}
-
-	return isIn ;
-}
-
 /**
  * Vérifie si l'objet est le tableau t
  * @param {*} t = tableau
  * @param {*} o = objet
  */
-function isInTabKeyElm(t, o) {
+function isInTabByID(t, o) {
 	var isIn = false ;
 	for (let k = 0; k < t.length; k++) {
 		if(t[k].id == o.id ) {isIn = true ;}
 	}
 	return isIn ;
+}
+
+function showHide(id) {$("#"+id).toggleClass("hide") ;}
+
+function showHideSideBtn(id) {
+	showHide("zoneBtn"+id) ;
+
+	var etm = $("#btnZone"+id) ;
+	if (etm.text() == "+") {etm.text("-") ;}
+	else {etm.text("+") ;}
 }

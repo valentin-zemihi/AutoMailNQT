@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="style_editor.css">
 
     <!--JS-->
+        <!--JS Tools-->
+    <script src="../../js/tools/jquery-3.7.1.min.js"></script>
+    <script src="../../js/tools/toolsCreateHTML.js"></script>
+    <script src="../../js/tools/toolsArray.js"></script>
+    <script src="../../js/tools/toolsSave.js"></script>
         <!--JS Class-->
     <script src="../../js/keyElem.js"></script>
     <script src="../../js/textType.js"></script>
@@ -23,18 +28,23 @@
     <script src="main_editor.js"></script>
 </head>
 <body id="body">
-    <div id="header">
-        <div id="zoneActiveUser">
-            <a href="../library/library.html"><button id="backButt" class="btn-header btn-white" onclick="null">Liste</button></a>
-            <div id="infoActiveUser"></div>
-            <button class="btn-header btn-white" onclick="goToWelcome()">Changer d'utilisateur</button>
+    <header>
+        <a href="../library/library.html"><button id="backButt" class="btn-header btn-white" onclick="null">Liste</button></a>
+        <div id="infoActiveUser"></div>
+        <button id="btnChangeUser" class="btn-header btn-white" onclick="goToWelcome()">Changer d'utilisateur</button>
+        <div class="btn-left">
+            <button class="btn-header btn-white" onclick="saveTextType()">Sauvegarder Texte Type</button>
             <button class="btn-header btn-orange" onclick="goToPath('../../')">Parcous NQT</button>
         </div>
-    </div>
+    </header>
     <div id="main">
         <div id="zoneSideMenu">
+            <div class="infoSideMenu"><em>*Les boutons en<span class="WIP"> rouge </span>sont pour les Textes Types non à jour de la version <span id="spanActiveVersion"></span>.</em></div>
+            <div class="infoSideMenu"><em>*Les boutons en<span class="majPerso"> vert </span>sont pour les Textes Types que vous avez mis à jour.</em></div>
         </div>
         <div id="zoneEditor">
+            <div id="zoneTitleEditor"></div>
+            <div id="zoneUpdate"></div>
             <div id="zoneForm"></div>
             <div id="zoneObj"></div>
             <div id="zoneBtnCopyObj">

@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="style_index.css">
 
 	<!--JS-->
+		<!--JS Tools-->
+    <script src="js/tools/jquery-3.7.1.min.js"></script>
+    <script src="js/tools/toolsCreateHTML.js"></script>
+	<script src="js/tools/toolsSave.js"></script>
+	<script src="js/tools/toolsArray.js"></script>
 		<!--JS Class-->
 	<script src="js/keyElem.js"></script>
 	<script src="js/textType.js"></script>
@@ -19,11 +24,12 @@
 	<script src="js/main.js"></script>
 		<!--JS Page-->
 	<script src="main_index.js"></script>
+	
 </head>
 <body>
 	<button id="cleanBtn" class="btn-white" onclick="cleanLocalStorage()">Vider Localstorage</button>
-	<button id="showUpdateBtn" class="btn-white" onclick="showUpdateInfo()">Voir update</button>
-	<div id="zoneUpdateInfo">
+	<button id="showUpdateBtn" class="btn-white" onclick="showHide('zoneUpdateInfo')">Voir update</button>
+	<div id="zoneUpdateInfo" class="">
 		<div id="zoneEleUpdate">
 			<div id="zoneUpdateTitle"><h1 class="titleUpdate">Information dernière mise à jour</h1></div>
 			<div id="zoneUpdateTexte">
@@ -34,6 +40,64 @@
 					<p>Le scrip des appels et des messages vocaux pour les actions d'appels sont aussi disponible.</p>
 				</div>
 				<br>-->
+				<div><h2>02/06/2025 - Mise à jour V1.0</h2>
+					<p>L'éditeur de message entre dans sa version 1.0 grâce à l'arrivée trois fonctionnalités : 
+						<ul>
+							<li>L'édition des Textes Types ;</li>
+							<li>La sauvegarde des Textes Types localement ;</li>
+							<li>La sauvegarde et le chargement des Textes Types dans un fichier externe.</li>
+						</ul>
+					</p>
+					<p>Ces nouvelles fonctionnalités permettent beaucoup plus d'autonomie de l'utilisateur dans l'usage du site internet, par la personnalisation des Textes Types et l'ajout de nouveau.</p>
+					<h3>***Nouvelle fonctionnalité*** Editeur de message type</h3>
+					<strong>Une page "Editeur de texte type" est maintenant disponible !</strong>
+					<p>Cette page permet d'éditer directement dans le navigateur les messages types.</p>
+					<p>Les Textes Types édités apparaissent en<span class="majPerso"> vert </span>.</p>
+					<h3>***Nouvelle fonctionnalité*** Sauvegarde de Texte Type</h3>
+					<h4>Sauvegarde local</h4>
+					<ul>
+						<li>Les Textes Types sont désormais sauvegardés dans votre navigateur via la fonctionnalité Localstorage.</li>
+						<li>Vous pouvez éditer un Texte Type via l'éditeur et le retrouver imédiatement à jour dans votre bibliothèque.</li>
+						<li>Attention, il est important de sauvegarder ces textes avant vider le Localstorage via le bouton dans l'accueil ou avant une mise à jour du site. Ces deux actions réinitialisent le Localstorage avec les valeurs par défauts.</li>
+					</ul>
+					<h4>Sauvegarde dans un fichier</h4>
+					<ul>
+						<li>Les Textes Types peuvent être désormais sauvegardés dans des fichiers .txt que vous pouvez enregistrer localement sur votre ordinateur.</li>
+						<li>Le site charge automatiquement les Textes Types par défaut, mais vous pouvez aussi importer un fichier .txt que vous avez précédemment sauvegardé.</li>
+						<li>Due à cette refonte de sauvegarde, la manière de manipuler les Textes Types ont aussi changer. Le changement est principalement dans le programme et non dans l'affichage, mais il peut y avoir des anomalies.</li>
+					</ul>
+					<h3>⚠️Important - Mes à jour complète des des Textes Types</h3>
+					<em>Les Textes Types ne sont pas tous à jour et peuvent comporter des erreurs.</em>
+					<h4>Version des Textes Types</h4>
+					<ul>
+						<li>Chaque Texte Type comporte désormais une version de mise à jour, ce qui permet de suivre facilement son évolution.</li>
+						<li>Les Textes Types non à jour par rapport à la version actuelle apparaissent en<span class="WIP"> rouge </span>: ils restent accessibles, mais peuvent comporter erreurs.</li>
+					</ul>
+					<h4>Mise à jour des KeyElem</h4>
+					<p>Les parties du textes ouvert à l'édition sont identifiables par des mots clés, appelé KeyElem. La nouvelle fonctionnalité de sauvegarde et d'édition de texte ont conduit à des mise à jours de ses KeyElem.</p>
+					<ul>
+						<li>Les KeyElem pour faire de la mise en page fonctionne desormais comme les balise HTML avec un startTag et un  commun : exemple startStrong et endStrong pour &lt;strong> &lt;/strong> ;</li>
+					</ul>
+					<h3>Amélioration du design et de l'expérience utilisateur</h3>
+					<h4>Mise à jour des fichiers CSS</h4>
+					<p>Tri, correction et mise à jour des fichiers CSS.</p>
+				</div>
+				<div class="separatorUpdate"></div>
+				<div><h2>16/04/2025 - Mise à jour Beta V0.10</h2>
+					<h3>Ajout de texte type</h3>
+					<ul>
+						<li>Ajout du texte type SMS Jeune : Suivi mentorat - Relance ;</li>
+						<li>Ajout du texte type Mail Mentor : Vérification premier contact ;</li>
+						<li>Ajout du texte type Mail Mentor : Vérification premier contact - Relance ;</li>
+						<li>Ajout du texte type Mail Mentor : Suivi mentorat de masse - Relance ;</li>
+					</ul>
+					<h3>Modification de texte type</h3>
+					<ul>
+						<li>Modification du texte type SMS Jeune : Suivi mentorat -> Modification du texte ;</li>
+						<li>Modification du texte type SMS Jeune : Suivi mentorat - Dernière relance -> Modification du texte et renommage en Suivi mentorat - Ultimatum ;</li>
+						<li>Modification du texte type Mail Mentore : Suivi mentorat individualisé -> Modification du texte ;</li>
+					</ul>
+				</div>
 				<div><h2>19/02/2025 - Mise à jour Beta V0.9</h2>
 					<h3>Ajout d'utilisateur</h3>
 					<ul>
@@ -185,14 +249,14 @@
 					<p>*Les nouvelles fonctionnalités utilisent la sauvegarde locale permise par Localstorage pour conserver des informations lors de l'utilisation du site.</p>
 				</div>
 			</div>
-			<button id="okUpdateInfo" onclick="hideUpdateInfo()">Compris !</button>
+			<button id="okUpdateInfo" onclick="setToDefault()">Compris !</button>
 		</div>
 	</div>
 	<div id="main" class="welcomeBody">
 		<div id="zoneWelcome">
 			<div id="zoneTitle"><h1 class="welcomeTitle">Editeur de message NQT</h1></div>
 			<div id="zoneSelectUser">
-				<div id="zoneGuide">
+				<div id="zoneGuide" class="textCenter">
 					<p>Bienvenue !</p>
 					<p>Pour utiliser l'éditeur de message type, veuillez sélectioner ou ajouter votre profil.</p>
 				</div>
@@ -230,8 +294,12 @@
 						<option value="GE">Grand-Est</option>
 					</select>
 					<br>
-					<button class="btn-white" onclick="goToLibrary('newUser')">Enregistrer un nouvel utilisateur</button>
+					<button class="btn-white" onclick="goToLibrary('','newUser')">Enregistrer un nouvel utilisateur</button>
 				</div>
+			</div>
+			<div id="menuSeparator"></div>
+			<div id="zoneEditeurTextType">
+				<button class="btn-white btn-left" onclick="goToEditorTextType('','welcome')">Éditer les textes types</button>
 			</div>
 		</div>
 	</div>

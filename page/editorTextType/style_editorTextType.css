@@ -1,0 +1,40 @@
+/*---CSS de balise HTML---*/
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+h1 {
+	text-align: left;
+	font-size: 1rem ;
+}
+
+h2 {
+	margin: unset;
+	font-weight: bold;
+}
+
+/*---CSS ID---*/
+#main {
+	display: flex;
+	flex-grow: 1;
+}
+
+#zoneEditorForm {
+	margin-bottom: 1vh;
+	border: 1px solid black;
+	padding: 1rem;
+}
+
+#zoneVersion {font-size: 0.75rem;}
+
+.btnForm {
+	margin: unset ;
+	padding: 0.5vh 0.5vw ;
+	font-size: 0.75rem;
+}
+
+#zoneTextType {
+	width: 100%;
+	height: 50vh;
+}

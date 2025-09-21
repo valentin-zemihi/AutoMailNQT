@@ -36,7 +36,7 @@ window.onload = function () {
 	ed.appendChild(document.createTextNode(activeUser.firstName+" "+activeUser.lastName)) ;
 
     setKeyElemList() ;
-    setTextType() ;
+    setDefaultTextType() ;
 
     canvas = document.getElementById("canPath") ;
     if (canvas) {

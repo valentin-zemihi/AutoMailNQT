@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Éditeur BDD - NQT Editeur de texte type</title>
+
+	<!--CSS-->
+		<!--CSS principal-->
+	<link rel="stylesheet" href="../../css/style.css">
+		<!--CSS Page-->
+	<link rel="stylesheet" href="style_editorTextType.css">
+
+	<!--JS-->
+		<!--JS Tools-->
+	<script src="../../js/tools/jquery-3.7.1.min.js"></script>
+	<script src="../../js/tools/toolsCreateHTML.js"></script>
+	<script src="../../js/tools/toolsArray.js"></script>
+	<script src="../../js/tools/toolsSave.js"></script>
+		<!--JS Class-->
+	<script src="../../js/keyElem.js"></script>
+	<script src="../../js/textType.js"></script>
+	<script src="../../js/users.js"></script>
+		<!--JS Pricnipale-->
+	<script src="../../js/main.js"></script>
+		<!--JS Page-->
+	<script src="main_editorTextType.js"></script>
+</head>
+<body id="body">
+	<header>
+		<div id="zoneButtBack"></div>
+		<div id="zoneUpload">
+			<button class="btn-header btn-white" onclick="activeZoneUpload()">Charger un fichier</button>
+		</div>
+		<div class="btn-left">
+			<button class="btn-header btn-white" onclick="saveTextType()">Sauvegarder Texte Type</button>
+			<button class="btn-header btn-orange" onclick="goToPath('../../')">Parcous NQT</button>
+		</div>
+	</header>
+	<div id="main">
+		<div id="zoneSideMenu">
+			<div class="infoSideMenu"><em>*Les boutons en<span class="WIP"> rouge </span>sont pour les Textes Types non à jour de la version <span id="spanActiveVersion"></span>.</em></div>
+			<div class="infoSideMenu"><em>*Les boutons en<span class="majPerso"> vert </span>sont pour les Textes Types que vous avez mis à jour.</em></div>
+		</div>
+		<div id="zoneEditor">
+			<h1 id="zoneTitleEditor">Aucun Texte Type n'est sélectionné</h1>
+			<p id="zoneVersion"></p>
+			<div id="zoneEditorForm">
+				<h2>Editeur</h2>
+				<label for="titleTT">Titre Texte Type : </label><input id="titleTT" type="text">
+				<br>
+				<label for="typeTT">Type Texte Type : </label>
+				<select name="typeTT" id="typeTT">
+					<option value="SMS">SMS</option>
+					<option value="Mail">Mail</option>
+				</select>
+				<br>
+				<label for="categoryTT">Catégorie Texte Type : </label><input id="categoryTT" type="text">
+				<br>
+				<label for="subCategoryTT">Sous-Catégorie Texte Type : </label><input id="subCategoryTT" type="text">
+				<br>
+				<label for="labelTT">Bouton Texte Type : </label><input id="labelTT" type="text">
+				<br>
+				<button class="btnForm" onclick="modifyTextTypeInfo()">Enregistrer les modifications</button>
+				<br>
+				<br>
+				<h2>Modificateur de texte</h2>
+				<label for="keyElemSelector">Sélectionnez le KeyElem à ajouter : </label>
+				<select name="keyElemSelector" id="keyElemSelector">
+					<option value="">--Liste des KeyElem--</option>
+				</select>
+				<br>
+				<button class="btnForm" onclick="addKeyElemInTxt()">Ajouter le KeyElem</button>
+			</div>
+			<textarea name="zoneTextType" id="zoneTextType"><--Sélectionner le Texte Type</textarea>
+			<button onclick="saveNewText()">Enregistrer le texte</button>
+			<h1>Texte édité :</h1>
+			<div id="zoneText"></div>
+			<br>
+			<h1>Texte pour JavaScript :</h1>
+			<div id="zoneTextForJS"></div>
+		</div>
+	</div>
+</body>
+</html>
