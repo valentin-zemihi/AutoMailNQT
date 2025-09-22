@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Éditeur - NQT Message Type</title>
+
+    <!--CSS-->
+        <!--CSS principal-->
+	<link rel="stylesheet" href="../../css/style.css">
+        <!--CSS Page-->
+	<link rel="stylesheet" href="style_editor.css">
+
+    <!--JS-->
+        <!--JS Class-->
+    <script src="../../js/keyElem.js"></script>
+    <script src="../../js/textType.js"></script>
+    <script src="../../js/users.js"></script>
+        <!--JS Pricnipale-->
+    <script src="../../js/main.js"></script>
+        <!--JS Page-->
+    <script src="main_editor.js"></script>
+</head>
+<body id="body">
+    <div id="header">
+        <div id="zoneActiveUser">
+            <a href="../library/library.html"><button id="backButt" class="btn-header btn-white" onclick="null">Liste</button></a>
+            <div id="infoActiveUser"></div>
+            <button class="btn-header btn-white" onclick="goToWelcome()">Changer d'utilisateur</button>
+            <button class="btn-header btn-orange" onclick="goToPath('../../')">Parcous NQT</button>
+        </div>
+    </div>
+    <div id="main">
+        <div id="zoneSideMenu">
+        </div>
+        <div id="zoneEditor">
+            <div id="zoneForm"></div>
+            <div id="zoneObj"></div>
+            <div id="zoneBtnCopyObj">
+                <button id="copyTxt" onclick="copyFromIdToClip('zoneObj')">Copier l'objet</button>
+            </div>
+            <div id="zoneTxt"></div>
+            <div id="zoneBtnCopyTxt">
+                <button id="copyTxt" onclick="copyFromIdToClip('copyText')">Copier le texte</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,7 +1,5 @@
 /*Gender : true = femme, false = homme*/
-var activeVersion = 1.0 ;
 var activeText = 0 ;
-var testVersion = true ;
 
 function writePMOption() {
 	var ec ; //Element créé
@@ -168,78 +166,17 @@ function setPMOption(userSelect) {
 	writeButtonList() ;
 }
 
-function activeZoneUpload() {
-	var ed = $("#zoneUpload") ;
-	var ec = createHTMLInput("fichier", null, "fichier", "file", null, null) ;
-	ed.empty() ;
-	ed.append(ec) ;
-	ec = createHTMLElement("button", null, "btn-header btn-white", "readFile()", "Lire fichier") ;
-	ed.append(ec) ;
-}
-
-function actionTxtFile(txtFile) {updateTextTypeFromFile(txtFile)}
-
-function cleanLocalStorage() {localStorage.clear() ;}
-
-function resetTextType() {
-	setDefaultTextType() ;
-	localStorage.setItem("tabTextType", null) ;
-}
-
-/*-----Fonction d'écriture d'élément HTML-----*/
-function writeSideMenu() {
-    //--Déclaration des variables lié à la manipulation HTML
-	var ec ; //Elément crée
-    var ecs ; //Elément crée second
-    var ed ; //Elément de destination
-    var eds ; //Elément de destination second
-    var ided ; //ID élément de destination
-    var ideds ; //ID élément de destination second
-
-	for (let i = 0; i < tabTextType.length; i++) {
-		ided = "zone"+tabTextType[i].getFolder() ;
-		ed = $("#"+ided) ;
-		if (ed.length==0) {
-			let folderName = tabTextType[i].getFolder() ;
-			ec = createHTMLElement("div", "zone"+folderName, null, null, null) ;
-			ecs = createHTMLElement("div", "zoneTitle"+folderName, "folderSideMenu", null, null) ;
-			ecs.append(createHTMLElement("button", "btnZone"+folderName, "btn-white btnSideMenu", "showHideSideBtn('"+folderName+"')", "+")) ;
-			ecs.append(createHTMLElement("h1", null, "sideMenuTitle", null, folderName)) ;
-			ec.append(ecs) ;
-			ec.append(createHTMLElement("div", "zoneBtn"+folderName, "hide", null, null)) ;
-			$("#zoneSideMenu").append(ec) ;
-		}
-
-		ided = "zoneBtn"+tabTextType[i].getFolder() ;
-		ed = $("#"+ided) ;
-		ideds = ided+"-"+tabTextType[i].getCategoryFolder() ;
-		eds = $("#"+ideds) ;
-		if (eds.length==0) {
-			ec = createHTMLElement("div", ideds, "listBut sideMenuListBtn", null, null) ;
-			ec.append(createHTMLElement("h2", null, "sideMenuTitle", null, tabTextType[i].category)) ;
-			ed.append(ec) ;
-			eds = $("#"+ideds) ;
-		}
-
-		tempClass = tabTextType[i].getClassBtn() ;
-		if (tempClass == "") tempClass = "btn-white" ;
-		eds.append(createHTMLElement("button", tabTextType[i].type+""+i, "btnSideMenu "+tempClass, "writeTxt('"+i+"')", tabTextType[i].name)) ;
-	}
+function cleanLocalStorage() {
+	localStorage.clear() ;
 }
 
 /*-----Fonction de navigation-----*/
-function goToWelcome() {window.location = "../../index.html" ;}
-function goToLibrary(from, user) {
-	if (user != null) {
-		if (user == "newUser") {activeUser = createNewUser() ;}
-		else {activeUser = listUser[user] ;}
-		localStorage.setItem("activeUser", JSON.stringify(activeUser)) ;
-	}
-	window.location = from+"page/library/library.html" ;
+function goToEditor(idTTT) {
+    window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;
 }
-function goToEditor(idTTT) {window.location = "../editor/editor.html?idTTT="+encodeURIComponent(idTTT) ;}
+
+function goToWelcome() {window.location = "../../index.html" ;}
 function goToPath(from) {window.location = from+"page/path/path.html";}
-function goToEditorTextType(from, sourcePage) {window.location = from+"page/editorTextType/editorTextType.html?sourcePage="+encodeURIComponent(sourcePage);}
 
 /*-----Fontion outil d'ajout d'élément HTML-----*/
 /**
@@ -297,8 +234,10 @@ function addLinkButton(id, style, txt, link, idMother) {
 	return ec ;
 }
 
+
 /*-----Fonction outil-----*/
-/*Fonction qui copie un texte riche en paramètre*/
+/*Fonction qui copie un texte riche en paramètre
+*/
 function copyFromIdToClip(divId) {
 	// Sélectionnez l'élément div par son ID
 	const divToCopy = document.getElementById(divId);
@@ -318,25 +257,34 @@ function copyFromIdToClip(divId) {
 	window.getSelection().removeAllRanges();
 }
 
+/**isInTab(e, t)
+ * Fonction : cherche l'élément e dans le tableau t
+ * @param {*} e : élément
+ * @param {*} t : tableau
+ * return : true/false selon la présence de l'élément
+ */
+function isInTab(e, t) {
+	var isIn = false ;
+	var ite = 0 ;
+	while (!isIn && ite < t.length) {
+		if (t[ite] == e) {
+			isIn = true ;
+		}
+		ite++ ;
+	}
+
+	return isIn ;
+}
+
 /**
  * Vérifie si l'objet est le tableau t
  * @param {*} t = tableau
  * @param {*} o = objet
  */
-function isInTabByID(t, o) {
+function isInTabKeyElm(t, o) {
 	var isIn = false ;
 	for (let k = 0; k < t.length; k++) {
 		if(t[k].id == o.id ) {isIn = true ;}
 	}
 	return isIn ;
-}
-
-function showHide(id) {$("#"+id).toggleClass("hide") ;}
-
-function showHideSideBtn(id) {
-	showHide("zoneBtn"+id) ;
-
-	var etm = $("#btnZone"+id) ;
-	if (etm.text() == "+") {etm.text("-") ;}
-	else {etm.text("+") ;}
 }

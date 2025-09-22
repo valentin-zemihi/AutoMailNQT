@@ -51,7 +51,7 @@ function writeLibrary() {
                     tempClass = " backB" ;
                     useBackB = false    
                 } else {useBackB = true ;}
-                ec = createHTMLElement("h1", null, "titleFolder", null, tabTextType[i].getFolder()) ;
+                ec = createHTMLElement("h1", null, "titleFolder"+tempClass, null, tabTextType[i].getFolder()) ;
                 ec.prepend(createHTMLButton(`btnVisibilty${tabTextType[i].getFolder()}`, "btn-Ltl btnBlue btn-orange", `setDivVisibilityByButt("btnVisibilty${tabTextType[i].getFolder()}", "zone${tabTextType[i].getFolder()}", null)`, null, "-")) ;
                 $("#zoneLibrary").append(ec) ;
                 $("#zoneLibrary").append(createHTMLElement("div", `zone${tabTextType[i].getFolder()}`, "folder"+tempClass, null, null)) ;

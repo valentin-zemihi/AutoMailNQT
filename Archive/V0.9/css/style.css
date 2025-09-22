@@ -1,0 +1,125 @@
+/*--CSS par balise--*/
+body {
+    margin: 0px ;
+
+    font-size: 12px ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    height: 100vh;
+}
+
+button {
+    margin : 0.25rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top : 0.5rem;
+    padding-bottom : 0.5rem;
+
+    background-color: #3367cd;
+    
+    border: none;
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+    
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+button:hover {background-color: #7291ce;}
+
+h1 {
+    margin: 0px;
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    margin-top: 0.25rem;
+    
+    padding-left: 1rem;
+
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+p {margin: 0;}
+
+span {background-color: yellow;}
+
+ul {margin: 0px;}
+
+/*--CSS par class--*/
+.hide {
+    display: none !important;
+}
+
+.btn-header {
+    margin: 0px;
+    padding: 0.5rem 0.5rem;
+    font-size: 1rem;
+}
+
+.btn-white {
+    background-color: white;
+
+    color: #3367cd;
+}
+.btn-white:hover {
+    background-color: #ffffffCA;
+}
+
+.btn-orange {
+    margin-left: auto;
+    background-color: #fc9d19;
+}
+.btn-orange:hover {
+    background-color: #fc9d19CA;
+}
+
+.listBut {
+    display: flex ;
+    margin-right: 5px;
+    flex-direction: column ;
+}
+
+.butTexType {
+    width: 100%;
+}
+
+/*--CSS par ID--*/
+#header {
+    background-color: #3367cd;
+
+    padding: 1vh 1vw;
+
+    color: white ;
+}
+
+#zoneActiveUser {display: flex;}
+
+#infoActiveUser {
+    display: flex;
+    align-items: center;
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    padding-left: 1rem;
+
+    border-left: white solid 0.25rem;
+}
+
+#main {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#pathBtn {
+    position: absolute;
+    top : 30px;
+}

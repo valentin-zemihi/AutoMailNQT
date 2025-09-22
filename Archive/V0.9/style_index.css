@@ -1,0 +1,120 @@
+/*CSS Update Info*/
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#zoneUpdateInfo {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    background-color: #00000080;
+}
+
+#zoneEleUpdate {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 50vw ;
+    max-height: 50vh;
+
+    padding: 1rem;
+
+    background-color: white;
+
+    border: #3367cd solid 1rem;
+    border-radius: 1rem;
+}
+
+#zoneUpdateTexte {
+    overflow-y: scroll;
+    margin-bottom: 1rem;
+}
+
+.titleUpdate {
+    color: black;
+}
+
+.wip {
+    font-style: italic;
+}
+
+/*CSS Welcome*/
+/*Main Index*/.welcomeBody {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0px !important ;
+
+    background-color: #3367cd;
+}
+
+.welcomeTitle {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    border-bottom: white solid 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#zoneWelcome {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border: white solid 1rem;
+    border-radius: 1rem;
+
+    padding: 2rem;
+
+    color: white;
+}
+
+#zoneSelectUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#zonePreSetUser {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/*CSS showUpdateBtn*/
+#showUpdateBtn {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    margin: 0px;
+    padding: 0.25rem;
+
+    font-size: 0.5rem;
+}
+
+/*CSS CleanButt*/
+#cleanBtn {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    margin: 0px;
+    padding: 0.25rem;
+
+    font-size: 0.5rem;
+}

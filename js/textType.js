@@ -193,7 +193,7 @@ function setDefaultTextType() {
 	tabTextType.push(new TextType("Préscription - Relance", "Jeune", ["BFC", "GE"], "SMS", "Préscription", "Préscription", "Ultimatum (2/2)", null,
 		"Bonjour <YGFirstName>,<startBR>Je fais suite à mon précédent message au sujet du mentorat NQT.<startBR>Si notre accompagnement vous intéresse, rendez-vous sur nqt.fr pour plus d’infos ou pour vous inscrire.<startBR>Pour toute question, je reste disponible par SMS, appel ou mail à <PMMail>.<startBR>Au plaisir d’échanger avec vous !<startBR><PMSignSMS>"
 	,1.0));
-	tabTextType.push(new TextType("Relance - Doit s'inscrire", "Jeune", ["BFC", "GE"], "SMS", "Préscription", "Doit s'inscrire", "Relance", null, 
+	tabTextType.push(new TextType("Doit s'inscrire - Relance", "Jeune", ["BFC", "GE"], "SMS", "Préscription", "Doit s'inscrire", "Relance", null, 
 		"Bonjour <YGFirstName>,<startBR>Je me permets de vous relancer concernant l'accompagnement NQT. Si notre dispositif vous intéresse, vous pouvez découvrir plus d'informations, ou vous inscrire, sur nqt.fr.<startBR>Je reste à votre disposition pour toute question, dont par mail à <PMMail>.<startBR>Au plaisir de vous accompagner !<startBR><PMSignSMS>"
 	,1.0));
 	tabTextType.push(new TextType("Finalisation inscription - Post-événement", "Jeune", ["BFC", "GE"], "SMS", "Inscription", "Post-événement", "Post-événement", null, 
@@ -231,7 +231,7 @@ function setDefaultTextType() {
 		"J'ai potentiellement un mentor NQT pour t'accompagner dans ta recherche, mais j’aurais besoin de ton CV pour te présenter. Pourrais-tu me l’envoyer à ","PMMail"," ?","startBR",
 		"Bonne journée à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Suivi attente mentorat - Contact", "Jeune", ["BFC", "GE"], "SMS", "Suivi attente mentorat", "Suivi attente mentorat", "Contact (1/3)", null,
 		"Bonjour <YGFirstName>,<startBR>Je reviens vers toi pour faire le point sur l'avancée de ton projet professionnel.<startBR>As-tu identifié des postes intéressants et passé quelques entretiens récemment ?<startBR><nextSoonM>J’ai d’ailleurs proposé à un mentor de t’accompagner dans ta recherche et j’espère pouvoir te donner une réponse positive très bientôt.<startBR><endNext>Dans l'attente de ton retour, bien à toi,<startBR><PMSignSMS>"
 	,1.0));
@@ -247,20 +247,20 @@ function setDefaultTextType() {
 		"Le but de ce premier contact est de te présenter et de solliciter un rendez-vous avec ","MPPT",".","startBR",
 		"Bon accompagnement à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Vérification premier contact - Contact", "Jeune", ["BFC", "GE"], "SMS", "Mise en mentorat", "Vérficaition premier contact", "Contact (1/2)", null, [
 		"Bonjour ","YGFirstName",",","startBR",
 		"Suite à mon précédent message t’informant ta mise en relation avec un mentor, as-tu eu le temps de le contacter pour te présenter ?","startBR",
 		"Bien à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Vérification premier contact - Ultimatum", "Jeune", ["BFC", "GE"], "SMS", "Mise en mentorat", "Vérficaition premier contact", "Ultimatum (2/2)", null, [
 		"Bonjour ","YGFirstName",",","startBR",
 		"Suite à mon précédent message, je te contacte pour savoir si tu as bien envoyé ton premier mail à ","MAD2"," mentor","MGender",". En l'absence de réponse positive avant le ","closingDate",", je serais contraint de rompre le mentorat et de clôturer ton compte.","startBR",
 		"Pour le moindre souci, je suis à ton entière disposition.","startBR",
 		"Bien à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Suivi mentorat - Contact", "Jeune", ["BFC", "GE"], "SMS", "Suivi mentorat", "Suivi mentorat", "Contact (1/3)", null, [
 		"Bonjour ","YGFirstName",",","startBR",
 		"Suite à mon message vocal, je te contacte aujourd’hui pour faire le point sur ton mentorat :","startBR",
@@ -268,7 +268,7 @@ function setDefaultTextType() {
 		"N’hésite pas à m’indiquer tes disponibilités pour un appel.","startBR",
 		"Bien à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Suivi mentorat - Relance", "Jeune", ["BFC", "GE"], "SMS", "Suivi mentorat", "Suivi mentorat", "Relance (2/3)", null, [
 		"Bonjour ","YGFirstName",",","startBR",
 		"Suite à mon message vocal, je te relance pour faire le point sur ton mentorat :","startBR",
@@ -276,7 +276,7 @@ function setDefaultTextType() {
 		"Quand seras-tu disponible pour un appel de suivi ?","startBR",
 		"Bien à toi,","startBR",
 		"PMSignSMS"
-	],0.13));
+	],null));
 	tabTextType.push(new TextType("Suivi mentorat - Ultimatum", "Jeune", ["BFC", "GE"], "SMS", "Suivi mentorat", "Suivi mentorat", "Ultimatum (3/3)", null,[
 		"Bonjour ","YGFirstName",",","startBR",
 		"Suite à mon message vocal, je suis toujours dans l'attente de ton suivi mentorat NQT :","startBR",
@@ -285,26 +285,11 @@ function setDefaultTextType() {
 		"Merci de ta compréhension,","startBR",
 		"Bien à toi.","startBR",
 		"PMSignSMS"
-	],0.13));
-	/**Mail jeune**/
-	tabTextType.push(new TextType("Dossier non éligible", "Jeune", ["BFC", "GE"], "Mail", "Non éligible", "Mail sortie", "Mail sortie", "NQT - Dossier non éligible", [
-		"Bonjour ","YGTitle"," ","YGLastName",",","startBR",
-		"startBR",
-		"Je fais suite à votre inscription chez NQT.","startBR",
-		"startBR",
-		"Après analyse de votre dossier, il s'avère que vous ne remplissez pas les critères d'éligibilité pour intégrer notre dispositif d'accompagnement.","startBR",
-		"startBR",
-		"Néanmoins, vous trouverez ci-dessous le nom de deux autres associations vers lesquelles vous pouvez vous tourner : ","startBR",
-		"startUL",
-		"startLI","Solidarités Nouvelles face au Chômage (SNC) : qui propose un service mentorat ouvert à tous;","startBR","endLI",
-		"startLI","Association Pour l'Emploi des Cadres (APEC) : qui accompagne les jeunes cadres | https://www.apec.fr/","startBR","endLI",
-		"endUL","startBR",
-		"Si vous souhaitez en savoir plus, n'hésitez pas à me contacter. Je reste à votre disposition pour vous répondre et si vous avez besoin de conseils dans votre projet professionnel.","startBR",
-		"startBR",
-		"Merci de votre compréhension.","startBR",
-		"startBR",
-		"Bien cordialement,"
 	],null));
+	/**Mail jeune**/
+	tabTextType.push(new TextType("Dossier non éligible", "Jeune", ["BFC", "GE"], "Mail", "Non éligible", "Mail sortie", "Mail sortie", "NQT - Dossier non éligible",
+		"Bonjour <YGTitle> <YGLastName>,<startBR><startBR>Je fais suite à votre inscription chez NQT.<startBR><startBR>Après analyse de votre dossier, il s'avère que vous ne remplissez pas les critères d'éligibilité pour intégrer notre dispositif d'accompagnement.<startBR><startBR>Néanmoins, vous trouverez ci-dessous le nom de deux autres associations vers lesquelles vous pouvez vous tourner : <startBR><startUL><startLI>Solidarités Nouvelles face au Chômage (SNC) : qui propose un service mentorat ouvert à tous;<startBR><endLI><startLI>Association Pour l'Emploi des Cadres (APEC) : qui accompagne les jeunes cadres | https://www.apec.fr/<startBR><endLI><endUL><startBR>Si vous souhaitez en savoir plus, n'hésitez pas à me contacter. Je reste à votre disposition pour vous répondre et si vous avez besoin de conseils dans votre projet professionnel.<startBR><startBR>Merci de votre compréhension.<startBR><startBR>Bien cordialement,"
+	,0.13));
 	tabTextType.push(new TextType("Finalisation inscription - Contact", "Jeune", ["BFC", "GE"], "Mail", "Inscription", "Inscription", "Contact (1/2)", "NQT - Finalisation procédure d'inscription", [
 		"Bonjour ","YGTitle"," ","YGLastName",",","startBR",
 		"startBR",

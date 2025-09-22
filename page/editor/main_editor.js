@@ -21,54 +21,10 @@ window.onload = function () {
 
 	if (activeText.versionUpdate != null) $("#zoneUpdate").text(`Texte Type à jour de la version : ${activeText.versionUpdate}`) ;
 
-	writeSide() ;
+	writeSideMenu() ;
     writeForm() ;
 	writeObj() ;
     writeTxt() ;
-}
-
-function writeSide() {
-	//--Déclaration des variables lié à la manipulation HTML
-	var ec ; //Elément crée
-    var ecs ; //Elément crée second
-    var ed ; //Elément de destination
-    var eds ; //Elément de destination second
-    var ided ; //ID élément de destination
-    var ideds ; //ID élément de destination second
-	
-	var tempClass ;
-
-	for (let i = 0; i < tabTextType.length; i++) {
-		if (isInTabByAttr(tabTextType[i].region, activeUser.shortRegion, null)) {
-			ided = "zone"+tabTextType[i].getFolder() ;
-			ed = $("#"+ided) ;
-			if (ed.length==0) {
-				let folderName = tabTextType[i].getFolder() ;
-				ec = createHTMLElement("div", "zone"+folderName, null, null, null) ;
-				ecs = createHTMLElement("div", "zoneTitle"+folderName, "folderSideMenu", null, null) ;
-				ecs.append(createHTMLElement("button", "btnZone"+folderName, "btn-white btnSideMenu", "showHideSideBtn('"+folderName+"')", "+")) ;
-				ecs.append(createHTMLElement("h1", null, "sideMenuTitle", null, folderName)) ;
-				ec.append(ecs) ;
-				ec.append(createHTMLElement("div", "zoneBtn"+folderName, "hide", null, null)) ;
-				$("#zoneSideMenu").append(ec) ;
-			}
-
-			ided = "zoneBtn"+tabTextType[i].getFolder() ;
-			ed = $("#"+ided) ;
-			ideds = ided+"-"+tabTextType[i].getCategoryFolder() ;
-			eds = $("#"+ideds) ;
-			if (eds.length==0) {
-				ec = createHTMLElement("div", ideds, "listBut sideMenuListBtn", null, null) ;
-				ec.append(createHTMLElement("h2", null, "sideMenuTitle", null, tabTextType[i].category)) ;
-				ed.append(ec) ;
-				eds = $("#"+ideds) ;
-			}
-
-			tempClass = tabTextType[i].getClassBtn() ;
-			if (tempClass == "") tempClass = "btn-white" ;
-			eds.append(createHTMLElement("button", tabTextType[i].type+""+i, "btnSideMenu "+tempClass, "goToEditor('"+i+"')", tabTextType[i].name)) ;
-		}
-	}
 }
 
 function writeForm() {

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Accueil - NQT Message Type</title>
+
+	<!--CSS-->
+		<!--CSS principal-->
+	<link rel="stylesheet" href="css/style.css">
+		<!--CSS page-->
+	<link rel="stylesheet" href="style_index.css">
+
+	<!--JS-->
+		<!--JS Class-->
+	<script src="js/keyElem.js"></script>
+	<script src="js/textType.js"></script>
+	<script src="js/users.js"></script>
+		<!--JS Pricnipal-->
+	<script src="js/main.js"></script>
+		<!--JS Page-->
+	<script src="main_index.js"></script>
+</head>
+<body>
+	<button id="cleanBtn" class="btn-white" onclick="cleanLocalStorage()">Vider Localstorage</button>
+	<button id="showUpdateBtn" class="btn-white" onclick="showUpdateInfo()">Voir update</button>
+	<div id="zoneUpdateInfo">
+		<div id="zoneEleUpdate">
+			<div id="zoneUpdateTitle"><h1 class="titleUpdate">Information dernière mise à jour</h1></div>
+			<div id="zoneUpdateTexte">
+				<!--<div><h2>XX/XX/XXXX - Mise à jour Beta V0.X</h2>
+					<h3>***Nouvelle fonctionnalité*** Parcours NQT</h3>
+					<strong>Une page "Parcours NQT" est disponible !</strong>
+					<p>Cette page contient les schémas du parcours du jeune et du mentor chez NQT. En lien avec la bibliothèque de message type, elle permet d'associer chaque message à une étape dans le parcour de NQT.</p>
+					<p>Le scrip des appels et des messages vocaux pour les actions d'appels sont aussi disponible.</p>
+				</div>
+				<br>-->
+				<div><h2>19/02/2025 - Mise à jour Beta V0.9</h2>
+					<h3>Ajout d'utilisateur</h3>
+					<ul>
+						<li>Ajout des utilisateurs : Solène L. et Hugo P.</li>
+					</ul>
+					<h3>Ajout de texte type</h3>
+					<ul>
+						<li>Ajout du texte type Mail Mentor : Affectation mentorat - Avec information ;</li>
+					</ul>
+					<h3>Modification de texte type</h3>
+					<ul>
+						<li>Modification du texte type Mail Mentor : Première proposition mentorat -> Modification du texte ;</li>
+						<li>Modification du texte type Mail Mentor : Proposition mentorat -> Modification du texte ;</li>
+						<li>Modification du texte type Mail Mentor : Relance proposition mentorat -> Modification du texte ;</li>
+					</ul>
+					<h3>Correctif mineur</h3>
+					<ul>
+						<li>Correction du CSS pour un menu sur le côté dans l'éditeur plus propre ;</li>
+					</ul>
+				</div>
+				<br>
+				<div><h2>02/02/2025 - Mise à jour Beta V0.8</h2>
+					<h3>Amélioration des éléments clés</h3>
+					<ul>
+						<li>Ajout de l'élément clé : YGSerchAP pour ajouter un article partitif (de, d') à la recherche du jeune (stage, alternance, emploi) ;</li>
+						<li>Ajoute des éléments clés liés au directeur d'agence (AD, Agency director) : ADFirstName (Prénom), ADLastName (Nom), ADTitle (M/Mme) ;</li>
+					</ul>
+					<h3>Ajout de texte type</h3>
+					<ul>
+						<li>Ajout du texte type SMS Jeune : Finalisation inscription - Post événement ;</li>
+						<li>Ajout du texte type SMS Jeune : Examen dossier - Bug ;</li>
+						<li>Ajout du texte type SMS Jeune : Reprise de contact ;</li>
+						<li>Ajout du texte type SMS Jeune : Relance - Suivi attente mentorat ;</li>
+						<li>Ajout du texte type SMS Jeune du Grand-Est : Vérification premier contact - J+15 ;</li>
+						<li>Ajout du texte type Mail Jeune : Dossier validé - Après examen éligibilité ;</li>
+						<li>Ajout du texte type Mail Mentor : Point engagement - En pause ;</li>
+						<li>Ajout du texte type Mail Mentor : Première proposition mentorat ;</li>
+						<li>Ajout du texte type Mail Mentor : Annulation proposition mentorat ;</li>
+						<li>Ajout du texte type Mail Sourcing : Premier contact France Travail ;</li>
+					</ul>
+					<h3>Modification de texte type</h3>
+					<ul>
+						<li>Modification du texte type SMS Jeune : Examen dossier - Non éligible -> Modification du nom, de la catégorie et du texte ;</li>
+						<li>Modification du texte type SMS Jeune : Dernière relance finalisation inscription -> Changement du mail par l'élément clé PMMail ;</li>
+						<li>Modification du texte type SMS Jeune : Suivi attente mentorat -> Modification du texte, correction d'élément clé ;</li>
+						<li>Modification du texte type SMS Jeune : Suivi attente mentorat - Mentor potentiel -> Modification du texte, correction d'élément clé ;</li>
+						<li>Modification du texte type SMS Jeune : Suivi attente mentorat - Mentor autonome -> Modification du texte, correction d'élément clé ;</li>
+						<li>Modification du texte type Mail Jeune du GE : Dossier validé -> Modification du texte ;</li>
+						<li>Modification du texte type Mail Jeune de BFC : Dossier validé -> Modification du texte ;</li>
+						<li>Modification du texte type Mail Mentor : Proposition mentorat -> Modification du texte ;</li>
+						<li>Modification du texte type Mail Mentor : Relance proposition mentorat -> Modification du texte ;</li>
+					</ul>
+				</div>
+				<br>
+				<div><h2>09/09/2024 - Mise à jour Beta V0.7</h2>
+					<h3>[WIP]***Nouvelle fonctionnalité*** Parcours NQT</h3>
+					<p class="wip">Fonctionnalité encore en développement</p>
+					<strong>Une page "Parcours NQT" est disponible !</strong>
+					<p>Cette page contient les schémas du parcours du jeune et du mentor chez NQT. En lien avec la bibliothèque de message type, elle permet d'associer chaque message à une étape dans le parcour de NQT.</p>
+					<p>Le scrip des appels et des messages vocaux pour les actions d'appels sont aussi disponible.</p>
+					<h3>Amélioration</h3>
+					<p>Ajout de texte type</p>
+					<ul>
+						<strong>SMS Jeune</strong>
+						<li>Relance - Doit s'inscrire</li>
+						<li>Demande de CV pour proposition mentorat</li>
+						<li>Suivi attente mentorat</li>
+						<li>Suivi attente mentorat - Mentor potentiel</li>
+						<li>Suivi attente mentorat - Mentor autonome</li>
+						<li>Confirmation mentorat</li>
+						<li>Vérification premier contact</li>
+						<li>Vérification premier contact - Dernière relance</li>
+						<li>Suivi mentorat - Après appel</li>
+					</ul>
+					<ul>
+						<strong>Mail Jeune</strong>
+						<li>Suivi attente mentorat</li>
+					</ul>
+					<ul>
+						<strong>Mail Mentor</strong>
+						<li>Proposition mentorat - Relance</li>
+					</ul>
+					<br>
+					<p>Amélioration de texte</p>
+					<ul>
+						<strong>Mail Jeune</strong>
+						<li>Dossier validé - BFC</li>
+					</ul>
+					<br>
+					<p>Ajout d'utilisateur</p>
+					<ul>
+						<li>Ajoute de l'utilisateur Danielle-Ange</li>
+					</ul>
+					<p>Amélioration des utilisateurs</p>
+					<ul>
+						<li>Ajout du mail de l'utilisateur</li>
+					</ul>
+				</div>
+				<br>
+				<div><h2>10/04/2024 - Mise à jour Beta V0.6.1</h2>
+					<ul>
+						<li>Correction utilisateur Laure D.</li>
+						<li>Ajout des utilisateur Olivier P. et Wahiba R.</li>
+					</ul>
+					<p>Correction des messages types :</p>
+					<ul>
+						<li>Réécrtiture SMS de presciption</li>
+						<li>Réécrtiture SMS Relance de presciption</li>
+						<li>Ajout du Mail Suivi mentorat individualisé pour les jeunes et les mentors</li>
+					</ul>
+				</div>
+				<br>
+				<div><h2>04/03/2024 - Mise à jour Beta V0.6</h2>
+					<p>Pour cette version 0.6, l'expérience utilisateur a été complètement améliorée avec l'ajout de nouvelles fonctionnalités : page d'accueil avec les dernières informations, amélioration des éléments utilisateur, organisation des textes types, amélioration de la page éditeur.</p>
+					<br>
+					<p>La liste des principales nouvelles fonctionnalités :</p>
+					<ul>
+						<strong>Page d'accueil</strong>
+						<li>Encart mise à jour : informe les modifications apportées au site internet ;</li>
+						<li>Ajout d'une page d'accueil : permet de sélectioner ou ajouter un profil utilisateur avant de passer à la liste de message type.</li>
+						<br>
+						<strong>Page bibliothèque</strong>
+						<li>Ajout en-tête utilisateur : zone au dessus de la page où est affiché l'utilisateur actif, un bouton "Retour pour retourner à la page précédente et un bouton pour changer d'utilisateur ;</li>
+						<li>Classement des textes : les textes types ont été classés dans différents dossiers et sous-dossiers. Chaque dossier est associé à un public et un média, ou à un événement. Les sous-dossiers sont associés à une raison ;</li>
+						<li>Filtre par région : les textes affichés sont filtrés selon la région de l'utilisateur.</li>
+						<br>
+						<strong>Page éditeur</strong>
+						<li>Ajout d'un menu sur le côté : permet de changer de texte depuis l'éditeur ;</li>
+						<li>Ajout d'objet de mail : pour les mails, l'objet est écrit au dessus du texte et un bouton permet de le copier ;</li>
+						<li>Case à cocher : amélioration de certaine intéraction dans le formulaire d'écriture de texte avec des cases à cocher ;</li>
+						<li>Champs de texte plus grand : amélioration du champs de texte pour certaine demande de texte long.</li>
+					</ul>
+					<br>
+					<p>Correction des messages types :</p>
+					<ul>
+						<li>SMS de presciption : "Pole emploi" -> "France Travail".</li>
+					</ul>
+					<br>
+					<p>Mise à jour mineur :</p>
+					<ul>
+						<li>Dans la page d'accueil :
+							<ul>
+								<li>Bouton "Voir update" : permet d'afficher l'encart avec les dernières mise à jour ;</li>
+								<li>Bouton "Vider Localstorage" : permet de vider le Localstorage*.</li>
+							</ul>
+						</li>
+					</ul>
+					<br>
+					<p>*Les nouvelles fonctionnalités utilisent la sauvegarde locale permise par Localstorage pour conserver des informations lors de l'utilisation du site.</p>
+				</div>
+			</div>
+			<button id="okUpdateInfo" onclick="hideUpdateInfo()">Compris !</button>
+		</div>
+	</div>
+	<div id="main" class="welcomeBody">
+		<div id="zoneWelcome">
+			<div id="zoneTitle"><h1 class="welcomeTitle">Editeur de message NQT</h1></div>
+			<div id="zoneSelectUser">
+				<div id="zoneGuide">
+					<p>Bienvenue !</p>
+					<p>Pour utiliser l'éditeur de message type, veuillez sélectioner ou ajouter votre profil.</p>
+				</div>
+				<div id="zonePreSetUser">
+					<p><u>Sélectionez un utilisateur :</u></p>
+				</div>
+				<div id="zoneNewUser">
+					<p><u>Ajoutez un utilisateur :</u></p>
+					<label for="firstNameUser" class="welcomeLabel">Prénom :</label>
+					<input id="firstNameUser" name="firstNameUser" type="text" value="Valentin">
+					<br>
+					<label for="lastNameUser" class="welcomeLabel">Nom :</label>
+					<input id="lastNameUser" name="lastNameUser" type="text" value="ZEMIHI">
+					<br>
+					<label for="genderUser">Genre :</label>
+					<select id="genderUser" name="genderUser">
+						<option value="M">Homme</option>
+						<option value="F">Femme</option>
+					</select>
+					<br>
+					<label for="workUser" class="welcomeLabel">Poste :</label>
+					<select id="workUser" name="workUser">
+						<option value="Chargé de mission">Chargé de mission</option>
+						<option value="Coordinateur sourcing">Coordinateur sourcing</option>
+						<option value="Attaché territorial">Attaché territorial</option>
+						<option value="Délégué régional">Délégué régional</option>
+					</select>
+					<br>
+					<label for="mailUser" class="welcomeLabel">Mail :</label>
+					<input id="mailUser" name="mailUser" type="text" value="v.zemihi@nqt.fr">
+					<br>
+					<label for="regionUser" class="welcomeLabel">Région :</label>
+					<select id="regionUser" name="regionUser">
+						<option value="BFC">Bourgogne Franche-Comté</option>
+						<option value="GE">Grand-Est</option>
+					</select>
+					<br>
+					<button class="btn-white" onclick="goToLibrary('newUser')">Enregistrer un nouvel utilisateur</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
