@@ -66,9 +66,9 @@
  */
 
 class KeyElem {
-    //Name category et content sont lié au KeyElem
+    //Name category sont lié au KeyElem
     //id, type, label et exemple sont les informations utiles pour la partie formulaire
-    constructor (name, category, id, type, label, exemple) {
+    constructor (name, category, id, type, label, exemple, use) {
         this.name = name ;
         this.category = category ;
 
@@ -77,6 +77,9 @@ class KeyElem {
         this.type = type ;
         this.label = label ;
         this.exemple = exemple ;
+
+        //---Information de classement
+        this.use = use ;
     }
 
     writeInputMode () {
@@ -189,9 +192,21 @@ class KeyElem {
                 if($("#"+this.id+"F").is(':checked')) val = "e" ;
                 else val = "" ;
                 break ;
-            case "title" :
+            case "title":
                 if($("#"+this.id+"F").is(':checked')) val = "Mme" ;
                 else val = "M" ;
+                break ;
+            case "ton.ta":
+            case "le.la":
+            case "lui.elle":
+            case "il.elle":
+                temp = this.category.split(".") ;
+                if($("#"+this.id+"F").is(':checked')) val = temp[1] ;
+                else val = temp[0] ;
+                break ;
+            case "low.text" :
+                temp = $("#"+this.id).val() ;
+                val = temp.charAt(0).toLowerCase() + temp.slice(1) ;
                 break ;
             case "de.des":
                 temp = $("#"+this.id).val() ;
@@ -199,9 +214,15 @@ class KeyElem {
                 if (/^[aeiouyàâäéèêëîïôöùûüÿ]/i.test(temp)) val = "d'"+temp ;
                 else val = "de "+temp ;
                 break ;
-            case "next" :
+            case "next":
                 if($("#"+this.id).is(':checked')) val = true ;
                 else val = false ;
+                break ;
+            case "apec":
+                temp = $(`#${this.id}`).val() ;
+                temp = getIdTabInTabByAttr(apecGE, temp, null) ;
+                if (temp != null) val = apecGE[temp+1] ;
+                else val = null ;
                 break ;
             default:
                 console.log(`Erreur valeur switch : ${this.category} n'est pas paramètré par dans getValue() de la class KeyElem dans keyElem.js`)
@@ -235,6 +256,8 @@ class KeyElem {
     getToPrint() {
         var txtToPrint = "" ;
 
+        var temp ;
+
         switch (this.type) {
             case "text":
             case "gender" :
@@ -252,11 +275,11 @@ class KeyElem {
                     case "detail":
                         txtToPrint = `<span class="highlight">[e]</span>` ;
                         break ;
+                    case "lui.elle":
                     case "ton.ta":
-                        txtToPrint = `<span class="highlight">[ton/ta]</span>` ;
-                        break ;
                     case "il.elle":
-                        txtToPrint = `<span class="highlight">[il/elle]</span>` ;
+                        temp = this.category.split(".") ;
+                        txtToPrint = `<span class="highlight">[${temp[0]}/${temp[1]}]</span>` ;
                         break ;
                     case "eurice":
                         txtToPrint = `<span class="highlight">[eur.rice]</span>` ;
@@ -351,7 +374,10 @@ class KeyElem {
                 txtToOption = `</${this.tag}> : `+"Fin de la balise HTML "+this.tag ;
                 break ;
             case "next":
-                txtToOption = `<span> : `+"Début de balise span si : "+this.label+"(fonctionne avec endSpan)" ;
+                txtToOption = `<${this.name}> : Début de balise next si : ${this.label} (fonctionne avec endNext)"` ;
+                break ;
+            case "endNext":
+                txtToOption = `<endNext> : Fin de la balise HTML ${this.tag}` ;
                 break ;
             case "if":
                 if (this.name == "ifYGSearchJob") txtToOption = `<span> : `+"Début de balise span si le travail du jeune est Emploi (fonctionne avec endSpan)" ;
@@ -363,11 +389,39 @@ class KeyElem {
         }
         return txtToOption ;
     }
+
+    get useTitle() {
+        switch (this.use) {
+            case "pmInfo" :
+                return "Information CM" ;
+            case "ygInfo" :
+                return "Information JD" ;
+            case "mInfo" :
+                return "Information Mentor" ;
+            case "eventInfo" :
+                return "Information événement" ;
+            case "shareInfo" :
+                return "Information à partager" ;
+            case "dateInfo" :
+                return "Information de date" ;
+            case "adInfo" :
+                return "Information Sourcing" ;
+            case "nextTag" :
+                return "Balise Next" ;
+            case "ifTag" :
+                return "Balise Si" ;
+            case "layoutTag" :
+                return "Balise Mise en page" ;
+            default:
+                errorSwitch(this.use, "get useTitle()", "keyElem.js") ;
+                return this.use ;
+        }
+    }
 }
 
 class ConstElem extends KeyElem {
-    constructor (name, category, content, label) {
-        super(name, category, null,"const", label, null) ;
+    constructor (name, category, content, label, use) {
+        super(name, category, null,"const", label, null, use) ;
         this.content = content ;
     }
 
@@ -384,7 +438,7 @@ class ConstElem extends KeyElem {
             case "eurice" :
                 if(this.content) {value = "rice" ;}
                 else {value = "eur";}
-                break ;    
+                break ;
             default:
                 alert(this.category+" : cette category n'a pas été paramètrée pour getValue() de ConstElem.")
                 break;
@@ -397,8 +451,8 @@ class ConstElem extends KeyElem {
 }
 
 class TagElem extends KeyElem {
-    constructor (name, category, tag) {
-        super(name, category, null, "tag", null, null) ;
+    constructor (name, category, tag, use) {
+        super(name, category, null, "tag", null, null, use) ;
         this.tag = tag ;
     }
     
@@ -419,101 +473,106 @@ var tabKeyElem = [] ; //Tableau d'objet KeyElem
  * Pour la liste des éléments clés, voir le fichier keyElem.js
  */
 function setKeyElemList() {
-	//new KeyElem(name, category, content, id, type, label, exemple)
-	tabKeyElem.push(new ConstElem("PMFirstName", "text", activeUser.firstName, "Prénom de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMLastName", "text", activeUser.lastName, "Nom de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMWork", "text", activeUser.work, "Travail de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMRegion", "text", activeUser.region, "Région de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMGender", "detail", activeUser.gender, "Genre de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMGeurice", "eurice", activeUser.gender, "Genre de l'utilisateur"));
-	tabKeyElem.push(new ConstElem("PMSignSMS", "text", activeUser.sign, "Signature SMS de l'utilisateur"));
-    tabKeyElem.push(new ConstElem("PMMail", "text", activeUser.mail, "Mail de l'utilisateur"));
+    //new ConstElem(name, category, content, label)
+	tabKeyElem.push(new ConstElem("PMFirstName", "text", activeUser.firstName, "Prénom de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMLastName", "text", activeUser.lastName, "Nom de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMWork", "text", activeUser.work, "Travail de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMRegion", "text", activeUser.region, "Région de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMGender", "detail", activeUser.gender, "Genre de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMGeurice", "eurice", activeUser.gender, "Genre de l'utilisateur", "pmInfo"));
+	tabKeyElem.push(new ConstElem("PMSignSMS", "text", activeUser.sign, "Signature SMS de l'utilisateur", "pmInfo"));
+    tabKeyElem.push(new ConstElem("PMMail", "text", activeUser.mail, "Mail de l'utilisateur", "pmInfo"));
 
-	tabKeyElem.push(new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom"));
-	tabKeyElem.push(new KeyElem("YGLastName","text", "YGLastName", "text", "Nom du jeune", "Sawyer"));
-	tabKeyElem.push(new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null));
-	tabKeyElem.push(new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du jeune", null)); //PP pour Pronom Personnel
-	tabKeyElem.push(new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null));
-	tabKeyElem.push(new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50"));
-	tabKeyElem.push(new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
-	tabKeyElem.push(new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //Low pour en minuscule
-	tabKeyElem.push(new KeyElem("YGSearchAP", "de.des", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"])); //AP pour Article Partitif
-	tabKeyElem.push(new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux"));
-	tabKeyElem.push(new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)"));
-	tabKeyElem.push(new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)"));
+	//new KeyElem(name, category, id, type, label, exemple)
+	tabKeyElem.push(new KeyElem("YGFirstName", "text","YGFirstName", "text", "Prénom du jeune", "Tom", "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGLastName","text", "YGLastName", "text", "Nom du jeune", "Sawyer", "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGGender", "detail", "YGGender", "gender", "Genre du jeune", null, "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGPP", "il.elle", "YGGender", "gender", "Genre du jeune", null, "ygInfo")); //PP pour Pronom Personnel
+	tabKeyElem.push(new KeyElem("YGTitle", "title", "YGGender", "gender", "Genre du jeune", null, "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGDept", "dept", "YGDept", "text", "Département du jeune", "50", "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGSearch", "text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"], "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGSearchLow", "low.text", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"], "ygInfo")); //Low pour en minuscule
+	tabKeyElem.push(new KeyElem("YGSearchAP", "de.des", "YGSearch","list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"], "ygInfo")); //AP pour Article Partitif
+	tabKeyElem.push(new KeyElem("YGWork","text", "YGWork", "text", "Poste occupé par le jeune", "Vendeur de journaux", "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGPres", "text", "YGPres", "longText", "Présentation du jeune", "jeune orphelin préférant l'école buissonière. (Pensez au point final)", "ygInfo"));
+	tabKeyElem.push(new KeyElem("YGIdea", "text", "YGIdea", "longText", "Motivation de cette mise en relation", "Votre accompagnement lui permettrait de définir un projet professionnel où son envie d'aventure pourra librement s'exprimer. (Pensez au point final)", "ygInfo"));
 
-	tabKeyElem.push(new KeyElem("MFirstName","text", "MFirstName", "text", "Prénom du mentor", "Thomas"));
-	tabKeyElem.push(new KeyElem("MLastName","text", "MLastName", "text", "Nom du mentor", "Pesquet"));
-	tabKeyElem.push(new KeyElem("MGender", "detail", "MGender", "gender", "Genre du mentor", null));
-	tabKeyElem.push(new KeyElem("MTitle", "title", "MGender", "gender", "Genre du mentor", null));
-	tabKeyElem.push(new KeyElem("MMail", "text", "MMail", "text", "Mail du mentor", "thomas.pesquet@space.com"));
-	tabKeyElem.push(new KeyElem("MPP", "il.elle", "MGender", "gender", "Genre du mentor", null)); //PP pour Pronom Personnel
-	tabKeyElem.push(new KeyElem("MPPT", "lui.elle", "MGender", "gender", "Genre du mentor", null)); //PPT pour Pronom Personnel Tonique
-	tabKeyElem.push(new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre du mentor", null)); //AD2 pour Adjectif Possesif de la deuxième personne
-    tabKeyElem.push(new KeyElem("MPCOD", "le.la", "MGender", "gender", "Genre du mentor", null)); //PCOD pour Pronom Compléments d'objet direct
-	tabKeyElem.push(new KeyElem("MWork", "text", "MWork", "text", "Travail du mentor", "Spationaute"));
-    tabKeyElem.push(new KeyElem("MMultYG", "votre.vos", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
-    tabKeyElem.push(new KeyElem("MMultD", "details", "MMultYG", "next", "Accompagne plusieurs jeunes", null)) ;
+	tabKeyElem.push(new KeyElem("MFirstName","text", "MFirstName", "text", "Prénom du mentor", "Thomas", "mInfo"));
+	tabKeyElem.push(new KeyElem("MLastName","text", "MLastName", "text", "Nom du mentor", "Pesquet", "mInfo"));
+	tabKeyElem.push(new KeyElem("MGender", "detail", "MGender", "gender", "Genre du mentor", null, "mInfo"));
+	tabKeyElem.push(new KeyElem("MTitle", "title", "MGender", "gender", "Genre du mentor", null, "mInfo"));
+	tabKeyElem.push(new KeyElem("MMail", "text", "MMail", "text", "Mail du mentor", "thomas.pesquet@space.com", "mInfo"));
+	tabKeyElem.push(new KeyElem("MPP", "il.elle", "MGender", "gender", "Genre du mentor", null, "mInfo")); //PP pour Pronom Personnel
+	tabKeyElem.push(new KeyElem("MPPT", "lui.elle", "MGender", "gender", "Genre du mentor", null, "mInfo")); //PPT pour Pronom Personnel Tonique
+	tabKeyElem.push(new KeyElem("MAD2", "ton.ta", "MGender", "gender", "Genre du mentor", null, "mInfo")); //AD2 pour Adjectif Possesif de la deuxième personne
+    tabKeyElem.push(new KeyElem("MPCOD", "le.la", "MGender", "gender", "Genre du mentor", null, "mInfo")); //PCOD pour Pronom Compléments d'objet direct
+	tabKeyElem.push(new KeyElem("MWork", "text", "MWork", "text", "Travail du mentor", "Spationaute", "mInfo"));
+    tabKeyElem.push(new KeyElem("MMultYG", "votre.vos", "MMultYG", "next", "Accompagne plusieurs jeunes", null, "mInfo"));
+    tabKeyElem.push(new KeyElem("MMultD", "details", "MMultYG", "next", "Accompagne plusieurs jeunes", null, "mInfo"));
 
-	tabKeyElem.push(new KeyElem("EventName", "text", "EventName", "text", "Nom de l'événement","Séance de Prana-bindu"));
-	tabKeyElem.push(new KeyElem("EventDate", "text", "EventDate", "text", "Date de l'événement", "13/03/2024"));
-	tabKeyElem.push(new KeyElem("EventTime","text","EventTime", "text", "Horaire de l'événement", "19h10"));
-	tabKeyElem.push(new KeyElem("EventProg1", "text", "EventProg1", "text", "Acte 1 de l'événement", "Présentation"));
-	tabKeyElem.push(new KeyElem("EventProg2", "text", "EventProg2", "text", "Acte 2 de l'événement", "Entrainement physique"));
-	tabKeyElem.push(new KeyElem("EventProg3", "text", "EventProg3", "text", "Acte 3 de l'événement", "Entrainement mental"));
-	tabKeyElem.push(new KeyElem("EventLink", "text", "EventLink", "text", "Lien de l'événement", "www.prana-bindu.dune"));
-	tabKeyElem.push(new KeyElem("EventLinkVisio", "text", "EventLinkVisio", "text", "Lien de la visio de l'événement", "teams.prana-bindu.dune"));
+	tabKeyElem.push(new KeyElem("EventName", "text", "EventName", "text", "Nom de l'événement","Séance de Prana-bindu", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventDate", "text", "EventDate", "text", "Date de l'événement", "13/03/2024", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventTime","text","EventTime", "text", "Horaire de l'événement", "19h10", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventProg1", "text", "EventProg1", "text", "Acte 1 de l'événement", "Présentation", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventProg2", "text", "EventProg2", "text", "Acte 2 de l'événement", "Entrainement physique", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventProg3", "text", "EventProg3", "text", "Acte 3 de l'événement", "Entrainement mental", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventLink", "text", "EventLink", "text", "Lien de l'événement", "www.prana-bindu.dune", "eventInfo"));
+	tabKeyElem.push(new KeyElem("EventLinkVisio", "text", "EventLinkVisio", "text", "Lien de la visio de l'événement", "teams.prana-bindu.dune", "eventInfo"));
 
-	tabKeyElem.push(new KeyElem("linkForm", "text", "linkForm", "text", "Lien de la formation", "www.salledutemps.com"));
+	tabKeyElem.push(new KeyElem("linkForm", "text", "linkForm", "text", "Lien de la formation", "www.salledutemps.com", "shareInfo"));
+    tabKeyElem.push(new KeyElem("linkInteMeet", "text", "linkInteMeet", "text", "Lien de la réunion d'intégration", "www.poudlard.com", "shareInfo"));
 
-	tabKeyElem.push(new KeyElem("closingDate", "text", "closingDate","text","Date de clôture du dossier", "17 novembre"));
-	tabKeyElem.push(new KeyElem("registrationDate", "text", "registrationDate","text","Date d'inscription du dossier", "17 novembdre"));
-    tabKeyElem.push(new KeyElem("startMentoringDate", "text", "startMentoringDate", "text", "Date de début du mentorat", "17 novembre"));
-    tabKeyElem.push(new KeyElem("dateMailYG", "text", "dateMailYG", "text", "Date du mail de premier contac du jeune", "17 novembre")) ;
+	tabKeyElem.push(new KeyElem("closingDate", "text", "closingDate","text","Date de clôture du dossier", "21 juillet", "dateInfo"));
+	tabKeyElem.push(new KeyElem("registrationDate", "text", "registrationDate","text","Date d'inscription du dossier", "21 juillet", "dateInfo"));
+    tabKeyElem.push(new KeyElem("startMentoringDate", "text", "startMentoringDate", "text", "Date de début du mentorat", "21 juillet", "dateInfo"));
+    tabKeyElem.push(new KeyElem("dateMailYG", "text", "dateMailYG", "text", "Date du mail de premier contac du jeune", "21 juillet", "dateInfo"));
+    tabKeyElem.push(new KeyElem("dateInteMeet", "text", "dateInteMeet", "text", "Date et horaire de la réunion d'intégration", "Lundi 21 juillet de 2h56 à 5h11", "dateInfo"));
 
-	tabKeyElem.push(new KeyElem("ApecGE", "apec", "YGDept", "text", "Département du jeune", "50")); //A modifier
+	tabKeyElem.push(new KeyElem("APECGE", "apec", "YGDept", "list", "Département ou QPV du jeune", ["QPV","08","10","51","52","54","55","57","67","68","88"], "ygInfo")); //A modifier
 
-	tabKeyElem.push(new KeyElem("EmploymentAdvisor", "text", "EmploymentAdvisor", "text", "Prénom et nom du prescripteur", "Gandalf LEGRIS"));
-    tabKeyElem.push(new KeyElem("ADFirstName","text", "ADFirstName", "text", "Prénom du directeur d'agence", "Albus"));
-	tabKeyElem.push(new KeyElem("ADLastName","text", "ADLastName", "text", "Nom du directeur d'agence", "Dumbledore"));
-	tabKeyElem.push(new KeyElem("ADTitle", "title", "ADGender", "gender", "Genre du directeur d'agence", null));
-    tabKeyElem.push(new KeyElem("EmploymentAgency", "text", "EmploymentAgency", "text", "Agence du prescripteur", "Communauté de l'Anneau"));
+	tabKeyElem.push(new KeyElem("EmploymentAdvisor", "text", "EmploymentAdvisor", "text", "Prénom et nom du prescripteur", "Gandalf LEGRIS", "adInfo"));
+    tabKeyElem.push(new KeyElem("ADFirstName","text", "ADFirstName", "text", "Prénom du directeur d'agence", "Albus", "adInfo"));
+	tabKeyElem.push(new KeyElem("ADLastName","text", "ADLastName", "text", "Nom du directeur d'agence", "Dumbledore", "adInfo"));
+	tabKeyElem.push(new KeyElem("ADTitle", "title", "ADGender", "gender", "Genre du directeur d'agence", null, "adInfo"));
+    tabKeyElem.push(new KeyElem("EmploymentAgency", "text", "EmploymentAgency", "text", "Agence du prescripteur", "Communauté de l'Anneau", "adInfo"));
 
-    tabKeyElem.push(new TagElem("startBR", "startTag", "br"));
-	tabKeyElem.push(new TagElem("startUL", "startTag", "ul"));
-	tabKeyElem.push(new TagElem("startLI", "startTag", "li"));
-	tabKeyElem.push(new TagElem("startStrong", "startTag", "strong"));
-    tabKeyElem.push(new TagElem("endUL", "endTag", "ul"));
-	tabKeyElem.push(new TagElem("endLI", "endTag", "li"));
-	tabKeyElem.push(new TagElem("endStrong", "endTag", "strong"));
-	tabKeyElem.push(new TagElem("endSpan", "endTag", "span"));
-    tabKeyElem.push(new TagElem("endTag", "endTag", null)) ;
+    tabKeyElem.push(new KeyElem("nextCom", "next", "nextCom", "next", "Message communication ?", null, "nextTag"));
+	tabKeyElem.push(new KeyElem("nextForm", "next", "nextFrom", "next", "Lien vers la formation ?", null, "nextTag"));
+	tabKeyElem.push(new KeyElem("nextCV", "next", "nextCV", "next", "CV disponnible ?", null, "nextTag"));
+	tabKeyElem.push(new KeyElem("nextIdea", "next", "nextIdea", "next", "Idée derrière cette proposition ?", null, "nextTag"));
+	tabKeyElem.push(new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null, "nextTag"));
+    tabKeyElem.push(new KeyElem("nextSoonM", "next", "nextSoonM", "next", "Un mentor est bientôt disponible ?", null, "nextTag")) ;
+    tabKeyElem.push(new KeyElem("nextMeteo", "next", "nextMeteo", "next", "Promotion météo des parrainages ?", null, "nextTag")) ;
 
-    tabKeyElem.push(new TagElem("endNext", "endNext", null)) ;
+	tabKeyElem.push(new KeyElem("ifYGSearchJob","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"], "ifTag"));
 
-	tabKeyElem.push(new KeyElem("nextCom", "next", "nextCom", "next", "Message communication ?", null));
-	tabKeyElem.push(new KeyElem("nextForm", "next", "nextFrom", "next", "Lien vers la formation ?", null));
-	tabKeyElem.push(new KeyElem("nextCV", "next", "nextCV", "next", "CV disponnible ?", null));
-	tabKeyElem.push(new KeyElem("nextIdea", "next", "nextIdea", "next", "Idée derrière cette proposition ?", null));
-	tabKeyElem.push(new KeyElem("nextJob", "next", "nextJob", "next", "Travail du jeune ?", null));
-    tabKeyElem.push(new KeyElem("nextSoonM", "next", "nextSoonM", "next", "Un mentor est bientôt disponible ?")) ;
-
-	tabKeyElem.push(new KeyElem("ifYGSearchJob","if", "YGSearch", "list", "Recherche du jeune", ["Stage", "Alternance", "Emploi"]));
+    //new TagElem(name, category, tag)
+    tabKeyElem.push(new TagElem("startBR", "startTag", "br", "layoutTag"));
+	tabKeyElem.push(new TagElem("startUL", "startTag", "ul", "layoutTag"));
+	tabKeyElem.push(new TagElem("startLI", "startTag", "li", "layoutTag"));
+	tabKeyElem.push(new TagElem("startStrong", "startTag", "strong", "layoutTag"));
+    tabKeyElem.push(new TagElem("endUL", "endTag", "ul", "layoutTag"));
+	tabKeyElem.push(new TagElem("endLI", "endTag", "li", "layoutTag"));
+	tabKeyElem.push(new TagElem("endStrong", "endTag", "strong", "layoutTag"));
+	tabKeyElem.push(new TagElem("endSpan", "endTag", "span", "layoutTag"));
+    tabKeyElem.push(new TagElem("endTag", "endTag", null, "layoutTag"));
+    tabKeyElem.push(new TagElem("endNext", "endNext", null, "nextTag"));
 
     //---Fonctionalité "or" en cours de programmation
-    //tabKeyElem.push(new KeyElem("orYGReview", "or", "YGReview", "next", "Dossier du jeune examiné", null))
+    //tabKeyElem.push(new KeyElem("orYGReview", "or", "YGReview", "next", "Dossier du jeune examiné", null, "orTag"))
 }
 
 /*---Fonction particulière pour l'APEC Grand-Est---*/
 
 var apecGE = [
-	"08","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
+    "QPV","Contact APEC Grand-Est : Nicolas MARQUES-MIRANDA nicolas.marques-miranda@apec.fr",
+	"08","Pour l’APEC Reims : Sandrine GOUPIL sandrine.goupil@apec.fr",
 	"10","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
-	"51","Pour l’APEC Reims : Corinne CHARTIER corinne.chartier@apec.fr",
+	"51","Pour l’APEC Reims : Sandrine GOUPIL sandrine.goupil@apec.fr",
 	"52","Pour l'APEC Aube : Laurence FUSTE laurence.fuste@apec.fr",
 	"54","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",
 	"55","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",
-	"57","Pour l’APEC Moselle : Véronique PETITJEAN veronique.petitjean@apec.fr",
+	"57","Pour l’APEC Moselle : Aicha WYSEUR aicha.wyseur@apec.fr",
 	"67","Pour l’APEC Bas-Rhin : Sylvie KONING sylvie.koning@apec.fr",
 	"68","Pour l’APEC Haut-Rhin: Franck WOOG franck.woog@apec.fr",
 	"88","Pour l’APEC Lorraine : Angéline BASTID angeline.bastid@apec.fr",

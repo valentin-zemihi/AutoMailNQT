@@ -21,7 +21,7 @@ window.onload = function () {
 
 	if (activeText.versionUpdate != null) $("#zoneUpdate").text(`Texte Type à jour de la version : ${activeText.versionUpdate}`) ;
 
-	writeSideMenu() ;
+	writeSideMenu("editor") ;
     writeForm() ;
 	writeObj() ;
     writeTxt() ;

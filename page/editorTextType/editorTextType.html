@@ -15,6 +15,7 @@
 	<!--JS-->
 		<!--JS Tools-->
 	<script src="../../js/tools/jquery-3.7.1.min.js"></script>
+	<script src="../../js/tools/tools.js"></script>
 	<script src="../../js/tools/toolsCreateHTML.js"></script>
 	<script src="../../js/tools/toolsArray.js"></script>
 	<script src="../../js/tools/toolsSave.js"></script>
@@ -40,15 +41,46 @@
 	</header>
 	<div id="main">
 		<div id="zoneSideMenu">
+			<div class="infoSideMenu"><em>*Les boutons en<strong> italique </strong>sont des Textes Types communs à toutes les régions.</em></div>
 			<div class="infoSideMenu"><em>*Les boutons en<span class="WIP"> rouge </span>sont pour les Textes Types non à jour de la version <span id="spanActiveVersion"></span>.</em></div>
 			<div class="infoSideMenu"><em>*Les boutons en<span class="majPerso"> vert </span>sont pour les Textes Types que vous avez mis à jour.</em></div>
+		    <div class="infoSideMenu"><em>*Les boutons en<span class="higlInactive"> violet </span>sont pour des Textes Types pouvant comporter des bugs.</em></div>
 		</div>
 		<div id="zoneEditor">
 			<h1 id="zoneTitleEditor">Aucun Texte Type n'est sélectionné</h1>
 			<p id="zoneVersion"></p>
 			<div id="zoneEditorForm">
-				<h2>Editeur</h2>
-				<label for="titleTT">Titre Texte Type : </label><input id="titleTT" type="text">
+				<!--TextType(name, target, region, type, category, subCategory, label, obj, txt, versionUpdate)-->
+				<h2>Formulaire</h2>
+				<label for="nameTT">Nom Texte Type : </label><input id="nameTT" type="text">
+				<br>
+				<label for="targetTT">Cible Texte Type : </label>
+				<select name="targetTT" id="targetTT">
+					<option value="Jeune">Jeune</option>
+					<option value="Mentor">Mentor</option>
+					<option value="Développement">Prospection</option>
+					<option value="Déploiement">Déploiement</option>
+					<option value="Sourcing">Sourcing</option>
+					<option value="Événement">Événement</option>
+				</select>
+				<br>
+				<label for="regionTT">Région Texte Type : </label>
+				<select name="regionTT" id="regionTT">
+					<option value="ARA">Auvergne-Rhône-Alpes</option>
+					<option value="BFC">Bourgogne Franche-Comté</option>
+					<option value="BRE">Bretagne</option>
+					<option value="CVL">Centre-Val de Loire</option>
+					<option value="COR">Corse</option>
+					<option value="DROM">Département et Région d'Outre-mer</option>
+					<option value="GE">Grand-Est</option>
+					<option value="HDF">Hauts-de-France</option>
+					<option value="IDF">Île-de-France</option>
+					<option value="NOR">Normandie</option>
+					<option value="NA">Nouvelle-Aquitaine</option>
+					<option value="OCC">Occitanie</option>
+					<option value="PDL">Pays de la Loire</option>
+					<option value="PACA">Provence-Alpes-Côte d'Azur</option>
+				</select>
 				<br>
 				<label for="typeTT">Type Texte Type : </label>
 				<select name="typeTT" id="typeTT">
@@ -60,26 +92,27 @@
 				<br>
 				<label for="subCategoryTT">Sous-Catégorie Texte Type : </label><input id="subCategoryTT" type="text">
 				<br>
-				<label for="labelTT">Bouton Texte Type : </label><input id="labelTT" type="text">
+				<label for="labelTT">Label Texte Type : </label><input id="labelTT" type="text">
+				<br>
+				<label for="objectTT">Objet Texte Type : </label><input id="objectTT" type="text">
 				<br>
 				<button class="btnForm" onclick="modifyTextTypeInfo()">Enregistrer les modifications</button>
-				<br>
-				<br>
-				<h2>Modificateur de texte</h2>
-				<label for="keyElemSelector">Sélectionnez le KeyElem à ajouter : </label>
-				<select name="keyElemSelector" id="keyElemSelector">
-					<option value="">--Liste des KeyElem--</option>
-				</select>
-				<br>
-				<button class="btnForm" onclick="addKeyElemInTxt()">Ajouter le KeyElem</button>
 			</div>
-			<textarea name="zoneTextType" id="zoneTextType"><--Sélectionner le Texte Type</textarea>
+			<div id="zoneTextList">
+				<div><textarea name="zoneTextType" id="zoneTextType"></textarea></div>
+				<div id="zoneListKeyElem">
+					<p><strong>Liste des balises de personnalisation</strong></p>
+				</div>
+			</div>
 			<button onclick="saveNewText()">Enregistrer le texte</button>
 			<h1>Texte édité :</h1>
 			<div id="zoneText"></div>
 			<br>
 			<h1>Texte pour JavaScript :</h1>
 			<div id="zoneTextForJS"></div>
+			<br>
+			<h1>Objet pour JavaScript :</h1>
+			<div id="zoneObjectJs"></div>
 		</div>
 	</div>
 </body>

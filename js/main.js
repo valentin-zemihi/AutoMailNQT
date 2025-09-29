@@ -187,7 +187,7 @@ function resetTextType() {
 }
 
 /*-----Fonction d'écriture d'élément HTML-----*/
-function writeSideMenu() {
+function writeSideMenu(from) {
     //--Déclaration des variables lié à la manipulation HTML
 	var ec ; //Elément crée
     var ecs ; //Elément crée second
@@ -222,7 +222,7 @@ function writeSideMenu() {
 		}
 
 		tempClass = tabTextType[i].getClassBtn() ;
-		if (tempClass == "") tempClass = "btn-white" ;
+		if (tempClass == "" || tempClass == "multiRegion") tempClass += " btn-white" ;
 		eds.append(createHTMLElement("button", tabTextType[i].type+""+i, "btnSideMenu "+tempClass, "writeTxt('"+i+"')", tabTextType[i].name)) ;
 	}
 }

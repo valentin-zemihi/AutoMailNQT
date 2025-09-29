@@ -61,7 +61,9 @@ function writeLibrary() {
             if ($("#"+idedC).length==0) {
                 //---Si oui :
                 //---Crée et ajoute la la zone de cette catégorie
-                ec = createHTMLElement("div", idedC, "categoryFolder", null, null) ;
+                tempClass = "" ;
+                if (idedC == "zoneMail-Mentor-Miseenmentorat" || idedC == "zoneMail-Jeune-Accueil") {tempClass = " large" ;}
+                ec = createHTMLElement("div", idedC, "categoryFolder"+tempClass, null, null) ;
                 ecd = createHTMLElement("div", null, null, null, null) ;
                 ecd.append(createHTMLElement("h2", null, "titleCategoryFolder", null, tabTextType[i].category)) ;
                 ec.append(ecd) ;
@@ -80,7 +82,7 @@ function writeLibrary() {
 
             //---Crée et ajoute le bouton dans la zone de la catégorie
             tempClass = tabTextType[i].getClassBtn() ;
-            if (tabTextType[i].label == "nullLabel") tempText = tabTextType[i].name ;
+            if (activeUser.shortRegion.length > 1 && tabTextType[i].region.length <= 1) tempText = `${tabTextType[i].region[0]} - ${tabTextType[i].label}` ;
             else tempText = tabTextType[i].label ;
             $("#"+idedSC).append(createHTMLElement("button", tabTextType[i].type+""+i, "btnTextType "+tempClass, "goToEditor('"+i+"')", tempText)) ;
         }

@@ -1,43 +1,55 @@
 /***Fonction de recherche dans un tableau***/
 
-/**getIdInTabByObjAttr(tab, elem, attr) :
+/**getIdTabInTabByAttr(tab, elem, attr) :
  * Retourne la position dans le tableau tab de l'objet ayant pour attribut attr l'élément elem
  * @param {Array} tab : tableau contenant l'objet à trouver ;
  * @param {*} elem : carctéristique de l'objet à trouver ;
  * @param {String} attr : attribut à comparer pour le test :
  * @returns retourne l'objet trouver ou null ;
  */
-function getIdInTabByObjAttr(tab, elem, attr) {
-	var isFound = false ;
-	var iteLoop = 0 ;
-	var pos = null ;
-	while (!isFound && iteLoop < tab.length) {
-		switch (attr) {
-			case "name" :
-				if(tab[iteLoop].name == elem) {
+function getIdTabInTabByAttr(tab, attr, attrType) {
+    var isFound = false ;
+    var iteLoop = 0 ;
+    var idTab = null ;
+    while (!isFound && iteLoop < tab.length) {
+        switch (attrType) {
+            case "id":
+                if(tab[iteLoop].id == attr) {
+                    isFound = true ;
+                    idTab = iteLoop ;
+                }
+                break;
+            case "name":
+                if(tab[iteLoop].name == attr) {
+                    isFound = true ;
+                    idTab = iteLoop ;
+                }
+                break ;
+			case "name+target+type":
+				if (tab[iteLoop].name+tab[iteLoop].target+tab[iteLoop].type == attr) {
 					isFound = true ;
-					pos = iteLoop ;
-				}
-				break;
-			case "id" :
-				if(tab[iteLoop].id == elem) {
-					isFound = true ;
-					pos = iteLoop ;
+					idTab = iteLoop ;
 				}
 				break ;
-			case "name+target+type" :
-				if (tab[iteLoop].name+tab[iteLoop].target+tab[iteLoop].type == elem) {
-					isFound = true ;
-					pos = iteLoop ;
-				}
-				break ;
-			default:
-				console.log(attr+" n'est pas paramètré dans le switch de getIdInTabByObjAttr() dans toolsArray.js")
-				break;
-		}
-		iteLoop++ ;
-	}
-	return pos ;
+			case null:
+            case "object":
+                if (tab[iteLoop] == attr) {
+                    isFound = true ;
+                    idTab = iteLoop ;
+                }
+                break ;
+            default:
+                console.log(`${attrType} n'est par parramètré dans getObjInTabByAttr() dans toolsArray.js.`) ;
+                return false ;
+        }
+        iteLoop++
+    }
+    try {
+        if (idTab==null) throw new Error(idTab+" n'a pas été trouvé dans le tableau."); 
+    } catch (err) {
+        console.error("Stack trace :", err.stack);
+    }
+    return idTab ;
 }
 
 /**getObjInTabByAttr(tab, elem, attr) :

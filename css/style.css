@@ -38,6 +38,11 @@ h3 {
     margin-top: 0.5rem;
 }
 
+p {
+    display: flex;
+    align-items: center;
+}
+
 .hidden {display: none !important ;}
 
 /**---En révision---**/
@@ -154,6 +159,8 @@ button:hover {background-color: #7291ce;}
 
     font-size: 1rem;
 }
+
+.multiRegion {font-style: italic;}
 
     /*CSS majPerso*/
 .majPerso {background-color: #1fa055;}
